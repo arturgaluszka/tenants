@@ -28,6 +28,11 @@ public class MainActivity extends AppCompatActivity {
         b6 = (Button) findViewById(R.id.button6);
     }
 
+    public void Action(View v){
+        Intent i = new Intent(this, TodoList.class);
+        startActivity(i);
+    }
+
     public void Exit(View V){
         System.exit(0);
     }

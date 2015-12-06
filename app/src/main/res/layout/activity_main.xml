@@ -28,7 +28,8 @@
         android:text="To-Do List"
         android:id="@+id/button2"
         android:layout_below="@+id/button"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:onClick="Action"/>
 
     <Button
         android:layout_width="300dp"
