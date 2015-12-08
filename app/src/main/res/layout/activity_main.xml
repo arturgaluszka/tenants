@@ -51,10 +51,11 @@
         android:layout_marginLeft="12dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="17dp"
-        android:text="noName"
+        android:text="Expense List"
         android:id="@+id/button4"
         android:layout_below="@+id/button3"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:onClick="startExpenseList"/>
 
     <Button
         android:layout_width="300dp"

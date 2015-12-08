@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.tenantsproject.flatmates.expenseslist.ExpensesListActivity;
 import com.tenantsproject.flatmates.wallet.WalletActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -37,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void startWallet(View v) {
         Intent intent = new Intent(this, WalletActivity.class);
+        startActivity(intent);
+    }
+
+    public void startExpenseList(View v) {
+        Intent intent = new Intent(this, ExpensesListActivity.class);
         startActivity(intent);
     }
 
