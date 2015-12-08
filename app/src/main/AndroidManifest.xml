@@ -16,6 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".TodoList"></activity>
+        <activity android:name=".wallet.WalletActivity"></activity>
     </application>
 
 </manifest>

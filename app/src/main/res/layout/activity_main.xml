@@ -41,7 +41,8 @@
         android:text="Virtual Wallet"
         android:id="@+id/button3"
         android:layout_below="@+id/button2"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:onClick="startWallet"/>
 
     <Button
         android:layout_width="300dp"

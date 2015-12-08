@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.tenantsproject.flatmates.wallet.WalletActivity;
+
 public class MainActivity extends AppCompatActivity {
 
     Button b;
@@ -31,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
     public void Action(View v){
         Intent i = new Intent(this, TodoList.class);
         startActivity(i);
+    }
+
+    public void startWallet(View v) {
+        Intent intent = new Intent(this, WalletActivity.class);
+        startActivity(intent);
     }
 
     public void Exit(View V){
