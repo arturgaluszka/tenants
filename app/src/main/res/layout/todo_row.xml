@@ -25,14 +25,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="Delete"
+            android:text="Priority"
             android:id="@+id/buttonDelete"
+            android:onClick="onPriority"
             android:clickable="true" />
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Notify"
+            android:onClick="onNotify"
             android:id="@+id/buttonNotify"
             android:clickable="true"
             android:layout_alignParentTop="true"

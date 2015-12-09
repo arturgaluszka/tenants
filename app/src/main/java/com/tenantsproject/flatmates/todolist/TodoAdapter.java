@@ -7,13 +7,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import java.util.ArrayList;
 import android.widget.TextView;
-/**
- * Created by Karol on 2015-12-08.
- */
+
 public class TodoAdapter extends ArrayAdapter {
     private LayoutInflater inflater;
-    private ArrayList<String> tasks;
-    public TodoAdapter(Activity activity, ArrayList<String> tasks){
+    private ArrayList<TodoTask> tasks;
+    public TodoAdapter(Activity activity, ArrayList<TodoTask> tasks){
         super(activity, R.layout.todo_row, tasks);
         this.inflater = activity.getWindow().getLayoutInflater();
         this.tasks = tasks;
@@ -22,7 +20,7 @@ public class TodoAdapter extends ArrayAdapter {
     public View getView(int position, View convertView, ViewGroup parent){
         View rowView = inflater.inflate(R.layout.todo_row, parent, false);
         TextView textView = (TextView) rowView.findViewById(R.id.textView);
-        textView.setText(tasks.get(position));
+        textView.setText(tasks.get(position).message);
         return rowView;
     }
 }
