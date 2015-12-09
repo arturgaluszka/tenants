@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.tenantsproject.flatmates.expenseslist.ExpensesListActivity;
+import com.tenantsproject.flatmates.todolist.TodoList;
 import com.tenantsproject.flatmates.wallet.WalletActivity;
 
 public class MainActivity extends AppCompatActivity {
