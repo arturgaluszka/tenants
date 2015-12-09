@@ -1,4 +1,5 @@
-package com.tenantsproject.flatmates;
+package com.tenantsproject.flatmates.todolist;
+import com.tenantsproject.flatmates.R;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,8 +19,7 @@ public class TodoList extends AppCompatActivity {
         setContentView(R.layout.activity_todo_list);
         tasksView = (ListView) findViewById(R.id.tasksView);
         tasks = new ArrayList<String>();
-        tasksAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, tasks);
+        tasksAdapter = new TodoAdapter(this, tasks);
         tasksView.setAdapter(tasksAdapter);
     }
     public void onAddItem(View v) {

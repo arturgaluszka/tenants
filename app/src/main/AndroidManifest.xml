@@ -15,7 +15,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TodoList"></activity>
+        <activity android:name=".todolist.TodoList"></activity>
         <activity android:name=".wallet.WalletActivity"></activity>
         <activity android:name=".expenseslist.ExpensesListActivity"></activity>
 
