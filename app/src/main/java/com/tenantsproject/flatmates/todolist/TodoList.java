@@ -66,7 +66,7 @@ public class TodoList extends AppCompatActivity {
                 .setSmallIcon(android.R.drawable.btn_star);
         builder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
         builder.setLights(Color.RED, 300, 300);
-        Notification notification1 = builder.build();
+        Notification notification1 = builder.getNotification();
         NotificationManager notificationManager = (NotificationManager)
                                     getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(1, notification1);
