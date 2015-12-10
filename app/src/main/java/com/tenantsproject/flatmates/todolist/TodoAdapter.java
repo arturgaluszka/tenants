@@ -1,6 +1,7 @@
 package com.tenantsproject.flatmates.todolist;
 import com.tenantsproject.flatmates.R;
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,16 @@ public class TodoAdapter extends ArrayAdapter {
         View rowView = inflater.inflate(R.layout.todo_row, parent, false);
         TextView textView = (TextView) rowView.findViewById(R.id.textView);
         Button btnNxt = (Button) rowView.findViewById(R.id.buttonNotify);
-        tasks.get(position).priority = TodoTask.Priority.MEDIUM;
+        if(tasks.get(position).priority == TodoTask.Priority.MEDIUM) {
+            textView.setTextColor(Color.BLACK);
+        }
+        else if(tasks.get(position).priority == TodoTask.Priority.HIGH){
+            textView.setTextColor(Color.RED);
+        }
+        else{
+            textView.setTextColor(Color.GREEN);
+        }
+
         btnNxt.setTag(position);
         textView.setText(tasks.get(position).message);
         return rowView;

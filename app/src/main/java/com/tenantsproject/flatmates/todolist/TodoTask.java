@@ -5,4 +5,7 @@ public class TodoTask {
     Priority priority;
     String message;
     Date date;
+    TodoTask(){
+        priority = Priority.MEDIUM;
+    }
 }
