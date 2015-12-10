@@ -1,6 +1,6 @@
 package com.tenantsproject.flatmates.todolist;
-import com.tenantsproject.flatmates.R;
 
+import com.tenantsproject.flatmates.R;
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -14,87 +14,108 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.EditText;
-import android.view.View;
 import android.widget.RelativeLayout;
+import android.view.View;
+import com.tenantsproject.flatmates.utils.JSONFileHandler;
 
 public class TodoList extends AppCompatActivity {
+
     private ArrayAdapter<String> tasksAdapter;
-    private ArrayList<TodoTask> tasks;
+    private List list = null;
     private ListView tasksView;
+    private static final String TODO_FILE_NAME = "todo_file";
+    private JSONFileHandler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo_list);
         tasksView = (ListView) findViewById(R.id.tasksView);
-        tasks = new ArrayList<TodoTask>();
-        tasksAdapter = new TodoAdapter(this, tasks);
+        this.handler = new JSONFileHandler(TODO_FILE_NAME, this);
+        this.list = (List) handler.load(List.class);
+        if (this.list == null) {
+            list = new List();
+        }
+        tasksAdapter = new TodoAdapter(this, list.tasks);
         tasksView.setAdapter(tasksAdapter);
         tasksView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
-                tasks.remove(pos);
+                list.tasks.remove(pos);
+                handler.save(list);
                 tasksAdapter.notifyDataSetChanged();
                 return true;
             }
         });
         tasksView.setLongClickable(true);
+        handler.save(this.list);
     }
     public void onAddItem(View v) {
         EditText etNewItem = (EditText) findViewById(R.id.etNewItem);
         String itemText = etNewItem.getText().toString();
         TodoTask task = new TodoTask();
         task.message = itemText;
-        tasks.add(task);
+        list.tasks.add(task);
         etNewItem.setText("");
+        handler.save(this.list);
     }
     public void onNotify(View v) {
         Notification.Builder builder = new Notification.Builder(this)
-                .setContentText("Nie zapomni!")
+                .setContentText("Nie zapomnij!")
                 .setContentTitle("Masz nowe zadanie!")
                 .setSmallIcon(android.R.drawable.btn_star);
         builder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
         builder.setLights(Color.RED, 300, 300);
         Notification notification1 = builder.build();
-        NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        NotificationManager notificationManager = (NotificationManager)
+                                    getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(1, notification1);
         builder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
         builder.setLights(Color.CYAN, 3000, 3000);
         notification1.flags |= Notification.FLAG_AUTO_CANCEL;
     }
     public void onPriority(View v) {
-        final int position = tasksView.getPositionForView((RelativeLayout)v.getParent());
-        final  TodoTask.Priority previousPriority = tasks.get(position).priority;
-        final AlertDialog  levelDialog;
-        final CharSequence[] items = {" Low "," Medium "," High "};
+        final int position = tasksView.getPositionForView
+                                            ((RelativeLayout) v.getParent());
+        final TodoTask.Priority previousPriority = list.tasks.get(position).priority;
+        final AlertDialog levelDialog;
+        final CharSequence[] items = {" Low ", " Medium ", " High "};
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 tasksAdapter.notifyDataSetChanged();
+                handler.save(list);
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                tasks.get(position).priority = previousPriority;
+                list.tasks.get(position).priority = previousPriority;
             }
         });
         builder.setTitle("Select The Priority Level");
         builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int item) {
-                switch(item) {
+                switch (item) {
                     case 0:
-                        tasks.get(position).priority = TodoTask.Priority.LOW;
+                        list.tasks.get(position).priority = TodoTask.Priority.LOW;
                         break;
                     case 1:
-                        tasks.get(position).priority = TodoTask.Priority.MEDIUM;
+                        list.tasks.get(position).priority = TodoTask.Priority.MEDIUM;
                         break;
                     case 2:
-                        tasks.get(position).priority = TodoTask.Priority.HIGH;
+                        list.tasks.get(position).priority = TodoTask.Priority.HIGH;
                         break;
                 }
             }
         });
         levelDialog = builder.create();
         levelDialog.show();
+    }
+    private class List {
+        private ArrayList<TodoTask> tasks;
+
+        List() {
+            tasks = new ArrayList<TodoTask>();
+        }
     }
 }
