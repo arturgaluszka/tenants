@@ -1,9 +1,9 @@
-.gradle
-/local.properties
-/.idea/workspace.xml
-/.idea/libraries
-.DS_Store
-/build
-/captures
+android/.gradle
+android/local.properties
+android/.idea/workspace.xml
+android/.idea/libraries
+adnroid/.DS_Store
+android/build
+android/captures
 *.iml
-/.idea
+android/.idea
