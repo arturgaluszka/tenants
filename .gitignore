@@ -7,3 +7,5 @@ android/build
 android/captures
 *.iml
 android/.idea
+server/.idea
+server/node_modules

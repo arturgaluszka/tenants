@@ -13,10 +13,11 @@
         android:layout_marginLeft="12dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="17dp"
-        android:text="Add Flat"
+        android:text="USER"
         android:id="@+id/button"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"/>
+        android:layout_centerHorizontal="true"
+        android:onClick="startUser"/>
 
     <Button
         android:layout_width="300dp"
