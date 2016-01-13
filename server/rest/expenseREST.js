@@ -43,8 +43,13 @@ function runREST(app) {
 
     });
     app.delete('/expenses/:id',function(req,res){
-        expensesdb.deleteexpense(req.params.id,function(){
-            res.send(200);
+        expensesdb.deleteexpense(req.params.id,function(rows){
+            if(rows.affectedRows==0){
+                res.send(404);
+            } else{
+                res.send(200);
+            }
+
         })
     });
 }

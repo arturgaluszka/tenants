@@ -2,7 +2,7 @@ package com.tenantsproject.flatmates.model.data;
 
 import java.io.Serializable;
 
-public class ExpensePOJO implements Serializable {
+public class Expense implements Serializable {
     private int id;
     private int done;
     private double price;
@@ -11,10 +11,10 @@ public class ExpensePOJO implements Serializable {
     private String user;
     private String modificationDate;
 
-    public ExpensePOJO() {
+    public Expense() {
     }
 
-    public ExpensePOJO(double price, String description, int done, int flat, String user) {
+    public Expense(double price, String description, int done, int flat, String user) {
         this.price = price;
         this.description = description;
         this.done = done;
@@ -22,7 +22,7 @@ public class ExpensePOJO implements Serializable {
         this.user = user;
     }
 
-    public ExpensePOJO(int id, double price, String description, int done, int flat, String user) {
+    public Expense(int id, double price, String description, int done, int flat, String user) {
         this.id = id;
         this.price = price;
         this.description = description;

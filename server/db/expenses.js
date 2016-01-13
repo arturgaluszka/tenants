@@ -73,7 +73,7 @@ function deleteexpense(id, userHandler) {
     connection.query('DELETE FROM expenses WHERE id='+id, function (err, rows, fields) {
         if (!err) {
             console.log('Deleted expense id='+id);
-            userHandler();
+            userHandler(rows);
         }
         else
             console.log('Error while performing Query.' + err);

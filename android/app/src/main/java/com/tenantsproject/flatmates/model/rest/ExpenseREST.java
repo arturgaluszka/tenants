@@ -5,9 +5,10 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.tenantsproject.flatmates.model.data.ExpensePOJO;
+import com.tenantsproject.flatmates.model.data.Expense;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -32,10 +33,10 @@ public class ExpenseREST {
         return response;
     }
 
-    public Response update(ExpensePOJO expensePOJO) {
+    public Response update(Expense expense) {
         UpdateExpenseTask task = new UpdateExpenseTask();
         Response response = new Response();
-        task.execute(expensePOJO);
+        task.execute(expense);
         try {
             response = task.get();
         } catch (InterruptedException | ExecutionException e) {
@@ -44,9 +45,9 @@ public class ExpenseREST {
         return response;
     }
 
-    public Response newExpense(ExpensePOJO expensePOJO) {
+    public Response newExpense(Expense expense) {
         NewExpenseTask task = new NewExpenseTask();
-        task.execute(expensePOJO);
+        task.execute(expense);
         Response response = new Response();
         try {
             response = task.get();
@@ -69,9 +70,9 @@ public class ExpenseREST {
         return response;
     }
 
-    public Response delete(ExpensePOJO expensePOJO) {
+    public Response delete(Expense expense) {
         DeleteExpenseTask task = new DeleteExpenseTask();
-        task.execute(expensePOJO);
+        task.execute(expense);
         Response response = new Response();
         try {
             response = task.get();
@@ -109,7 +110,7 @@ public class ExpenseREST {
                 urlConnection.disconnect();
                 if(response.getMessageCode()==Response.MESSAGE_OK){
                     Gson gson = new Gson();
-                    Type listType = new TypeToken<List<ExpensePOJO>>() {
+                    Type listType = new TypeToken<List<Expense>>() {
                     }.getType();
                     response.setObject(gson.fromJson(json, listType));
                 }
@@ -119,18 +120,18 @@ public class ExpenseREST {
         }
     }
 
-    private class UpdateExpenseTask extends AsyncTask<ExpensePOJO, Void, Response> {
+    private class UpdateExpenseTask extends AsyncTask<Expense, Void, Response> {
 
         private HttpURLConnection urlConnection;
 
         @Override
-        protected Response doInBackground(ExpensePOJO... params) {
-            ExpensePOJO expensePOJO = params[0];
+        protected Response doInBackground(Expense... params) {
+            Expense expense = params[0];
             Gson gson = new Gson();
-            String json = gson.toJson(expensePOJO);
+            String json = gson.toJson(expense);
             Response response = new Response();
             try {
-                URL url = new URL(Properties.SERVER_URL + "expenses/" + expensePOJO.getId());
+                URL url = new URL(Properties.SERVER_URL + "expenses/" + expense.getId());
                 urlConnection = (HttpURLConnection) url.openConnection();
 
                 urlConnection.setDoOutput(true);
@@ -149,15 +150,15 @@ public class ExpenseREST {
         }
     }
 
-    private class NewExpenseTask extends AsyncTask<ExpensePOJO, Void, Response> {
+    private class NewExpenseTask extends AsyncTask<Expense, Void, Response> {
 
         private HttpURLConnection urlConnection;
 
         @Override
-        protected Response doInBackground(ExpensePOJO... params) {
-            ExpensePOJO expensePOJO = params[0];
+        protected Response doInBackground(Expense... params) {
+            Expense expense = params[0];
             Gson gson = new Gson();
-            String json = gson.toJson(expensePOJO);
+            String json = gson.toJson(expense);
             StringBuilder responseMsg = new StringBuilder();
             int msgCode = -1;
             Response response = new Response();
@@ -186,8 +187,8 @@ public class ExpenseREST {
                 e.printStackTrace();
             } finally {
                 if (msgCode == 200) {
-                    expensePOJO = gson.fromJson(responseMsg.toString(), ExpensePOJO.class);
-                    response.setObject(expensePOJO);
+                    expense = gson.fromJson(responseMsg.toString(), Expense.class);
+                    response.setObject(expense);
                 }
                 response.setMessageCode(msgCode);
                 urlConnection.disconnect();
@@ -205,7 +206,7 @@ public class ExpenseREST {
             int id = params[0];
 
             String responseMsg = "";
-            ExpensePOJO expense;
+            Expense expense;
             Response response = new Response();
             try {
                 URL url = new URL(Properties.SERVER_URL + "expenses/" + id);
@@ -226,7 +227,7 @@ public class ExpenseREST {
                 urlConnection.disconnect();
                 if(response.getMessageCode()==Response.MESSAGE_OK){
                     Gson gson = new Gson();
-                    expense = gson.fromJson(responseMsg, ExpensePOJO.class);
+                    expense = gson.fromJson(responseMsg, Expense.class);
                     response.setObject(expense);
                 }
 
@@ -236,34 +237,26 @@ public class ExpenseREST {
         }
     }
 
-    private class DeleteExpenseTask extends AsyncTask<ExpensePOJO, Void, Response> {
+    private class DeleteExpenseTask extends AsyncTask<Expense, Void, Response> {
         private HttpURLConnection urlConnection;
 
         @Override
-        protected Response doInBackground(ExpensePOJO... params) {
-            ExpensePOJO expensePOJO = params[0];
-            int id = expensePOJO.getId();
+        protected Response doInBackground(Expense... params) {
+            Expense expense = params[0];
+            int id = expense.getId();
             Response response = new Response();
             try {
                 URL url = new URL(Properties.SERVER_URL + "expenses/" + id);
                 urlConnection = (HttpURLConnection) url.openConnection();
 
                 urlConnection.setDoOutput(false);
-                urlConnection.setDoInput(true);
+                urlConnection.setDoInput(false);
                 urlConnection.setRequestMethod("DELETE");
-
-                InputStream in = urlConnection.getInputStream();
-                BufferedReader rd = new BufferedReader(new InputStreamReader(in));
-                String line;
-                StringBuilder responseMsg = new StringBuilder();
-                while ((line = rd.readLine()) != null) {
-                    responseMsg.append(line);
-                }
-                rd.close();
                 response.setMessageCode(urlConnection.getResponseCode());
 
+
             } catch (IOException e) {
-                e.printStackTrace();
+                Log.e("EXPENSE_REST","Can't load inputstream",e);
             } finally {
                 urlConnection.disconnect();
             }

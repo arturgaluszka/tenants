@@ -1,10 +1,8 @@
 package com.tenantsproject.flatmates.model.service;
 
-import com.tenantsproject.flatmates.model.data.ExpensePOJO;
+import com.tenantsproject.flatmates.model.data.Expense;
 import com.tenantsproject.flatmates.model.rest.ExpenseREST;
 import com.tenantsproject.flatmates.model.rest.Response;
-
-import java.util.List;
 
 /**
  * Created by Strajk on 10.01.2016.
@@ -19,16 +17,16 @@ public class ExpenseService {
     public Response getAllExpenses(int id){
         return expenseREST.getAllExpenses(id);
     }
-    public Response update(ExpensePOJO expense){
+    public Response update(Expense expense){
         return expenseREST.update(expense);
     }
-    public Response newExpense(ExpensePOJO expensePOJO){
+    public Response newExpense(Expense expensePOJO){
         return expenseREST.newExpense(expensePOJO);
     }
     public Response get(int id){
         return expenseREST.get(id);
     }
-    public Response delete(ExpensePOJO expensePOJO){
+    public Response delete(Expense expensePOJO){
         return expenseREST.delete(expensePOJO);
     }
 }
