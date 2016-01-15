@@ -16,32 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `expenses`
+-- Table structure for table `todo`
 --
 
-DROP TABLE IF EXISTS `expenses`;
+DROP TABLE IF EXISTS `todo`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `expenses` (
+CREATE TABLE `todo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `price` double DEFAULT NULL,
-  `description` varchar(60) DEFAULT NULL,
-  `done` tinyint(4) DEFAULT NULL,
+  `priority` varchar(45) DEFAULT NULL,
+  `message` varchar(45) DEFAULT NULL,
   `flat` int(11) DEFAULT NULL,
   `user` varchar(45) DEFAULT NULL,
-  `modificationDate` bigint(16) DEFAULT '0',
+  `modificationdate` bigint(16) DEFAULT '0',
+  `date` bigint(16) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `expenses`
+-- Dumping data for table `todo`
 --
 
-LOCK TABLES `expenses` WRITE;
-/*!40000 ALTER TABLE `expenses` DISABLE KEYS */;
-INSERT INTO `expenses` VALUES (1,666,'first row 2',1,0,'NOVA',1452706169130),(2,3,'asd',1,0,'NOVA',0),(3,69,'app created',1,0,'NOVA',0),(4,12,'qw',0,0,'desirex',0),(5,12,'qw',0,0,'desirex',0),(6,12,'qwq',0,0,'desirex',1452890786113);
-/*!40000 ALTER TABLE `expenses` ENABLE KEYS */;
+LOCK TABLES `todo` WRITE;
+/*!40000 ALTER TABLE `todo` DISABLE KEYS */;
+INSERT INTO `todo` VALUES (1,'HIGH','asdf',0,'NOVA',0,NULL),(2,'HIGH','asdf',0,'NOVA',0,NULL),(3,'HIGH','asdf',0,'NOVA',0,NULL);
+/*!40000 ALTER TABLE `todo` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
