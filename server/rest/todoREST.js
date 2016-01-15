@@ -1,36 +1,36 @@
-var expensesdb = require('./../db/expenses');
+var tododb = require('./../db/todo');
 function runREST(app) {
-    app.get('/expenses/flats/:id', function (req, res) {
-        expensesdb.getexpenses(req.params.id,function (row) {
+    app.get('/todos/flats/:id', function (req, res) {
+        tododb.gettodos(req.params.id,function (row) {
             res.send(row);
         });
 
     });
-    app.put('/expenses/:id', function (req, res) {
+    app.put('/todos/:id', function (req, res) {
         var json = JSON.parse(req.body.obj);
         var id = req.params.id;
-        expensesdb.getexpensedate(id,function(row){
+        tododb.gettododate(id,function(row){
             if(row== undefined){
                 res.send(404);
-            } else if(row.modificationDate>json.modificationDate){
+            } else if( parseInt(row.modificationDate)>parseInt(json.modificationDate)){
                 res.sendStatus(409);
             } else{
-                expensesdb.updateexpense(json, function () {
+                tododb.updatetodo(json, function () {
                     res.send(200);
                 });
             }
         });
     });
-    app.post('/expenses/', function (req, res) {
+    app.post('/todos/', function (req, res) {
         var json = JSON.parse(req.body.obj);
-        expensesdb.newexpense(json, function (row) {
-            console.log("Created new Expense with id=" + row[0]['LAST_INSERT_ID()']);
+        tododb.newtodo(json, function (row) {
+            console.log("Created new todo with id=" + row[0]['LAST_INSERT_ID()']);
             json.id = row[0]['LAST_INSERT_ID()'];
             res.send(json);
         })
     });
-    app.get('/expenses/:id', function (req, res) {
-        expensesdb.getexpense(req.params.id, function (row) {
+    app.get('/todos/:id', function (req, res) {
+        tododb.gettodo(req.params.id, function (row) {
             if(row == undefined){
                 res.send(404);
             } else if (row.length==0){
@@ -42,8 +42,8 @@ function runREST(app) {
         });
 
     });
-    app.delete('/expenses/:id',function(req,res){
-        expensesdb.deleteexpense(req.params.id,function(rows){
+    app.delete('/todos/:id',function(req,res){
+        tododb.deletetodo(req.params.id,function(rows){
             if(rows.affectedRows==0){
                 res.send(404);
             } else{

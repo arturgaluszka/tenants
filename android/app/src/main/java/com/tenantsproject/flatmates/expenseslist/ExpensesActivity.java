@@ -140,7 +140,7 @@ public class ExpensesActivity extends AppCompatActivity {
                 editPrice.setText(String.valueOf(detailedExpense.getPrice()));
                 editAuthor.setText(detailedExpense.getUser());
                 //TODO: display date in nice format
-                editModDate.setText(detailedExpense.getModificationDate());
+                editModDate.setText(detailedExpense.getModificationDate().toString());
                 break;
             case Response.MESSAGE_NOT_FOUND:
                 error = true;

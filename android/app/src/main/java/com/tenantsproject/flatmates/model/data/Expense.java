@@ -9,7 +9,7 @@ public class Expense implements Serializable {
     private String description;
     private int flat;
     private String user;
-    private String modificationDate;
+    private Long modificationDate;
 
     public Expense() {
     }
@@ -79,11 +79,11 @@ public class Expense implements Serializable {
         this.user = user;
     }
 
-    public String getModificationDate() {
+    public Long getModificationDate() {
         return modificationDate;
     }
 
-    public void setModificationDate(String modificationDate) {
+    public void setModificationDate(Long modificationDate) {
         this.modificationDate = modificationDate;
     }
 }

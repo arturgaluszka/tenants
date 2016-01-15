@@ -5,8 +5,8 @@ var connection = mysql.createConnection(properties.dbprops);
 connection.connect(function (err) {
 });
 
-function getexpenses(id,userHandler) {
-    connection.query('SELECT id,price,description,done,flat,user FROM expenses WHERE flat='+id, function (err, rows, fields) {
+function gettodos(id,userHandler) {
+    connection.query('SELECT id,priority,message,flat,user FROM todo WHERE flat='+id, function (err, rows, fields) {
         if (!err) {
             //console.log(rows);
             userHandler(rows);
@@ -16,29 +16,28 @@ function getexpenses(id,userHandler) {
     });
 }
 
-function updateexpense(json, userHandler) {
+function updatetodo(json, userHandler) {
     var date = new Date().getTime();
-    var a = 'UPDATE expenses SET ' +
-        'price=' + json.price + ',' +
-        'description="' + json.description + '",' +
-        'done=' + json.done +','+
+    var a = 'UPDATE todo SET ' +
+        'priority="' + json.priority + '",' +
+        'message="' + json.message + '",' +
         'user="' + json.user +'",'+
         'modificationDate=' + date +''+
         ' WHERE id=' + json.id;
-    console.log(a);
+    //console.log(a);
     connection.query(a, function (err, rows, fields) {
         if (!err) {
             userHandler();
-            console.log("Updated expense id=" + json.id);
+            console.log("Updated todo id=" + json.id);
         }
         else
             console.log('Error while performing Query.' + err);
 
     });
 }
-function newexpense(json, userHandler) {
-    var a = 'INSERT INTO expenses (price,description,done,flat,user)' +
-        'VALUES (' + json.price + ',"' + json.description + '",' + json.done + ', ' + json.flat + ', "' + json.user + '")';
+function newtodo(json, userHandler) {
+    var a = 'INSERT INTO todo (priority,message,flat,user)' +
+        'VALUES ("' + json.priority + '","' + json.message + '",' + json.flat + ', "' + json.user + '")';
     var b = 'SELECT LAST_INSERT_ID()';
     //console.log(a);
     //console.log(b);
@@ -58,8 +57,8 @@ function newexpense(json, userHandler) {
     });
 }
 
-function getexpense(id, userHandler) {
-    connection.query('SELECT * from expenses WHERE id=' + id, function (err, rows, fields) {
+function gettodo(id, userHandler) {
+    connection.query('SELECT * from todo WHERE id=' + id, function (err, rows, fields) {
         if (!err) {
             //console.log(rows);
             userHandler(rows[0]);
@@ -69,10 +68,10 @@ function getexpense(id, userHandler) {
     });
 }
 
-function deleteexpense(id, userHandler) {
-    connection.query('DELETE FROM expenses WHERE id='+id, function (err, rows, fields) {
+function deletetodo(id, userHandler) {
+    connection.query('DELETE FROM todo WHERE id='+id, function (err, rows, fields) {
         if (!err) {
-            console.log('Deleted expense id='+id);
+            console.log('Deleted todo id='+id);
             userHandler(rows);
         }
         else
@@ -80,8 +79,8 @@ function deleteexpense(id, userHandler) {
     });
 }
 
-function getexpensedate(id,userHandler) {
-    connection.query('SELECT id,modificationDate from expenses WHERE id=' + id, function (err, rows, fields) {
+function gettododate(id,userHandler) {
+    connection.query('SELECT id,modificationDate from todo WHERE id=' + id, function (err, rows, fields) {
         if (!err) {
             userHandler(rows[0]);
         }
@@ -90,9 +89,9 @@ function getexpensedate(id,userHandler) {
     });
 }
 
-exports.getexpenses = getexpenses;
-exports.updateexpense = updateexpense;
-exports.newexpense = newexpense;
-exports.getexpense = getexpense;
-exports.deleteexpense = deleteexpense;
-exports.getexpensedate = getexpensedate;
+exports.gettodos = gettodos;
+exports.updatetodo = updatetodo;
+exports.newtodo = newtodo;
+exports.gettodo = gettodo;
+exports.deletetodo = deletetodo;
+exports.gettododate = gettododate;

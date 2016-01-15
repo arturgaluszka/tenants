@@ -1,5 +1,7 @@
 package com.tenantsproject.flatmates.todolist;
 import com.tenantsproject.flatmates.R;
+import com.tenantsproject.flatmates.model.data.TodoTask;
+
 import android.app.Activity;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -23,10 +25,10 @@ public class TodoAdapter extends ArrayAdapter {
         View rowView = inflater.inflate(R.layout.todo_row, parent, false);
         TextView textView = (TextView) rowView.findViewById(R.id.textView);
         Button btnNxt = (Button) rowView.findViewById(R.id.buttonNotify);
-        if(tasks.get(position).priority == TodoTask.Priority.MEDIUM) {
+        if(tasks.get(position).getPriority() == TodoTask.Priority.MEDIUM) {
             textView.setTextColor(Color.BLACK);
         }
-        else if(tasks.get(position).priority == TodoTask.Priority.HIGH){
+        else if(tasks.get(position).getPriority() == TodoTask.Priority.HIGH){
             textView.setTextColor(Color.RED);
         }
         else{
@@ -34,7 +36,7 @@ public class TodoAdapter extends ArrayAdapter {
         }
 
         btnNxt.setTag(position);
-        textView.setText(tasks.get(position).message);
+        textView.setText(tasks.get(position).getMessage());
         return rowView;
     }
 }

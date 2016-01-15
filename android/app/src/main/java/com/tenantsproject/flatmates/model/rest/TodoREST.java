@@ -5,7 +5,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.tenantsproject.flatmates.model.data.Expense;
+import com.tenantsproject.flatmates.model.data.TodoTask;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,70 +18,69 @@ import java.net.URL;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class ExpenseREST {
-
-    public Response getAllExpenses(int id) {
-        GetAllExpensesTask task = new GetAllExpensesTask();
+public class TodoREST {
+    public Response getAllTodos(int id) {
+        GetAllTodosTask task = new GetAllTodosTask();
         Response response = new Response();
         try {
             task.execute(id);
-            response  = task.get();
+            response = task.get();
         } catch (InterruptedException | ExecutionException e) {
-            Log.e("REST", "Can't run task: getAllExpenses", e);
+            Log.e("REST", "Can't run task: getAllTodos", e);
         }
         return response;
     }
 
-    public Response update(Expense expense) {
-        UpdateExpenseTask task = new UpdateExpenseTask();
+    public Response update(TodoTask todoTask) {
+        UpdateTodoTask task = new UpdateTodoTask();
         Response response = new Response();
-        task.execute(expense);
+        task.execute(todoTask);
         try {
             response = task.get();
         } catch (InterruptedException | ExecutionException e) {
-            Log.e("REST", "Can't run task: updateExpense", e);
+            Log.e("REST", "Can't run task: updateTodo", e);
         }
         return response;
     }
 
-    public Response newExpense(Expense expense) {
-        NewExpenseTask task = new NewExpenseTask();
-        task.execute(expense);
+    public Response newTodo(TodoTask todoTask) {
+        NewTodoTask task = new NewTodoTask();
+        task.execute(todoTask);
         Response response = new Response();
         try {
             response = task.get();
         } catch (InterruptedException | ExecutionException e) {
-            Log.e("REST", "Can't run task: newExpense", e);
+            Log.e("REST", "Can't run task: newTodo", e);
         }
         return response;
     }
 
     public Response get(int id) {
-        GetExpenseTask task = new GetExpenseTask();
+        GetTodoTask task = new GetTodoTask();
         task.execute(id);
         Response response = new Response();
         try {
             response = task.get();
         } catch (InterruptedException | ExecutionException e) {
-            Log.e("REST", "Can't run task: getExpense", e);
+            Log.e("REST", "Can't run task: getTodo", e);
         }
 
         return response;
     }
 
-    public Response delete(Expense expense) {
-        DeleteExpenseTask task = new DeleteExpenseTask();
-        task.execute(expense);
+    public Response delete(TodoTask todoTask) {
+        DeleteTodoTask task = new DeleteTodoTask();
+        task.execute(todoTask);
         Response response = new Response();
         try {
             response = task.get();
         } catch (InterruptedException | ExecutionException e) {
-            Log.e("REST", "Can't run task: deleteExpense", e);
+            Log.e("REST", "Can't run task: deleteTodo", e);
         }
         return response;
     }
 
-    private class GetAllExpensesTask extends AsyncTask<Integer, Void, Response> {
+    private class GetAllTodosTask extends AsyncTask<Integer, Void, Response> {
 
         private HttpURLConnection urlConnection;
 
@@ -91,7 +90,7 @@ public class ExpenseREST {
             String json = "";
             Response response = new Response();
             try {
-                URL url = new URL(Properties.SERVER_URL + "expenses/flats/"+flatId);
+                URL url = new URL(Properties.SERVER_URL + "todos/flats/" + flatId);
                 urlConnection = (HttpURLConnection) url.openConnection();
 
                 InputStream in = urlConnection.getInputStream();
@@ -107,30 +106,29 @@ public class ExpenseREST {
                 e.printStackTrace();
             } finally {
                 urlConnection.disconnect();
-                if(response.getMessageCode()==Response.MESSAGE_OK){
+                if (response.getMessageCode() == Response.MESSAGE_OK) {
                     Gson gson = new Gson();
-                    Type listType = new TypeToken<List<Expense>>() {
+                    Type listType = new TypeToken<List<TodoTask>>() {
                     }.getType();
                     response.setObject(gson.fromJson(json, listType));
                 }
-
             }
             return response;
         }
     }
 
-    private class UpdateExpenseTask extends AsyncTask<Expense, Void, Response> {
+    private class UpdateTodoTask extends AsyncTask<TodoTask, Void, Response> {
 
         private HttpURLConnection urlConnection;
 
         @Override
-        protected Response doInBackground(Expense... params) {
-            Expense expense = params[0];
+        protected Response doInBackground(TodoTask... params) {
+            TodoTask todoTask = params[0];
             Gson gson = new Gson();
-            String json = gson.toJson(expense);
+            String json = gson.toJson(todoTask);
             Response response = new Response();
             try {
-                URL url = new URL(Properties.SERVER_URL + "expenses/" + expense.getId());
+                URL url = new URL(Properties.SERVER_URL + "todos/" + todoTask.getId());
                 urlConnection = (HttpURLConnection) url.openConnection();
 
                 urlConnection.setDoOutput(true);
@@ -149,20 +147,20 @@ public class ExpenseREST {
         }
     }
 
-    private class NewExpenseTask extends AsyncTask<Expense, Void, Response> {
+    private class NewTodoTask extends AsyncTask<TodoTask, Void, Response> {
 
         private HttpURLConnection urlConnection;
 
         @Override
-        protected Response doInBackground(Expense... params) {
-            Expense expense = params[0];
+        protected Response doInBackground(TodoTask... params) {
+            TodoTask todoTask = params[0];
             Gson gson = new Gson();
-            String json = gson.toJson(expense);
+            String json = gson.toJson(todoTask);
             StringBuilder responseMsg = new StringBuilder();
             int msgCode = -1;
             Response response = new Response();
             try {
-                URL url = new URL(Properties.SERVER_URL + "expenses/");
+                URL url = new URL(Properties.SERVER_URL + "todos/");
                 urlConnection = (HttpURLConnection) url.openConnection();
 
                 urlConnection.setDoOutput(true);
@@ -186,8 +184,8 @@ public class ExpenseREST {
                 e.printStackTrace();
             } finally {
                 if (msgCode == 200) {
-                    expense = gson.fromJson(responseMsg.toString(), Expense.class);
-                    response.setObject(expense);
+                    todoTask = gson.fromJson(responseMsg.toString(), TodoTask.class);
+                    response.setObject(todoTask);
                 }
                 response.setMessageCode(msgCode);
                 urlConnection.disconnect();
@@ -196,7 +194,7 @@ public class ExpenseREST {
         }
     }
 
-    private class GetExpenseTask extends AsyncTask<Integer, Void, Response> {
+    private class GetTodoTask extends AsyncTask<Integer, Void, Response> {
 
         HttpURLConnection urlConnection;
 
@@ -205,10 +203,10 @@ public class ExpenseREST {
             int id = params[0];
 
             String responseMsg = "";
-            Expense expense;
+            TodoTask todoTask;
             Response response = new Response();
             try {
-                URL url = new URL(Properties.SERVER_URL + "expenses/" + id);
+                URL url = new URL(Properties.SERVER_URL + "todos/" + id);
                 urlConnection = (HttpURLConnection) url.openConnection();
 
                 InputStream in = urlConnection.getInputStream();
@@ -224,10 +222,10 @@ public class ExpenseREST {
                 e.printStackTrace();
             } finally {
                 urlConnection.disconnect();
-                if(response.getMessageCode()==Response.MESSAGE_OK){
+                if (response.getMessageCode() == Response.MESSAGE_OK) {
                     Gson gson = new Gson();
-                    expense = gson.fromJson(responseMsg, Expense.class);
-                    response.setObject(expense);
+                    todoTask = gson.fromJson(responseMsg, TodoTask.class);
+                    response.setObject(todoTask);
                 }
 
             }
@@ -236,16 +234,16 @@ public class ExpenseREST {
         }
     }
 
-    private class DeleteExpenseTask extends AsyncTask<Expense, Void, Response> {
+    private class DeleteTodoTask extends AsyncTask<TodoTask, Void, Response> {
         private HttpURLConnection urlConnection;
 
         @Override
-        protected Response doInBackground(Expense... params) {
-            Expense expense = params[0];
-            int id = expense.getId();
+        protected Response doInBackground(TodoTask... params) {
+            TodoTask todoTask = params[0];
+            int id = todoTask.getId();
             Response response = new Response();
             try {
-                URL url = new URL(Properties.SERVER_URL + "expenses/" + id);
+                URL url = new URL(Properties.SERVER_URL + "todos/" + id);
                 urlConnection = (HttpURLConnection) url.openConnection();
 
                 urlConnection.setDoOutput(false);
@@ -255,12 +253,11 @@ public class ExpenseREST {
 
 
             } catch (IOException e) {
-                Log.e("EXPENSE_REST","Can't load inputstream",e);
+                Log.e("EXPENSE_REST", "Can't load inputstream", e);
             } finally {
                 urlConnection.disconnect();
             }
             return response;
         }
     }
-
 }
