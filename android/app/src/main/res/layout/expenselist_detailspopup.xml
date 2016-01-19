@@ -84,14 +84,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Author: "
-                    android:id="@+id/textView3" />
+                    android:text="Mod Date:"
+                    android:id="@+id/textView6" />
 
                 <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/expenseslits_details_author"
-                    android:editable="false"
+                    android:id="@+id/expenseslits_details_moddate"
                     android:inputType="none" />
             </LinearLayout>
 
@@ -103,13 +102,14 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mod Date:"
-                    android:id="@+id/textView6" />
+                    android:text="User:"
+                    android:id="@+id/textView3" />
 
                 <EditText
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/expenseslits_details_moddate"
+                    android:id="@+id/expenseslits_details_user"
+                    android:editable="false"
                     android:inputType="none" />
             </LinearLayout>
 

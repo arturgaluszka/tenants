@@ -20,6 +20,7 @@ import com.tenantsproject.flatmates.model.data.Expense;
 import com.tenantsproject.flatmates.model.rest.Response;
 import com.tenantsproject.flatmates.model.service.ExpenseService;
 import com.tenantsproject.flatmates.user.UserActivity;
+import com.tenantsproject.flatmates.utils.TimeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,22 +55,23 @@ public class ExpensesActivity extends AppCompatActivity {
         createRefreshButton();
     }
 
-    private List<Expense> loadData(){
+    private List<Expense> loadData() {
         Response response = expenseService.getAllExpenses(getFlat());
         List<Expense> data;
-        switch (response.getMessageCode()){
+        switch (response.getMessageCode()) {
             case Response.MESSAGE_OK:
                 data = (List<Expense>) response.getObject();
                 break;
             default:
-                data =new ArrayList<>();
+                data = new ArrayList<>();
                 Log.e("expense load", "Can't load expense list");
         }
         return data;
     }
-    private void refreshData(){
+
+    private void refreshData() {
         Response response = expenseService.getAllExpenses(getFlat());
-        switch (response.getMessageCode()){
+        switch (response.getMessageCode()) {
             case Response.MESSAGE_OK:
                 this.data = (List<Expense>) response.getObject();
                 adapter.updateData(this.data);
@@ -127,10 +129,10 @@ public class ExpensesActivity extends AppCompatActivity {
         final EditText editDescription = (EditText) popupView.findViewById(R.id.expenseslits_details_description);
         final EditText editPrice = (EditText) popupView.findViewById(R.id.expenseslits_details_price);
         final TextView editError = (TextView) popupView.findViewById(R.id.expenseslits_details_error);
-        final TextView editAuthor = (TextView) popupView.findViewById(R.id.expenseslits_details_author);
+        final TextView editUser = (TextView) popupView.findViewById(R.id.expenseslits_details_user);
         final TextView editModDate = (TextView) popupView.findViewById(R.id.expenseslits_details_moddate);
         //make fields not editable
-        editAuthor.setKeyListener(null);
+        editUser.setKeyListener(null);
         editModDate.setKeyListener(null);
         //load data and handle get(id) errors
         switch (response.getMessageCode()) {
@@ -138,9 +140,8 @@ public class ExpensesActivity extends AppCompatActivity {
                 detailedExpense = (Expense) response.getObject();
                 editDescription.setText(detailedExpense.getDescription());
                 editPrice.setText(String.valueOf(detailedExpense.getPrice()));
-                editAuthor.setText(detailedExpense.getUser());
-                //TODO: display date in nice format
-                editModDate.setText(detailedExpense.getModificationDate().toString());
+                editModDate.setText(TimeUtils.displayDate(detailedExpense.getModificationDate()));
+                editUser.setText(detailedExpense.getUser());
                 break;
             case Response.MESSAGE_NOT_FOUND:
                 error = true;
@@ -186,7 +187,7 @@ public class ExpensesActivity extends AppCompatActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(finalExpense.getDone()==0) {
+                if (finalExpense.getDone() == 0) {
                     Response response = expenseService.delete(finalExpense);
                     switch (response.getMessageCode()) {
                         case Response.MESSAGE_OK:
@@ -200,7 +201,7 @@ public class ExpensesActivity extends AppCompatActivity {
                             editError.setText("Unknown error. Please refresh");
                             break;
                     }
-                } else{
+                } else {
                     editError.setText("Can't delete done expenses");
                 }
 
@@ -213,7 +214,7 @@ public class ExpensesActivity extends AppCompatActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!finalError) {
+                if (!finalError) {
                     String description = editDescription.getText().toString();
                     double price = Double.valueOf(editPrice.getText().toString());
 
@@ -230,13 +231,15 @@ public class ExpensesActivity extends AppCompatActivity {
                     if (changed && !done && price > 0 && !description.equals("")) {
                         finalExpense.setDescription(description);
                         finalExpense.setPrice(price);
+                        finalExpense.setUser(getUser());
                         //update and handle errors
                         Response response = expenseService.update(finalExpense);
-                        switch (response.getMessageCode()){
+                        switch (response.getMessageCode()) {
                             case Response.MESSAGE_OK:
                                 //continue closing
                                 expense.setDescription(description);
                                 expense.setPrice(price);
+                                expense.setUser(getUser());
                                 adapter.notifyDataSetChanged();
                                 alertDialog.dismiss();
                                 break;
@@ -264,13 +267,14 @@ public class ExpensesActivity extends AppCompatActivity {
     }
 
     //TODO: improve and/or delete (shared pref user info)
-    private int getFlat(){
+    private int getFlat() {
         SharedPreferences sP = getSharedPreferences(UserActivity.USER_PREF_NAME, Context.MODE_PRIVATE);
-        return sP.getInt(UserActivity.USER_PREF_FLAT,0);
+        return sP.getInt(UserActivity.USER_PREF_FLAT, 0);
     }
+
     //TODO: improve and/or delete (shared pref user info)
-    private String getUser(){
+    private String getUser() {
         SharedPreferences sP = getSharedPreferences(UserActivity.USER_PREF_NAME, Context.MODE_PRIVATE);
-        return sP.getString(UserActivity.USER_PREF_USER,"default");
+        return sP.getString(UserActivity.USER_PREF_USER, "default");
     }
 }
