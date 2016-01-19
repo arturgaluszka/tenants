@@ -8,11 +8,36 @@
     tools:context="com.tenantsproject.flatmates.wallet.WalletActivity"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Wallet"
-        android:id="@+id/walletTitle" />
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="R"
+            android:id="@+id/wallet_refreshbutton"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Wallet"
+            android:id="@+id/walletTitle"
+            android:layout_toRightOf="@+id/wallet_refreshbutton"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/wallet_errortext"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/walletTitle"
+            android:layout_toEndOf="@+id/walletTitle"
+            android:paddingLeft="15dp"
+            android:textColor="#ff0000" />
+
+    </RelativeLayout>
 
     <TextView
         android:layout_width="wrap_content"
