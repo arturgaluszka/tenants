@@ -34,6 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="R"
+        android:onClick="onRefresh"
         android:layout_toLeftOf="@id/btnAddItem"
         android:layout_alignParentBottom="true"
         android:id="@+id/btnRefresh"
