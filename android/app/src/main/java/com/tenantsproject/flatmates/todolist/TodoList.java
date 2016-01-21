@@ -1,12 +1,12 @@
 package com.tenantsproject.flatmates.todolist;
-
 import com.tenantsproject.flatmates.R;
 
 import android.app.AlertDialog;
 import android.app.Notification;
+import android.content.DialogInterface;
 import android.app.NotificationManager;
 import android.content.Context;
-import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,23 +21,23 @@ import android.widget.RelativeLayout;
 import android.view.View;
 
 import com.tenantsproject.flatmates.model.data.TodoTask;
-import com.tenantsproject.flatmates.utils.JSONFileHandler;
+import com.tenantsproject.flatmates.user.UserActivity;
 
 public class TodoList extends AppCompatActivity {
 
     private ArrayAdapter<String> tasksAdapter;
     private List list = null;
     private ListView tasksView;
-    private static final String TODO_FILE_NAME = "todo_file";
-    private JSONFileHandler handler;
+    //private static final String TODO_FILE_NAME = "todo_file";
+    //private JSONFileHandler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo_list);
         tasksView = (ListView) findViewById(R.id.tasksView);
-        this.handler = new JSONFileHandler(TODO_FILE_NAME, this);
-        this.list = (List) handler.load(List.class);
+        //this.handler = new JSONFileHandler(TODO_FILE_NAME, this);
+        //this.list = (List) handler.load(List.class);
         if (this.list == null) {
             list = new List();
         }
@@ -47,13 +47,13 @@ public class TodoList extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
                 list.tasks.remove(pos);
-                handler.save(list);
+                //handler.save(list);
                 tasksAdapter.notifyDataSetChanged();
                 return true;
             }
         });
         tasksView.setLongClickable(true);
-        handler.save(this.list);
+        //handler.save(this.list);
     }
 
     public void onAddItem(View v) {
@@ -63,7 +63,7 @@ public class TodoList extends AppCompatActivity {
         task.setMessage(itemText);
         list.tasks.add(task);
         etNewItem.setText("");
-        handler.save(this.list);
+        //handler.save(this.list);
     }
 
     public void onNotify(View v) {
@@ -92,7 +92,7 @@ public class TodoList extends AppCompatActivity {
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 tasksAdapter.notifyDataSetChanged();
-                handler.save(list);
+                //handler.save(list);
             }
         });
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -118,6 +118,17 @@ public class TodoList extends AppCompatActivity {
         });
         levelDialog = builder.create();
         levelDialog.show();
+    }
+
+    //TODO: improve and/or delete (shared pref user info)
+    private int getFlat(){
+        SharedPreferences sP = getSharedPreferences(UserActivity.USER_PREF_NAME, Context.MODE_PRIVATE);
+        return sP.getInt(UserActivity.USER_PREF_FLAT,0);
+    }
+    //TODO: improve and/or delete (shared pref user info)
+    private String getUser(){
+        SharedPreferences sP = getSharedPreferences(UserActivity.USER_PREF_NAME, Context.MODE_PRIVATE);
+        return sP.getString(UserActivity.USER_PREF_USER,"default");
     }
 
     private class List {

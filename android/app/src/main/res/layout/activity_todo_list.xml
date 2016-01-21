@@ -26,9 +26,18 @@
         android:hint="Enter a new item"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/btnAddItem"
-        android:layout_toStartOf="@+id/btnAddItem"
+        android:layout_toLeftOf="@+id/btnRefresh"
         android:layout_alignParentBottom="true" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="R"
+        android:layout_toLeftOf="@id/btnAddItem"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/btnRefresh"
+        />
 
     <Button
         android:layout_width="wrap_content"
