@@ -15,8 +15,8 @@ public class TodoTask {
         priority = Priority.MEDIUM;
     }
 
-    public TodoTask(Priority priority, String message, Long date, int flat, String user) {
-        this.priority = priority;
+    public TodoTask(String message, Long date, int flat, String user) {
+        this.priority = Priority.MEDIUM;
         this.message = message;
         this.date = date;
         this.flat = flat;
