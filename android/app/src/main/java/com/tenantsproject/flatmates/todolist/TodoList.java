@@ -8,12 +8,12 @@ import android.content.DialogInterface;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
-<<<<<<< HEAD
+
 import android.content.DialogInterface;
 import android.content.Intent;
-=======
+
 import android.content.SharedPreferences;
->>>>>>> c354d935a9625be5305ba514a1a443040be989b9
+
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -113,13 +113,13 @@ public class TodoList extends AppCompatActivity {
         etNewItem.setText("");
     }
 public int isStillExist(String check){
-    if(list.tasks.isEmpty()){
+    if(tasks.isEmpty()){
         return -1;
     }
-    for(int i=0;i<list.tasks.size();i++){
-        if(list.tasks.get(i).getMessage().equals(check)){
+    for(int i=0;i<tasks.size();i++){
+        if(tasks.get(i).getMessage().equals(check)){
             return i;
-        }else if(i+1 == list.tasks.size() ) {
+        }else if(i+1 == tasks.size() ) {
             return -1;
         }
     }
@@ -128,8 +128,7 @@ public int isStillExist(String check){
     public void remove(String check){
                 if(isStillExist(check) != -1){
                     Toast.makeText(getApplicationContext(), "Usunięto z zadań!", Toast.LENGTH_LONG).show();
-                    list.tasks.remove(isStillExist(check));
-                    handler.save(list);
+                    tasks.remove(isStillExist(check));
                     tasksAdapter.notifyDataSetChanged();
                     this.finish();
                 }else{
@@ -150,7 +149,7 @@ public int isStillExist(String check){
     public void setAlarm(Calendar targetCal,View v){
         int position = tasksView.getPositionForView
                 ((RelativeLayout) v.getParent());
-        String temp = list.tasks.get(position).getMessage();
+        String temp = tasks.get(position).getMessage();
         Toast.makeText(getApplicationContext(), "Ustawiono przypomnienie!", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
         intent.putExtra("temp",temp);
@@ -164,7 +163,7 @@ public int isStillExist(String check){
         if (isStillExist(check) != -1){
             Toast.makeText(getApplicationContext(), "Ustawiono przypomnienie!", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
-            intent.putExtra("temp", list.tasks.get(isStillExist(check)).getMessage());
+            intent.putExtra("temp", tasks.get(isStillExist(check)).getMessage());
             final int _id = (int) System.currentTimeMillis();
             PendingIntent pendingIntent = PendingIntent.getBroadcast(getBaseContext(), _id, intent, 0);
             AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
@@ -235,7 +234,7 @@ public int isStillExist(String check){
         levelDialog.show();
     }
 
-<<<<<<< HEAD
+
    
 
     class List {
@@ -247,7 +246,7 @@ public int isStillExist(String check){
     }
 
 
-=======
+
     public void onRefresh(View v){
         tasks = loadData();
         tasksAdapter = new TodoAdapter(this, tasks);
@@ -286,6 +285,6 @@ public int isStillExist(String check){
         SharedPreferences sP = getSharedPreferences(UserActivity.USER_PREF_NAME, Context.MODE_PRIVATE);
         return sP.getString(UserActivity.USER_PREF_USER,"default");
     }
->>>>>>> c354d935a9625be5305ba514a1a443040be989b9
+
 
 }
