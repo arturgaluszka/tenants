@@ -32,9 +32,9 @@ public class AlarmReceiver extends BroadcastReceiver {
                 Intent.FLAG_ACTIVITY_NEW_TASK);
 
         myNotification = new NotificationCompat.Builder(context)
-                .setContentTitle("Przypomnienie!")
+                .setContentTitle("Reminder!")
                 .setContentText(toShow)
-                .setTicker("Flatmates przypomnienie!")
+                .setTicker("Flatmates reminder!")
                 .setWhen(System.currentTimeMillis())
                 .setContentIntent(pendingIntent)
                 .setDefaults(Notification.DEFAULT_SOUND)

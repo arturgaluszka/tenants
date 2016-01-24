@@ -37,7 +37,7 @@ public class OnNotificationClick extends TodoList {
         cal.add(Calendar.MINUTE, 10);
         if(cal.compareTo(current) <= 0){
             Toast.makeText(getApplicationContext(),
-                    "Nieprawidłowa data!",
+                            "incorrect date!",
                     Toast.LENGTH_LONG).show();
         }else{
             setAlarm(cal,mytext);
@@ -55,7 +55,7 @@ public class OnNotificationClick extends TodoList {
         cal.add(Calendar.HOUR, 2);
         if(cal.compareTo(current) <= 0){
             Toast.makeText(getApplicationContext(),
-                    "Nieprawidłowa data!",
+                            "incorrect date!",
                     Toast.LENGTH_LONG).show();
         }else{
             setAlarm(cal,mytext);
@@ -73,7 +73,7 @@ public class OnNotificationClick extends TodoList {
         cal.add(Calendar.HOUR, 8);
         if(cal.compareTo(current) <= 0){
             Toast.makeText(getApplicationContext(),
-                    "Nieprawidłowa data!",
+                            "incorrect date!",
                     Toast.LENGTH_LONG).show();
         }else{
             setAlarm(cal,mytext);
@@ -91,7 +91,7 @@ public class OnNotificationClick extends TodoList {
         cal.add(Calendar.HOUR, 24);
         if(cal.compareTo(current) <= 0){
             Toast.makeText(getApplicationContext(),
-                    "Nieprawidłowa data!",
+                            "incorrect date!",
                     Toast.LENGTH_LONG).show();
         }else{
             setAlarm(cal,mytext);

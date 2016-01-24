@@ -112,27 +112,28 @@ public class TodoList extends AppCompatActivity {
         }
         etNewItem.setText("");
     }
-public int isStillExist(String check){
-    if(tasks.isEmpty()){
-        return -1;
-    }
-    for(int i=0;i<tasks.size();i++){
-        if(tasks.get(i).getMessage().equals(check)){
-            return i;
-        }else if(i+1 == tasks.size() ) {
+    public int isStillExist(String check){
+      if(tasks.isEmpty()){
             return -1;
-        }
+     }
+        for(int i=0;i<tasks.size();i++){
+         if(tasks.get(i).getMessage().equals(check)){
+             return i;
+         }else if(i+1 == tasks.size() ) {
+               return -1;
+          }
+     }
+     return -1;
     }
-    return -1;
-}
+
     public void remove(String check){
                 if(isStillExist(check) != -1){
-                    Toast.makeText(getApplicationContext(), "Usunięto z zadań!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Deleted from the tasks!", Toast.LENGTH_LONG).show();
                     tasks.remove(isStillExist(check));
                     tasksAdapter.notifyDataSetChanged();
                     this.finish();
                 }else{
-                    Toast.makeText(getApplicationContext(), "Zadanie zostało już usunięte!", Toast.LENGTH_LONG).show();;
+                    Toast.makeText(getApplicationContext(), "The task was deleted!", Toast.LENGTH_LONG).show();;
                     this.finish();
                 }
     }
@@ -143,14 +144,14 @@ public int isStillExist(String check){
         int position = tasksView.getPositionForView
                 ((RelativeLayout) v.getParent());
         setAlarm(cal, v);
-        Toast.makeText(getApplicationContext(),"Przypomnienie za 1 minute!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"Reminder in 1 minute!", Toast.LENGTH_SHORT).show();
     }
 
     public void setAlarm(Calendar targetCal,View v){
         int position = tasksView.getPositionForView
                 ((RelativeLayout) v.getParent());
         String temp = tasks.get(position).getMessage();
-        Toast.makeText(getApplicationContext(), "Ustawiono przypomnienie!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Reminder is set!", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
         intent.putExtra("temp",temp);
         final int _id = (int) System.currentTimeMillis();
@@ -161,7 +162,7 @@ public int isStillExist(String check){
 
     public void setAlarm(Calendar targetCal,String check){
         if (isStillExist(check) != -1){
-            Toast.makeText(getApplicationContext(), "Ustawiono przypomnienie!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Reminder is set!", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
             intent.putExtra("temp", tasks.get(isStillExist(check)).getMessage());
             final int _id = (int) System.currentTimeMillis();
@@ -171,7 +172,7 @@ public int isStillExist(String check){
             this.finish();
 
         }else{
-            Toast.makeText(getApplicationContext(), "To zadanie zostało już usunięte", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "The task was deleted", Toast.LENGTH_SHORT).show();
             this.finish();
         }
     }
