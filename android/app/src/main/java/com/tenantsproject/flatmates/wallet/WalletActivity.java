@@ -1,12 +1,18 @@
 package com.tenantsproject.flatmates.wallet;
 
 import android.content.Context;
+<<<<<<< HEAD
 import android.content.Intent;
+=======
+>>>>>>> db976159333a23db8e278301c661546cf07b9307
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+<<<<<<< HEAD
 import android.util.Log;
+=======
+>>>>>>> db976159333a23db8e278301c661546cf07b9307
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,8 +36,11 @@ public class WalletActivity extends AppCompatActivity {
     private DecimalDigitsInputFilter decimalFilter;
     private WalletService walletService;
     private Button refreshButton;
+<<<<<<< HEAD
     public String v1;
 
+=======
+>>>>>>> db976159333a23db8e278301c661546cf07b9307
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,7 +97,10 @@ public class WalletActivity extends AppCompatActivity {
                 if (WalletActivity.this.decimalFilter.filter(value)) {
                     double previousValue = wallet.getCurrent();
                     String previousUser = wallet.getUser();
+<<<<<<< HEAD
                     v1 = value;
+=======
+>>>>>>> db976159333a23db8e278301c661546cf07b9307
                     boolean didWithdraw = WalletActivity.this.wallet.withdraw(Double.valueOf(value));
                     if (didWithdraw) {
                         Response response = walletService.update(wallet);
@@ -173,6 +185,7 @@ public class WalletActivity extends AppCompatActivity {
         SharedPreferences sP = getSharedPreferences(UserActivity.USER_PREF_NAME, Context.MODE_PRIVATE);
         return sP.getString(UserActivity.USER_PREF_USER, "default");
     }
+<<<<<<< HEAD
 
     private void goToHistory() {
         Intent i = new Intent(this, HistoryActivity.class);
@@ -189,4 +202,6 @@ public class WalletActivity extends AppCompatActivity {
         goToHistory();
     }
 
+=======
+>>>>>>> db976159333a23db8e278301c661546cf07b9307
 }

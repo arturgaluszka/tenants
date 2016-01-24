@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">FlatMates</string>
     <string name="title_activity_add_flat">AddFlat</string>
+<<<<<<< HEAD
     <string name="title_activity_history">HistoryActivity</string>
+=======
+>>>>>>> db976159333a23db8e278301c661546cf07b9307
 </resources>

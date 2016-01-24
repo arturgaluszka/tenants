@@ -77,5 +77,8 @@
         android:layout_below="@+id/button5"
         android:layout_centerHorizontal="true"
         android:onClick="Exit"/>
+<<<<<<< HEAD
 
+=======
+>>>>>>> db976159333a23db8e278301c661546cf07b9307
 </RelativeLayout>

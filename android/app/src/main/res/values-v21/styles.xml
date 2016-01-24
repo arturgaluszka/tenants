@@ -1,5 +1,8 @@
 <resources>>
+<<<<<<< HEAD
 
+=======
+>>>>>>> db976159333a23db8e278301c661546cf07b9307
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
