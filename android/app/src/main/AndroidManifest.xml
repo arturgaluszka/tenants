@@ -20,6 +20,8 @@
         </activity>
         <activity android:name=".todolist.TodoList" />
         <activity android:name=".wallet.WalletActivity" />
+        <receiver android:name=".todolist.AlarmReceiver" android:process=":remote" />
+        <activity android:name=".todolist.OnNotificationClick" />
         <activity
             android:name=".expenseslist.ExpensesActivity"
             android:windowSoftInputMode="stateHidden" />

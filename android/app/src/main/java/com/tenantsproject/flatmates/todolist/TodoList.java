@@ -2,16 +2,20 @@ package com.tenantsproject.flatmates.todolist;
 
 import com.tenantsproject.flatmates.R;
 
+import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,6 +23,7 @@ import android.widget.ListView;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.view.View;
+import android.widget.Toast;
 
 import com.tenantsproject.flatmates.model.data.TodoTask;
 import com.tenantsproject.flatmates.utils.JSONFileHandler;
@@ -65,21 +70,69 @@ public class TodoList extends AppCompatActivity {
         etNewItem.setText("");
         handler.save(this.list);
     }
+public int isStillExist(String check){
+    if(list.tasks.isEmpty()){
+        return -1;
+    }
+    for(int i=0;i<list.tasks.size();i++){
+        if(list.tasks.get(i).getMessage().equals(check)){
+            return i;
+        }else if(i+1 == list.tasks.size() ) {
+            return -1;
+        }
+    }
+    return -1;
+}
+    public void remove(String check){
+                if(isStillExist(check) != -1){
+                    Toast.makeText(getApplicationContext(), "Usunięto z zadań!", Toast.LENGTH_LONG).show();
+                    list.tasks.remove(isStillExist(check));
+                    handler.save(list);
+                    tasksAdapter.notifyDataSetChanged();
+                    this.finish();
+                }else{
+                    Toast.makeText(getApplicationContext(), "Zadanie zostało już usunięte!", Toast.LENGTH_LONG).show();;
+                    this.finish();
+                }
+    }
 
     public void onNotify(View v) {
-        Notification.Builder builder = new Notification.Builder(this)
-                .setContentText("Nie zapomnij!")
-                .setContentTitle("Masz nowe zadanie!")
-                .setSmallIcon(android.R.drawable.btn_star);
-        builder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
-        builder.setLights(Color.RED, 300, 300);
-        Notification notification1 = builder.getNotification();
-        NotificationManager notificationManager = (NotificationManager)
-                getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(1, notification1);
-        builder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
-        builder.setLights(Color.CYAN, 3000, 3000);
-        notification1.flags |= Notification.FLAG_AUTO_CANCEL;
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.MINUTE, 1);
+        int position = tasksView.getPositionForView
+                ((RelativeLayout) v.getParent());
+        setAlarm(cal, v);
+        Toast.makeText(getApplicationContext(),"Przypomnienie za 1 minute!", Toast.LENGTH_SHORT).show();
+    }
+
+    public void setAlarm(Calendar targetCal,View v){
+        int position = tasksView.getPositionForView
+                ((RelativeLayout) v.getParent());
+        String temp = list.tasks.get(position).getMessage();
+        Toast.makeText(getApplicationContext(), "Ustawiono przypomnienie!", Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
+        intent.putExtra("temp",temp);
+        final int _id = (int) System.currentTimeMillis();
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getBaseContext(), _id, intent, 0);
+        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(), pendingIntent);
+    }
+
+    public void setAlarm(Calendar targetCal,String check){
+        if (isStillExist(check) != -1){
+            Toast.makeText(getApplicationContext(), "Ustawiono przypomnienie!", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
+            intent.putExtra("temp", list.tasks.get(isStillExist(check)).getMessage());
+            final int _id = (int) System.currentTimeMillis();
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(getBaseContext(), _id, intent, 0);
+            AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+            alarmManager.set(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(), pendingIntent);
+            this.finish();
+
+        }else{
+            Toast.makeText(getApplicationContext(), "To zadanie zostało już usunięte", Toast.LENGTH_SHORT).show();
+            this.finish();
+        }
     }
 
     public void onPriority(View v) {
@@ -120,11 +173,16 @@ public class TodoList extends AppCompatActivity {
         levelDialog.show();
     }
 
-    private class List {
-        private ArrayList<TodoTask> tasks;
+   
+
+    class List {
+        protected ArrayList<TodoTask> tasks;
 
         List() {
             tasks = new ArrayList<TodoTask>();
         }
     }
+
+
+
 }
