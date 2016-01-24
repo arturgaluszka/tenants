@@ -128,12 +128,12 @@ public class TodoList extends AppCompatActivity {
 
     public void remove(String check){
                 if(isStillExist(check) != -1){
-                    Toast.makeText(getApplicationContext(), "Deleted from the tasks!", Toast.LENGTH_LONG).show();
-                    tasks.remove(isStillExist(check));
-                    tasksAdapter.notifyDataSetChanged();
+                  //  Toast.makeText(getApplicationContext(), "Deleted from the tasks!", Toast.LENGTH_LONG).show();
+                  //  tasks.remove(isStillExist(check));
+                  //  tasksAdapter.notifyDataSetChanged();
                     this.finish();
                 }else{
-                    Toast.makeText(getApplicationContext(), "The task was deleted!", Toast.LENGTH_LONG).show();;
+                  //  Toast.makeText(getApplicationContext(), "The task was deleted!", Toast.LENGTH_LONG).show();;
                     this.finish();
                 }
     }
