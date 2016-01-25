@@ -20,7 +20,7 @@
         </activity>
         <activity android:name=".todolist.TodoList" />
         <activity android:name=".wallet.WalletActivity" />
-<<<<<<< HEAD
+
         <activity
             android:name=".expenseslist.ExpensesActivity"
             android:windowSoftInputMode="stateHidden" />
@@ -29,14 +29,14 @@
             android:name=".wallet.HistoryActivity"
             android:label="@string/title_activity_history"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-=======
+
         <receiver android:name=".todolist.AlarmReceiver" android:process=":remote" />
         <activity android:name=".todolist.OnNotificationClick" />
         <activity
             android:name=".expenseslist.ExpensesActivity"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".user.UserActivity"></activity>
->>>>>>> db976159333a23db8e278301c661546cf07b9307
+
     </application>
 
 </manifest>

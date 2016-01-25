@@ -1,18 +1,15 @@
 package com.tenantsproject.flatmates.todolist;
+
 import com.tenantsproject.flatmates.R;
 
-<<<<<<< HEAD
-=======
+
 import android.app.AlarmManager;
->>>>>>> db976159333a23db8e278301c661546cf07b9307
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.content.DialogInterface;
 import android.app.NotificationManager;
-<<<<<<< HEAD
 import android.content.Context;
 import android.content.SharedPreferences;
-=======
 import android.app.PendingIntent;
 import android.content.Context;
 
@@ -20,17 +17,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
-
->>>>>>> db976159333a23db8e278301c661546cf07b9307
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+
 import java.util.ArrayList;
-<<<<<<< HEAD
-=======
 import java.util.Calendar;
->>>>>>> db976159333a23db8e278301c661546cf07b9307
+
 
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -38,11 +32,7 @@ import android.widget.ListView;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.view.View;
-<<<<<<< HEAD
-=======
 import android.widget.Toast;
->>>>>>> db976159333a23db8e278301c661546cf07b9307
-
 import com.tenantsproject.flatmates.model.data.TodoTask;
 import com.tenantsproject.flatmates.model.service.TodoService;
 import com.tenantsproject.flatmates.user.UserActivity;
@@ -53,26 +43,25 @@ public class TodoList extends AppCompatActivity {
     private ArrayAdapter<String> tasksAdapter;
     private ArrayList<TodoTask> tasks;
     private ListView tasksView;
-<<<<<<< HEAD
-   private TodoService todoService;
+    private TodoService todoService;
 
     //private static final String TODO_FILE_NAME = "todo_file";
     //private JSONFileHandler handler;
-=======
     private TodoService todoService;
->>>>>>> db976159333a23db8e278301c661546cf07b9307
+
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo_list);
         tasksView = (ListView) findViewById(R.id.tasksView);
-<<<<<<< HEAD
-        //this.handler = new JSONFileHandler(TODO_FILE_NAME, this);
-        //this.list = (List) handler.load(List.class);
-=======
->>>>>>> db976159333a23db8e278301c661546cf07b9307
-        todoService = new TodoService();
+
+                //this.handler = new JSONFileHandler(TODO_FILE_NAME, this);
+                //this.list = (List) handler.load(List.class);
+
+
+                todoService = new TodoService();
         tasks = loadData();
         tasksAdapter = new TodoAdapter(this, tasks);
         tasksView.setAdapter(tasksAdapter);
@@ -80,14 +69,14 @@ public class TodoList extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> av, View v, int pos, long id) {
                 AlertDialog alertDialog = new AlertDialog.Builder(TodoList.this).create();
-                Response response = todoService.delete( tasks.get(pos));
+                Response response = todoService.delete(tasks.get(pos));
                 switch (response.getMessageCode()) {
                     case Response.MESSAGE_OK:
                         tasks.remove(pos);
-<<<<<<< HEAD
-                        //alertDialog.dismiss();
-=======
->>>>>>> db976159333a23db8e278301c661546cf07b9307
+
+                            //alertDialog.dismiss();
+
+
                         break;
                     case Response.MESSAGE_NOT_FOUND:
                         alertDialog.setMessage("Already deleted Please refresh");
@@ -103,13 +92,11 @@ public class TodoList extends AppCompatActivity {
             }
         });
         tasksView.setLongClickable(true);
-<<<<<<< HEAD
-        //handler.save(this.list); DONE
-=======
->>>>>>> db976159333a23db8e278301c661546cf07b9307
+                //handler.save(this.list); DONE
+
     }
 
-    private ArrayList<TodoTask> loadData(){
+    private ArrayList<TodoTask> loadData() {
         Response response = todoService.getAllTodos(getFlat());
         ArrayList<TodoTask> data;
         switch (response.getMessageCode()) {
@@ -126,19 +113,15 @@ public class TodoList extends AppCompatActivity {
     public void onAddItem(View v) {
         EditText etNewItem = (EditText) findViewById(R.id.etNewItem);
         String itemText = etNewItem.getText().toString();
-<<<<<<< HEAD
         TodoTask task = new TodoTask();
         task.setMessage(itemText);
         task.setFlat(getFlat());
         task.setUser(getUser());
         AlertDialog alertDialog = new AlertDialog.Builder(TodoList.this).create();
         Response response = todoService.newTodo(task);
-=======
-        TodoTask task = new TodoTask(itemText,(long)1,getFlat(),getUser());
+        TodoTask task = new TodoTask(itemText, (long) 1, getFlat(), getUser());
         AlertDialog alertDialog = new AlertDialog.Builder(TodoList.this).create();
         Response response = todoService.newTodo(task);
-
->>>>>>> db976159333a23db8e278301c661546cf07b9307
         switch (response.getMessageCode()) {
             case Response.MESSAGE_OK:
                 tasks.add(task);
@@ -154,7 +137,7 @@ public class TodoList extends AppCompatActivity {
                 break;
         }
         etNewItem.setText("");
-<<<<<<< HEAD
+
         //handler.save(this.list);
     }
 
@@ -172,32 +155,33 @@ public class TodoList extends AppCompatActivity {
         builder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
         builder.setLights(Color.CYAN, 3000, 3000);
         notification1.flags |= Notification.FLAG_AUTO_CANCEL;
-=======
-    }
-    public int isStillExist(String check){
-      if(tasks.isEmpty()){
-            return -1;
-     }
-        for(int i=0;i<tasks.size();i++){
-         if(tasks.get(i).getMessage().equals(check)){
-             return i;
-         }else if(i+1 == tasks.size() ) {
-               return -1;
-          }
-     }
-     return -1;
+
     }
 
-    public void remove(String check){
-                if(isStillExist(check) != -1){
-                  //  Toast.makeText(getApplicationContext(), "Deleted from the tasks!", Toast.LENGTH_LONG).show();
-                  //  tasks.remove(isStillExist(check));
-                  //  tasksAdapter.notifyDataSetChanged();
-                    this.finish();
-                }else{
-                  //  Toast.makeText(getApplicationContext(), "The task was deleted!", Toast.LENGTH_LONG).show();;
-                    this.finish();
-                }
+    public int isStillExist(String check) {
+        if (tasks.isEmpty()) {
+            return -1;
+        }
+        for (int i = 0; i < tasks.size(); i++) {
+            if (tasks.get(i).getMessage().equals(check)) {
+                return i;
+            } else if (i + 1 == tasks.size()) {
+                return -1;
+            }
+        }
+        return -1;
+    }
+
+    public void remove(String check) {
+        if (isStillExist(check) != -1) {
+            //  Toast.makeText(getApplicationContext(), "Deleted from the tasks!", Toast.LENGTH_LONG).show();
+            //  tasks.remove(isStillExist(check));
+            //  tasksAdapter.notifyDataSetChanged();
+            this.finish();
+        } else {
+            //  Toast.makeText(getApplicationContext(), "The task was deleted!", Toast.LENGTH_LONG).show();;
+            this.finish();
+        }
     }
 
     public void onNotify(View v) {
@@ -206,24 +190,24 @@ public class TodoList extends AppCompatActivity {
         int position = tasksView.getPositionForView
                 ((RelativeLayout) v.getParent());
         setAlarm(cal, v);
-        Toast.makeText(getApplicationContext(),"Reminder in 1 minute!", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Reminder in 1 minute!", Toast.LENGTH_SHORT).show();
     }
 
-    public void setAlarm(Calendar targetCal,View v){
+    public void setAlarm(Calendar targetCal, View v) {
         int position = tasksView.getPositionForView
                 ((RelativeLayout) v.getParent());
         String temp = tasks.get(position).getMessage();
         Toast.makeText(getApplicationContext(), "Reminder is set!", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
-        intent.putExtra("temp",temp);
+        intent.putExtra("temp", temp);
         final int _id = (int) System.currentTimeMillis();
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getBaseContext(), _id, intent, 0);
-        AlarmManager alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarmManager.set(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(), pendingIntent);
     }
 
-    public void setAlarm(Calendar targetCal,String check){
-        if (isStillExist(check) != -1){
+    public void setAlarm(Calendar targetCal, String check) {
+        if (isStillExist(check) != -1) {
             Toast.makeText(getApplicationContext(), "Reminder is set!", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(getBaseContext(), AlarmReceiver.class);
             intent.putExtra("temp", tasks.get(isStillExist(check)).getMessage());
@@ -233,11 +217,11 @@ public class TodoList extends AppCompatActivity {
             alarmManager.set(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(), pendingIntent);
             this.finish();
 
-        }else{
+        } else {
             Toast.makeText(getApplicationContext(), "The task was deleted", Toast.LENGTH_SHORT).show();
             this.finish();
         }
->>>>>>> db976159333a23db8e278301c661546cf07b9307
+
     }
 
     public void onPriority(View v) {
@@ -249,49 +233,55 @@ public class TodoList extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-<<<<<<< HEAD
+
                 tasks.get(position).setUser(getUser());
                 AlertDialog alertDialog = new AlertDialog.Builder(TodoList.this).create();
                 Response response = todoService.update(tasks.get(position));
                 switch (response.getMessageCode()) {
                     case Response.MESSAGE_OK:
-=======
-                AlertDialog alertDialog = new AlertDialog.Builder(TodoList.this).create();
+                        AlertDialog alertDialog = new AlertDialog.Builder(TodoList.this).create();
 
-                Response response = todoService.update(tasks.get(position));
-                switch (response.getMessageCode()) {
-                    case Response.MESSAGE_OK:
-                        tasks.get(position).setUser(getUser());
->>>>>>> db976159333a23db8e278301c661546cf07b9307
-                        tasksAdapter.notifyDataSetChanged();
-                        break;
-                    case Response.MESSAGE_NOT_FOUND:
-                        alertDialog.setMessage("Todo not found. Please refresh.");
-<<<<<<< HEAD
-=======
-                        alertDialog.show();
->>>>>>> db976159333a23db8e278301c661546cf07b9307
-                        break;
-                    case Response.MESSAGE_CONFLICT:
-                        alertDialog.setMessage("Somebody already updated. Please refresh.");
-                        alertDialog.show();
-                        break;
-                    default:
-                        alertDialog.setMessage("Error while updating. Please refresh.");
-                        alertDialog.show();
-                        break;
+                        Response response = todoService.update(tasks.get(position));
+                        switch (response.getMessageCode()) {
+                            case Response.MESSAGE_OK:
+                                tasks.get(position).setUser(getUser());
+
+                                tasksAdapter.notifyDataSetChanged();
+                                break;
+                            case Response.MESSAGE_NOT_FOUND:
+                                alertDialog.setMessage("Todo not found. Please refresh.");
+
+                                alertDialog.show();
+
+                                break;
+                            case Response.MESSAGE_CONFLICT:
+                                alertDialog.setMessage("Somebody already updated. Please refresh.");
+                                alertDialog.show();
+                                break;
+                            default:
+                                alertDialog.setMessage("Error while updating. Please refresh.");
+                                alertDialog.show();
+                                break;
+                        }
+                        //handler.save(list);
                 }
-                //handler.save(list);
             }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
+
+            );
+            builder.setNegativeButton("Cancel",new DialogInterface.OnClickListener()
+
+            {
+                public void onClick (DialogInterface dialog,int id){
                 tasks.get(position).setPriority(previousPriority);
             }
-        });
-        builder.setTitle("Select The Priority Level");
-        builder.setSingleChoiceItems(items, -1, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int item) {
+            }
+
+            );
+            builder.setTitle("Select The Priority Level");
+            builder.setSingleChoiceItems(items,-1,new DialogInterface.OnClickListener()
+
+            {
+                public void onClick (DialogInterface dialog,int item){
                 switch (item) {
                     case 0:
                         tasks.get(position).setPriority(TodoTask.Priority.LOW);
@@ -304,28 +294,24 @@ public class TodoList extends AppCompatActivity {
                         break;
                 }
             }
-        });
-        levelDialog = builder.create();
-        levelDialog.show();
-    }
+            }
 
-<<<<<<< HEAD
-=======
-
-   
-
-    class List {
-        protected ArrayList<TodoTask> tasks;
-
-        List() {
-            tasks = new ArrayList<TodoTask>();
+            );
+            levelDialog=builder.create();
+            levelDialog.show();
         }
-    }
 
 
+        class List {
+            protected ArrayList<TodoTask> tasks;
 
->>>>>>> db976159333a23db8e278301c661546cf07b9307
-    public void onRefresh(View v){
+            List() {
+                tasks = new ArrayList<TodoTask>();
+            }
+        }
+
+
+    public void onRefresh(View v) {
         tasks = loadData();
         tasksAdapter = new TodoAdapter(this, tasks);
         tasksView.setAdapter(tasksAdapter);
@@ -336,12 +322,11 @@ public class TodoList extends AppCompatActivity {
                 Response response = todoService.delete(tasks.get(pos));
                 switch (response.getMessageCode()) {
                     case Response.MESSAGE_OK:
-<<<<<<< HEAD
                         tasks.remove(pos);
                         //alertDialog.dismiss();
-=======
-                        tasks.remove(pos);;
->>>>>>> db976159333a23db8e278301c661546cf07b9307
+                        tasks.remove(pos);
+                        ;
+
                         break;
                     case Response.MESSAGE_NOT_FOUND:
                         alertDialog.setMessage("Already deleted Please refresh");
@@ -358,23 +343,17 @@ public class TodoList extends AppCompatActivity {
         });
         tasksView.setLongClickable(true);
     }
-<<<<<<< HEAD
 
-=======
->>>>>>> db976159333a23db8e278301c661546cf07b9307
     //TODO: improve and/or delete (shared pref user info)
-    private int getFlat(){
+    private int getFlat() {
         SharedPreferences sP = getSharedPreferences(UserActivity.USER_PREF_NAME, Context.MODE_PRIVATE);
-        return sP.getInt(UserActivity.USER_PREF_FLAT,0);
-    }
-    //TODO: improve and/or delete (shared pref user info)
-    private String getUser(){
-        SharedPreferences sP = getSharedPreferences(UserActivity.USER_PREF_NAME, Context.MODE_PRIVATE);
-        return sP.getString(UserActivity.USER_PREF_USER,"default");
+        return sP.getInt(UserActivity.USER_PREF_FLAT, 0);
     }
 
-<<<<<<< HEAD
-=======
+    //TODO: improve and/or delete (shared pref user info)
+    private String getUser() {
+        SharedPreferences sP = getSharedPreferences(UserActivity.USER_PREF_NAME, Context.MODE_PRIVATE);
+        return sP.getString(UserActivity.USER_PREF_USER, "default");
+    }
 
->>>>>>> db976159333a23db8e278301c661546cf07b9307
 }

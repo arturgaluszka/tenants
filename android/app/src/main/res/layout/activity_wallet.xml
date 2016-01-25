@@ -69,16 +69,12 @@
             android:text="withdraw"
             android:id="@+id/walletwithdrawbutton" />
 
-<<<<<<< HEAD
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="History"
             android:id="@+id/button13"
             android:onClick="onClick"/>
-
-=======
->>>>>>> db976159333a23db8e278301c661546cf07b9307
     </LinearLayout>
 
 </LinearLayout>
