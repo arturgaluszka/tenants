@@ -141,22 +141,7 @@ public class TodoList extends AppCompatActivity {
         //handler.save(this.list);
     }
 
-    public void onNotify(View v) {
-        Notification.Builder builder = new Notification.Builder(this)
-                .setContentText("Nie zapomnij!")
-                .setContentTitle("Masz nowe zadanie!")
-                .setSmallIcon(android.R.drawable.btn_star);
-        builder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
-        builder.setLights(Color.RED, 300, 300);
-        Notification notification1 = builder.getNotification();
-        NotificationManager notificationManager = (NotificationManager)
-                getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(1, notification1);
-        builder.setVibrate(new long[]{1000, 1000, 1000, 1000, 1000});
-        builder.setLights(Color.CYAN, 3000, 3000);
-        notification1.flags |= Notification.FLAG_AUTO_CANCEL;
-
-    }
+   
 
     public int isStillExist(String check) {
         if (tasks.isEmpty()) {
