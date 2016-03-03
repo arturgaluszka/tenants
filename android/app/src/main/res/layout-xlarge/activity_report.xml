@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="If you find bug in our program, please send us report. "
+            android:textSize="32sp"
+            android:id="@+id/textView14" />
+        <RelativeLayout
+            android:layout_width="600dp"
+            android:layout_height="600dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginRight="100dp"
+            android:layout_marginTop="100dp"
+
+            android:id="@+id/relativeLayout">
+
+
+
+
+            <EditText
+                android:id="@+id/EditTextName"
+                android:layout_height="wrap_content"
+                android:hint="Name"
+                android:inputType="textPersonName"
+                android:layout_width="fill_parent"
+                android:layout_marginTop="48dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/edit_text_style">
+            </EditText>
+
+            <EditText
+                android:id="@+id/EditTextEmail"
+                android:layout_height="wrap_content"
+                android:hint="Feedback e-mail"
+                android:inputType="textEmailAddress"
+                android:layout_width="fill_parent"
+                android:background="@drawable/edit_text_style"
+                android:layout_below="@+id/EditTextName"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
+            </EditText>
+
+            <EditText
+                android:id="@+id/EditTextFeedbackBody"
+                android:layout_height="wrap_content"
+                android:hint="Describe"
+                android:inputType="textMultiLine"
+                android:lines="5"
+                android:layout_width="fill_parent"
+                android:background="@drawable/edit_text_style"
+                android:autoText="true"
+                android:layout_below="@+id/EditTextEmail"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
+            </EditText>
+
+            <CheckBox
+                android:id="@+id/CheckBoxResponse"
+                android:layout_height="wrap_content"
+                android:text="Would you like an email response?"
+                android:layout_width="fill_parent"
+                android:textColor="#000000"
+                android:layout_below="@+id/EditTextFeedbackBody"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true">
+            </CheckBox>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Send Report"
+                android:id="@+id/button2"
+                android:layout_below="@+id/CheckBoxResponse"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Please fill"
+                android:id="@+id/textView13"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:textColor="#000000"/>
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView8"
+                android:layout_marginRight="167dp"
+                android:layout_marginEnd="167dp"
+                android:layout_marginBottom="39dp"
+                android:src="@drawable/bug"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
+
+            <ImageView
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:id="@+id/imageView6"
+                android:src="@android:drawable/ic_media_rew"
+                android:onClick="back"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="44dp"
+                android:layout_marginStart="44dp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

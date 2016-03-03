@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.jacob6.layouts" >
+    package="com.example.androidswipeactivity"
+    Popchoose
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+        <activity android:name=".MainActivity" >
+            android:windowSoftInputMode="adjustNothing"
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Register_activity" >
+        </activity>
+        <activity android:name=".Flat_activity" />
+        <activity android:name=".newFlat_acitivity" />
+        <activity android:name=".Drawer" />
+        <activity android:name=".Mylist" />
+        <activity
+            android:name=".InformationAboutToDo"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name=".Popchoose"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name=".MyArchiwum"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity android:name=".Preferences" >
+        </activity>
+        <activity android:name=".Notification" >
+        </activity>
+        <activity android:name=".User" >
+        </activity>
+        <activity android:name=".Report" >
+        </activity>
+    </application>
+
+</manifest>
