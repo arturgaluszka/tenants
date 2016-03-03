@@ -5,7 +5,15 @@ android/.idea/libraries
 adnroid/.DS_Store
 android/build
 android/captures
-*.iml
 android/.idea
+android2/.gradle
+android2/local.properties
+android2/.idea/workspace.xml
+android2/.idea/libraries
+adnroid2/.DS_Store
+android/build
+android/captures
+android/.idea
+*.iml
 server/.idea
 server/node_modules

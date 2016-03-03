@@ -1,0 +1,268 @@
+extends layout
+block content
+    h1 FlatMates API - REST API
+    br
+    br
+    ul universal codes:
+        li 200 OK (completed/retrived/done)
+        li
+            span 401 user not logged in (some actions do not require being logged in)
+            br
+            span user token should be in Authorization header in HTTP request
+            br
+            span connection must be using TLS
+        li 501 its not yet implemented
+    br
+    h2 expenses
+    table(border=1)
+       tr
+         th path
+         th type
+         th args
+         th description
+         th return
+         th codes
+       tr
+         td /products/:id/mainlist
+         td delete
+         td path:
+            br
+            p id - product ID
+         td removes product from main list
+         td none
+         td
+             p 404 - already deleted/ product not found
+             p 403 - removing other user's product
+       tr
+          td /products/:id
+          td put
+          td
+             p path:
+             p id - product ID
+             br
+             p body:
+             p Product object
+          td updated given product
+          td none
+          td
+             p 404 - product not found
+             p 409 - somebody already updated after Product has been loaded
+             p 403 - updating other user's product
+       tr
+          td /products/
+          td post
+          td none
+          td creates new product
+          td none
+          td
+             p 404 - already deleted/ product not found
+             p 403 - removing other user's product
+       tr
+          td /products/:id/userlist
+          td post
+          td path:
+             br
+             p id - product ID
+          td reserves product for current user
+          td none
+          td
+             p 404 - product not found
+             p 409 - somebody already reserved after Product has been loaded
+       tr
+          td /products/:id/purchase
+          td post
+          td none
+          td creates new product
+          td none
+          td
+             p 404 - product not found
+             p 409 - somebody already bought after Product has been loaded
+       tr
+          td /products/:id/userlist
+          td delete
+          td path:
+             br
+             p id - product ID
+          td removes product from users list/ unreserve
+          td none
+          td
+             p 404 - product not found
+       tr
+          td /products/:id/purchase
+          td delete
+          td path:
+             br
+             p id - product ID
+          td cancels purchase
+          td none
+          td
+             p 404 - product not found
+
+    h2 users
+    table(border=1)
+        tr
+            th path
+            th type
+            th args
+            th description
+            th return
+            th codes
+        tr
+            td /login
+            td post
+            td body:
+               br
+               p username
+               p password - sha1 encrypted
+            td logs in user
+            td token
+            td
+               p 404 - user not found
+               p 403 - incorrect password
+        tr
+            td /users/:userID/flat/
+            td post
+            td
+               p path:
+               p userID - user ID
+               br
+               p body:
+               p flatID - flat ID
+               p flatPassword - flat password - sha1 encrypted
+            td signs user to given flat
+            td none
+            td
+               p 403 - incorrect password
+        tr
+            td /users/:userID/flat/:flatID/
+            td delete
+            td
+               p path:
+               p userID - user ID
+               p flatID - flat ID
+            td deletes user's assignment to a flat
+            td none
+            td
+               p 404 - user was not signed to this flat
+        tr
+            td /users/name/:name
+            td get
+            td path:
+               br
+               p name - username
+            td retrieves ID of given user
+            td name
+            td
+               p 404 - user not found
+        tr
+            td /users/
+            td post
+            td
+               p body:
+               p username - user name
+               p password - password sha1 encrypted
+            td creates new user
+            td none
+            td
+               p 403 - incorrect name or already in use
+        tr
+            td /users/:id/password
+            td delete
+            td
+               p body:
+               p oldPassword - old password sha1 encrypted
+               p newPassword - new password sha1 encrypted
+            td changes users password
+            td none
+            td
+               p 403 - incorrect password
+
+    h2 flats
+    table(border=1)
+        tr
+            th path
+            th type
+            th args
+            th description
+            th return
+            th codes
+        tr
+            td /flats/
+            td post
+            td body:
+                br
+                p password - sha1 encrypted
+            td creates flat and returns its id
+            td id
+            td none
+        tr
+            td /flats/:flatID/users
+            td get
+            td
+                p path:
+                p flatID - flat ID
+            td signs user to given flat
+            td none
+            td
+                p 403 - not a member of given flat
+    h2 stats
+    table(border=1)
+        tr
+            th path
+            th type
+            th args
+            th description
+            th return
+            th codes
+        tr
+            td /stats/user/:userID/flat/:flatID
+            td get
+            td
+                p path:
+                p userID - user ID
+                p flatID - flat ID
+            td retrieves stats for given user withing given flat
+            td Statistics object
+            td
+                p 404 - no such user in given flat
+                p 403 - can't check others' flats stats
+        tr
+            td /archive/user/:userID/flat/:flatID
+            td get
+            td
+                p path:
+                p flatID - flat ID
+                p userID - user ID
+            td retrieves archival list of products for given user within given flat
+            td list of Product
+            td
+                p 403 - can't check others' flats stats
+        tr
+            td /archive/flat/:flatID
+            td get
+            td
+                p path:
+                p flatID - flat ID
+            td retrieves archival list of products for given flat
+            td list of Product
+            td
+                p 403 - can't check others' flats stats
+    br
+    br
+    p objects are sent in JSON format
+    h2 Statictics object
+    ul attributes:
+        li id
+        li sum
+        li flat
+        li user
+    h2 Product object
+    ul attributes:
+        li id
+        li done (is bought, 0/1)
+        li price
+        li description
+        li flat (ID)
+        li user (ID)
+        li creator (ID)
+        li modificationDate (number of miliseconds since 01/01/1970)
