@@ -28,11 +28,11 @@
         <!-- Footer Start -->
         <LinearLayout android:id="@+id/footer"
             android:layout_width="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="255dp"
             android:layout_height="260dip"
             android:background="@layout/footer_register"
-            android:layout_alignParentBottom="true">
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="64dp">
         </LinearLayout>
         <!-- Footer Ends -->
 
@@ -62,8 +62,9 @@
             <TextView android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#372c24"
-                android:text="Password"
-                android:textSize="35dp" />
+                android:text=" Password"
+                android:textSize="35dp"
+                android:id="@+id/EditTextName2" />
             <EditText android:id="@+id/reg_password"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

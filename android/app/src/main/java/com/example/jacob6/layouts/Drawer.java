@@ -108,9 +108,13 @@ public class Drawer extends FragmentActivity {
         mDrawerLayout.closeDrawer(mDrawerPane);
 
         switch (position){
-            case 3:
-                Intent intent = new Intent(Drawer.this, Preferences.class);
+            case 1:
+                Intent intent = new Intent(Drawer.this, Statistics.class);
                 startActivity(intent);
+                break;
+            case 3:
+                Intent intent2 = new Intent(Drawer.this, Preferences.class);
+                startActivity(intent2);
                 break;
         }
     }

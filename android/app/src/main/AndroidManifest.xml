@@ -7,6 +7,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity android:name=".MainActivity" >
@@ -30,6 +31,9 @@
             android:name=".Popchoose"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity
+            android:name=".DescribeArchive"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
             android:name=".MyArchiwum"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
@@ -40,6 +44,14 @@
         <activity android:name=".User" >
         </activity>
         <activity android:name=".Report" >
+        </activity>
+        <activity android:name=".Archive" >
+        </activity>
+        <activity android:name=".Statistics" >
+        </activity>
+        <activity android:name=".User1" >
+        </activity>
+        <activity android:name=".Describtion" >
         </activity>
     </application>
 
