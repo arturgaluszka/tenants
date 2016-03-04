@@ -1,0 +1,281 @@
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+.clearfix:after {
+    clear: both;
+}
+.clearfix {
+    *zoom: 1;
+}
+
+.fa {
+	margin-top: 7px;
+	color:#7D8182;
+}
+
+.fa:hover {
+	color: #2aabd2;
+}
+
+.fa-active {
+	color: #2aabd2;
+}
+
+.name-active {
+	background-color: #2aabd2;
+	color:white !important;
+}
+
+
+.mobile-menu {
+	display: none;
+}
+.logo {
+	font-family: Track;
+	font-size: 18px;
+	float:left;
+	margin-left:  30px;
+	color: #2aabd2;
+	margin-top: 10px;
+}
+
+@font-face {
+	font-family: 'Track';
+	src: url('track.otf');
+}
+
+nav {
+	height: 40px;
+	width: 100%;
+	background: white;
+	font-size: 11pt;
+	font-family: 'PT Sans', Arial, sans-serif;
+	position: relative;
+}
+
+body {
+	background-color: #D6D6D6 !important;
+}
+
+nav ul {
+	padding: 0;
+	margin: 0 auto;
+	width: 500px;
+	height: 40px;
+	float: right;
+}
+nav li {
+	display: inline;
+	float: left;
+}
+nav a {
+	color: #949899;
+	display: inline-block;
+	width: 100px;
+	text-align: center;
+	text-decoration: none;
+	line-height: 40px;
+}
+nav li a {
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+}
+
+
+@media screen and (max-width: 680px) {
+	
+	.mobile-list {
+		text-align: center;
+	}
+
+	.mobile-list nav {
+		background-color: white;
+	}
+
+	.mobile-list nav li a {
+		color:#2aabd2;
+		font-weight: bold
+	}
+	.mobile-list nav:hover li a{
+		color:white;
+	}
+
+	.mobile-list nav:hover {
+		background-color: #2aabd2;
+	}
+
+nav ul {
+	width: 100px;
+	float:none;
+}
+nav li {
+	display: inline;
+	float: left;
+}
+	#menu {
+		display: none;
+	}
+	.mobile-menu {
+		display:block;
+		float:right;
+		margin-right: 30px;
+	}
+}
+
+@media screen and (max-width: 250px) {
+	nav ul {
+	width: 100px;
+	float:none;
+}
+nav li {
+	display: inline;
+	float: left;
+}
+	.logo {
+		display:none;
+	}
+	.mobile-menu {
+		display:block;
+		float:right;
+		margin-right: 30px;
+	}
+}
+
+.non-active {
+	display:none;
+}
+
+/* SIDEBAR */
+
+.groups-container {
+	background-color: white;
+	margin: 20px;
+	width:220px;
+	padding-bottom: 10px;
+	height:auto;
+	-webkit-box-shadow: 5px 3px 28px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow:    5px 3px 28px 0px rgba(0, 0, 0, 0.3);
+	box-shadow:         5px 3px 28px 0px rgba(0, 0, 0, 0.3);
+	float:left;
+}
+
+.groups-container li {
+	color: #2aabd2;
+	list-style: none;
+	font-size: 20px;
+	text-align: center;
+}
+
+.groups-container  li:hover {
+	font-weight: bold;
+	font-size: 23px;
+	cursor: pointer;
+}
+
+.groups-container li span {
+	color: black;
+}
+
+ .groups {
+	text-align: center;
+	font-size: 30px;
+	font-weight: bold;
+	color:#2aabd2;
+}
+.name {
+	font-size: 20px !important;
+	color: #2aabd2;
+	text-align: center;
+	font-weight: bold;
+	cursor:pointer;
+}
+
+.name:hover {
+	background-color: #2aabd2;
+	color:white;
+}
+
+
+.add p{
+	font-style: oblique;
+}
+
+
+.groups-container ul {
+	padding-left: 0px;
+}
+
+@media screen and (max-width: 1000px) {
+}
+
+@media screen and (max-width: 750px) {
+}
+
+@media screen and (max-width: 560px) {
+	.groups-container {
+		margin-left:auto !important;
+		margin-right:auto !important;
+		display: block;
+		position:relative;
+		float:none;
+	}
+}
+
+.front-stats {
+	height: auto;
+	background-color: white;
+	float:left;
+	position:relative;
+	margin-top:20px;
+	width: 700px;
+	-webkit-box-shadow: 5px 3px 28px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow:    5px 3px 28px 0px rgba(0, 0, 0, 0.3);
+	box-shadow:         5px 3px 28px 0px rgba(0, 0, 0, 0.3);
+}
+
+.expenses-table {
+	float:left;
+	margin:20px;
+	width:50%;
+	position:relative;
+}
+
+.table>tbody>tr>td {
+	    border-top: 1px solid #2aabd2 !important;
+}
+
+th {
+	border-top: 1px solid #2aabd2 !important;
+}
+
+tr:hover {
+	font-weight: bold;
+	cursor: pointer;
+	background-color: white !important;
+}
+
+.expenses-sum {
+	font-weight: bold;
+	font-size: 17px;
+	text-decoration: underline;
+}
+
+.front-stats p {
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+	color:#2aabd2;
+}
+.container {
+	margin-left:20px !important;
+}
+
+#myChart {
+	position:relative;
+	float: left;
+	margin-left:20px;
+	margin-bottom:20px;
+}

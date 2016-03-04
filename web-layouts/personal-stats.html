@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Personal Stats</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" >
+	<link rel="stylesheet" href="css/personal-stats.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<script src="js/jquery-2.2.1.min.js"></script>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/Chart.min.js"> </script> 
+</head>
+		<script type="text/javascript"> 
+		$(document).ready(function () {
+			$( ".mobile-menu" ).click(function() {
+	  		if($(".mobile-list").hasClass('non-active')){
+	  			$(".mobile-list").removeClass('non-active');
+	  		}
+	  		else{
+	  			$(".mobile-list").addClass('non-active');
+	  		}
+			});
+		});
+		$(window).resize(function() {
+			if($(window).width()>=680){
+				$(".mobile-list").addClass('non-active');
+			};
+		});
+
+		</script>
+<body>
+	<div class="mobile-list non-active">
+		<nav> <ul> <li><a href="#">Stats </a> </ul> </li> </nav>
+		<nav class="clearfix"> <ul class="clearfix"><li><a href="#"> Settings </a> </li></ul></nav>
+		<nav class="clearfix"> <ul class="clearfix"> <li><a href="#">Logout  </a></li> </ul>  </nav>
+		<nav class="clearfix"> <ul class="clearfix"><li><a href="#">Lists  </a> </li></ul> </nav>
+	</div>
+		<nav class="clearfix">
+		<div class="logo">FLATMATES</div>
+		<ul class="clearfix" id="menu">
+				<li><a href="#"><i class="fa fa-list-alt fa-2x"></i></a> </li>
+				<li><a href="#"><i class="fa fa-table fa-2x fa-active"></i></a></li>
+				<li><a href="#"><i class="fa fa-cogs fa-2x"></i></a></li>
+				<li><a href="#"></a></li>
+				<li><a href="#"><i class="fa fa-sign-out fa-2x"></i></a> </li>
+		</ul>
+		<div class="mobile-menu"> 
+			<i class="fa fa-bars fa-2x"></i>
+		</div>
+	</nav>
+</div>
+	<div class="groups-container">
+		<p class="name name-active">Grota-Roweckiego</p>
+		<ul class="group">
+			<li style="font-weight: bold;"> <span>Karol </span> </li>
+			<li> <span> Paweł </span> </li>
+			<li><span> Artur </span></li>
+			<li> <span class="add"><p>Add member</p> </span> </li>
+		</ul>
+		<p class="name">Wrzosowa 8</p>
+		<ul class="group">
+			<li> <span>Karol </span> </li>
+			<li> <span class="add"> <p>Add member </p> </span> </li>
+		</ul>
+		<p class="name">Create group</p>
+	</div>
+
+	<div class="front-stats"> 
+		<p>Grota Roweckiego, Karol</p>
+	<canvas id="myChart" width="300" height="300"></canvas>
+		<div class="expenses-table"> 
+			<p>Six last months</p>
+			<table class="table table-hover"> 
+					<th>Month</th>
+					<th>Expenses</th>
+					<tr> <td>January</td> <td> 100 zł </td></tr>
+					<tr> <td>February</td> <td> 120 zł </td></tr>
+					<tr> <td>March</td> <td> 130 zł </td></tr>
+					<tr> <td>April</td> <td> 140 zł </td></tr>
+					<tr> <td>May</td> <td> 100 zł </td></tr>
+					<tr> <td>July</td> <td> 120 zł </td></tr>
+					<tr class="expenses-sum"> <td>Total sum of expenses</td> <td> 1200 zł </td></tr>
+			</table>
+		</div>
+	</div>
+	<div class="expenses-history">
+			<div class="expenses-table"> 
+			<p class="name"> Karol's History</p>
+			<table class="table table-hover" style=" border-top: 1px solid #2aabd2 "> 
+					<th>Product</th>
+					<th>Cost</th>
+					<th> </th>
+					<tr> <td>Milk</td> <td> 10 zł </td>  <td> <i class="fa fa-undo"></i></td></tr>
+					<tr> <td>Eggs</td> <td> 12 zł </td> <td> <i class="fa fa-undo"></i></td></tr>
+					<tr> <td>Sweets</td> <td> 1 zł </td> <td > <i class="fa fa-undo"></i></td></tr>
+					<tr> <td>Bacon</td> <td> 18 zł </td> <td> <i class="fa fa-undo"></i> </td></tr>
+					<tr> <td>Meat</td> <td> 19 zł </td> <td > <i class="fa fa-undo"></i> </td></tr>
+					<tr> <td>Apples</td> <td> 4 zł  </td><td > <i class="fa fa-undo"></i> </td></tr>
+			</table>
+		</div>
+
+
+	</div>
+				<script>
+			var data = {
+		    labels: ["January", "February", "March","April","May","July"],
+		    datasets: [
+		        {
+		            label: "My First dataset",
+		            fillColor: "rgba(220,220,220,0.5)",
+		            strokeColor: "rgba(220,220,220,0.8)",
+		            highlightFill: "rgba(220,220,220,0.75)",
+		            highlightStroke: "rgba(220,220,220,1)",
+		            data: [100, 120, 130,140,100,120]
+		        }
+		    ]
+		};
+				var ctx = document.getElementById("myChart").getContext("2d");
+				var myNewChart = new Chart(ctx).Bar(data);
+		 </script>
+</body>
+</html>

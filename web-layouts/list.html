@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>List</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="css/list.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+	<script src="js/jquery-2.2.1.min.js"></script>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/Chart.min.js"> </script>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" >
+</head>
+		<script type="text/javascript"> 
+		$(document).ready(function () {
+			$( ".mobile-menu" ).click(function() {
+	  		if($(".mobile-list").hasClass('non-active')){
+	  			$(".mobile-list").removeClass('non-active');
+	  		}
+	  		else{
+	  			$(".mobile-list").addClass('non-active');
+	  		}
+			});
+		});
+		$(window).resize(function() {
+			if($(window).width()>=680){
+				$(".mobile-list").addClass('non-active');
+			};
+		});
+		</script>
+<body>
+	<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Add price</h4>
+      </div>
+      <div class="modal-body">
+        <p><input class="form-control" placeholder="Price"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-info" data-dismiss="modal">Add</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+	<div class ="blur">
+	<div class="mobile-list non-active">
+		<nav> <ul> <li><a href="#">Stats </a> </ul> </li> </nav>
+		<nav class="clearfix"> <ul class="clearfix"><li><a href="#"> Settings </a> </li></ul></nav>
+		<nav class="clearfix"> <ul class="clearfix"> <li><a href="#">Logout  </a></li> </ul>  </nav>
+		<nav class="clearfix"> <ul class="clearfix"><li><a href="#">Lists  </a> </li></ul> </nav>
+	</div>
+		<nav class="clearfix">
+		<div class="logo">FLATMATES</div>
+		<ul class="clearfix" id="menu">
+				<li><a href="#"><i class="fa fa-list-alt fa-2x fa-active"></i></a> </li>
+				<li><a href="#"><i class="fa fa-table fa-2x"></i></a></li>
+				<li><a href="#"><i class="fa fa-cogs fa-2x"></i></a></li>
+				<li><a href="#"></a></li>
+				<li><a href="#"><i class="fa fa-sign-out fa-2x"></i></a> </li>
+		</ul>
+		<div class="mobile-menu"> 
+			<i class="fa fa-bars fa-2x"></i>
+		</div>
+	</nav>
+	<div class="groups-container">
+		<p class="name name-active">Grota-Roweckiego</p>
+		<ul class="group">
+			<li> <span>Karol </span> </li>
+			<li> <span> Paweł </span> </li>
+			<li><span> Artur </span></li>
+			<li> <span class="add"><p> Add member</p> </span> </li>
+		</ul>
+		<p class="name">Czechosłowacka 3</p>
+		<ul class="group">
+			<li> <span>Karol </span> </li>
+			<li> <span class="add"> <p>Add member </p> </span> </li>
+		</ul>
+		<p class="name">Create group</p>
+	</div>
+		<section id="todoapp">
+			<header id="header">
+				<input id="new-todo" data-bind="value: current, valueUpdate: 'afterkeydown', enterKey: add" placeholder="What needs to be bought?" autofocus>
+			</header>
+			<section id="main" data-bind="visible: todos().length">
+				<ul id="todo-list" data-bind="foreach: filteredTodos">
+					<li data-bind="css: { completed: completed, editing: editing, reserved:reserved}">
+						<div class="view">
+							<input class="toggle" data-bind="checked: completed" type="checkbox" data-toggle="modal" data-target="#myModal">
+							<label data-bind="text: title, event: { dblclick: reserved }"></label>
+							<button class="destroy" data-bind="click: $root.remove"></button>
+						</div>
+						<input class="edit" data-bind="value: title, valueUpdate: 'afterkeydown', enterKey: $root.saveEditing, escapeKey: $root.cancelEditing, selectAndFocus: editing, event: { blur: $root.saveEditing }">
+					</li>
+				</ul>
+			</section>
+			<footer id="footer" data-bind="visible: completedCount() || remainingCount()">
+				<ul id="filters">
+					<li>
+						<a href="#">Active</a>
+					</li>
+					<li>
+						<a  href="#">Reserved</a>
+					</li>
+					<li>
+						<a href="#">Removed</a>
+					</li>
+				</ul>
+			</footer>
+		</section>
+		<script src="js/knockout-latest.js"></script>
+		<script src="js/app.js"></script>
+</div>
+</body>
+</html>

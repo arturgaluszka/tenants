@@ -1,0 +1,156 @@
+/*font for logo*/
+@font-face {
+	font-family: 'Track';
+	src: url('track.otf');
+}
+/*background image*/
+
+.bgEnvelope{
+  margin-top: 40px;
+  min-height: 100%;
+  min-width: 1024px;
+  width: 100%;
+  height: auto;
+  top: 0;
+  left: 0;
+  background:rgba(0,0,0,0.6);
+  position: fixed
+}
+
+img.bg {
+	opacity: 0.6;
+	height: 100%;
+	width:100%;
+	position: fixed;
+}
+@media screen and (max-width: 1024px) {
+  img.bg {
+    left: 50%;
+    margin-left: -512px; 
+  }
+}
+/*navbar*/
+
+nav {
+	height: 40px;
+	width: 100%;
+	background: white;
+	font-size: 11pt;
+	font-family: 'PT Sans', Arial, sans-serif;
+	position: relative;
+}
+
+.logo {
+	font-family: Track;
+	font-size: 18px;
+	float:left;
+	margin-left:  30px;
+	color: #2aabd2;
+	margin-top: 10px;
+} 
+
+.front {
+	margin-top: 100px;
+	width:1000px;
+	margin-right: auto;
+	margin-left:auto;
+}
+/*welcome box*/
+.front-welcome{
+	width:450px;
+	position: relative;
+	color: white;
+	float: left;
+	margin-left: 190px;
+}
+
+.front-welcome h1 {
+	font-weight: bold;
+}
+
+.front-welcome p {
+	line-height: 30px;
+	font-size: 20px;
+}
+
+.front-welcome .sign {
+	font-family: Track;
+	position: relative;
+}
+
+.front-welcome p {
+}
+
+.front-welcome h1 {
+	margin: 0px;
+}
+/*signin box*/
+hr {
+	margin-top: 10px !important;
+	margin: -10px;
+}
+
+.front-signin{
+	background-color: white;
+	position: relative;
+	border-radius: 2%; 
+	height: 153px;
+	width: 300px;
+	padding:10px;
+	float:right;
+}
+#signin-submit{
+	float: right;
+	width:	50%;
+}
+
+.checkbox {
+	float:left;
+}
+/*signup box*/
+.front-signup{
+	margin-top: 10px;
+	background-color: white;
+	position: relative;
+	border-radius: 2%; 
+	height: 250px;
+	width: 300px;
+	padding:10px;
+	float:right;
+}
+
+.signup-text {
+	font-weight: bold;
+}
+
+.btnCenter{
+	text-align: center;
+}
+
+.container{
+	margin-left:20px !important;
+}
+
+@media screen and (max-width: 1050px) {
+	.bg {
+		display:none;
+	}
+	.front-welcome {
+		display:none;
+		margin-left:100px;
+	}
+	.front {
+		width:300px;
+	}
+	.front-signup {
+		margin-top:10px;
+		margin-left:auto;
+		margin-right:auto;
+		float:none;
+	}
+	.front-signin {
+		margin-left:auto;
+		margin-right:auto;
+		float:none;
+	}
+}
