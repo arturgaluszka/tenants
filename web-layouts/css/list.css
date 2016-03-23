@@ -1,3 +1,184 @@
+#wrapper {
+    margin-top:25px;
+    height: 100%;
+    padding-left: 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    overflow: hidden;
+}
+ 
+.green {
+    color: #1CE46C !important;
+}
+
+.green :hover {
+    color:white !important;
+}
+
+#wrapper.toggled {
+    padding-left: 250px;
+    overflow: scroll;
+}
+ 
+#sidebar-wrapper {
+    z-index: 1000;
+    position: absolute; 
+    left: 250px;
+    width: 250;
+ 	height:80%;
+    margin-left: -250px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background: white;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+    -webkit-box-shadow: 5px 3px 28px 0px rgba(0, 0, 0, 0.3);
+	-moz-box-shadow:    5px 3px 28px 0px rgba(0, 0, 0, 0.3);
+	box-shadow:         5px 3px 28px 0px rgba(0, 0, 0, 0.3);
+	float:left;
+}
+
+#sidebar-wrapper:after {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 250px;
+}
+ 
+#page-content-wrapper {
+    position: absolute;
+    padding: 15px;
+    width: 100%;  
+    overflow-x: hidden; 
+}
+.xyz{
+    min-width: 360px;
+}
+#wrapper.toggled #page-content-wrapper {
+    position: relative;
+    margin-right: 0px; 
+}
+.fixed-brand{
+    width: 250px;
+}
+/* Sidebar Styles */
+ 
+.sidebar-nav {
+    position: absolute;
+    top: 0;
+    width: 250px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+ 
+.sidebar-nav li {
+    text-indent: 15px;
+    line-height: 40px;
+}
+ 
+.sidebar-nav li a {
+    display: block;
+    text-decoration: none;
+    color: #999999;
+}
+ 
+.sidebar-nav li a:hover {
+    text-decoration: none;
+    color: white !important;
+    background: #238ae1;
+}
+ 
+.sidebar-nav li a:active,
+.sidebar-nav li a:focus {
+    text-decoration: none;
+    background-color: #238ae1 !important;
+    color:white !important;
+}
+ 
+.sidebar-nav > .sidebar-brand {
+    height: 65px;
+    font-size: 18px;
+    line-height: 60px;
+}
+ 
+.sidebar-nav > .sidebar-brand a {
+    color: #999999;
+}
+ 
+.sidebar-nav > .sidebar-brand a:hover {
+    color: #fff;
+    background: none;
+}
+.no-margin{
+    margin:0;
+}
+    #wrapper {
+        padding-left: 250px;
+    }
+    .fixed-brand{
+        width: 250px;
+    }
+    #wrapper.toggled {
+        padding-left: 0;
+    }
+ 
+    #sidebar-wrapper {
+        width: 250px;
+    }
+ 
+    #wrapper.toggled #sidebar-wrapper {
+        width: 250px;
+    }
+    #wrapper.toggled-2 #sidebar-wrapper {
+        width: 50px;
+    }
+    #wrapper.toggled-2 #sidebar-wrapper:hover {
+        width: 250px;
+    }
+ 
+ 
+    #page-content-wrapper {
+        padding: 20px;
+        position: relative;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+    }
+ 
+    #wrapper.toggled #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+        padding-left: 250px;
+    }
+    #wrapper.toggled-2 #page-content-wrapper {
+        position: relative;
+        margin-right: 0;
+        margin-left: -200px;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+        width: auto;
+ 
+    }
+
+
+
+
+
+
+
+
 .clearfix:before,
 .clearfix:after {
     content: " ";
@@ -12,16 +193,15 @@
 
 .fa {
 	margin-top: 7px;
-	color:#7D8182;
 }
 
 .fa:hover {
-	color: #2aabd2;
+	color: #238ae1;
 }
 
 
 .fa-active {
-	color: #2aabd2;
+	color: #238ae1;
 }
 
 
@@ -33,7 +213,7 @@
 	font-size: 18px;
 	float:left;
 	margin-left:  30px;
-	color: #2aabd2;
+	color: #238ae1;
 	margin-top: 10px;
 }
 
@@ -92,7 +272,7 @@ nav li a {
 	}
 
 	.mobile-list nav li a {
-		color:#2aabd2;
+		color:#238ae1;
 		font-weight: bold
 	}
 	.mobile-list nav:hover li a{
@@ -100,7 +280,7 @@ nav li a {
 	}
 
 	.mobile-list nav:hover {
-		background-color: #2aabd2;
+		background-color: #238ae1;
 	}
 
 nav ul {
@@ -111,7 +291,7 @@ nav li {
 	display: inline;
 	float: left;
 }
-	#menu {
+	#menu-up {
 		display: none;
 	}
 	.mobile-menu {
@@ -159,7 +339,7 @@ nav li {
 }
 
 .groups-container li {
-	color: #2aabd2;
+	color: #238ae1;
 	list-style: none;
 	font-size: 20px;
 	text-align: center;
@@ -179,23 +359,23 @@ nav li {
 	text-align: center;
 	font-size: 30px;
 	font-weight: bold;
-	color:#2aabd2;
+	color:#238ae1;
 }
 .name {
 	font-size: 20px !important;
-	color: #2aabd2;
+	color: #238ae1;
 	text-align: center;
 	font-weight: bold;
 	cursor:pointer;
 }
 
 .name:hover {
-	background-color: #2aabd2;
+	background-color: #238ae1;
 	color:white;
 }
 
 .name-active {
-	background-color: #2aabd2;
+	background-color: #238ae1;
 	color:white;
 }
 
@@ -242,8 +422,7 @@ button {
 	-webkit-font-smoothing: antialiased;
 	-moz-font-smoothing: antialiased;
 	font-smoothing: antialiased;
-	font-weight: 300;
-	float:left;
+	font-weight: 300;;
 }
 
 button,
@@ -251,6 +430,9 @@ input[type="checkbox"] {
 	outline: none !important;
 }
 
+.outer {
+
+}
 
 .groups-container ul {
 	padding-left: 0px;
@@ -261,10 +443,12 @@ input[type="checkbox"] {
 
 #todoapp {
 	background: #fff;
-	margin-top: 20px;
 	position: relative;
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2),
 	            0 25px 50px 0 rgba(0, 0, 0, 0.1);
+	margin-left:auto;
+	margin-right: auto;
+	display: block;
 }
 
 #todoapp input::-webkit-input-placeholder {
@@ -459,7 +643,7 @@ label[for='toggle-all'] {
 }
 
 #todo-list li .destroy:hover {
-	color: #2aabd2;
+	color: #238ae1;
 }
 
 #todo-list li .destroy:after {
@@ -486,7 +670,7 @@ label[for='toggle-all'] {
 }
 
 #todo-list li .reserve:hover {
-	color: #2aabd2;
+	color: #238ae1;
 }
 
 #todo-list li .reserve:after {
@@ -565,7 +749,7 @@ label[for='toggle-all'] {
 }
 
 #filters li a.selected {
-	border-color: #2aabd2;
+	border-color: #238ae1;
 }
 
 #clear-completed,

@@ -38,9 +38,9 @@
 	</div>
 		<nav class="clearfix">
 		<div class="logo">FLATMATES</div>
-		<ul class="clearfix" id="menu">
-				<li><a href="#"><i class="fa fa-list-alt fa-2x"></i></a> </li>
-				<li><a href="#"><i class="fa fa-table fa-2x fa-active" ></i></a></li>
+		<ul class="clearfix" id="menu-up">
+				<li><a href="#"><i class="fa fa-cart-plus fa-2x"></i></a> </li>
+				<li><a href="#"><i class="fa fa-pie-chart fa-2x fa-active" ></i></a></li>
 				<li><a href="#"><i class="fa fa-cogs fa-2x"></i></a></li>
 				<li><a href="#"></a></li>
 				<li><a href="#"><i class="fa fa-sign-out fa-2x"></i></a> </li>
@@ -50,21 +50,45 @@
 		</div>
 	</nav>
 </div>
-	<div class="groups-container">
-		<p class="name name-active">Grota-Roweckiego</p>
-		<ul class="group">
-			<li> <span>Karol </span> </li>
-			<li> <span> Paweł </span> </li>
-			<li><span> Artur </span></li>
-			<li> <span class="add"><p> Add member </p> </span> </li>
-		</ul>
-		<p class="name">Wrzosowa 8</p>
-		<ul class="group">
-			<li> <span>Karol </span> </li>
-			<li> <span class="add"> <p>Add member </p> </span> </li>
-		</ul>
-		<p class="name">Create group</p>
-	</div>
+    <div id="wrapper" class="toggled-2">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+                <li>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Grota-Roweckiego</a>
+                       <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Karol</a></li>
+                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Artur</a></li>
+                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user-plus fa-stack-1x green "></i></span>Add Member</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Czechoslowacka</a>
+                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Jarek</a></li>
+                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Kamil</a></li>
+                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user-plus fa-stack-1x green "></i></span>Add Member</a></li>
+                    </ul>
+                </li>
+          </li>
+                <li>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span>Piastowska 47</a>
+                        <ul class="nav-pills nav-stacked" style="list-style-type:none;">
+                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Jarek</a></li>
+                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Kamil</a></li>
+                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user-plus fa-stack-1x green "></i></span>Add Member</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-plus fa-stack-1x green"></i></span>Add Group</a>
+                </li>
+            </ul>
+        </div><!-- /#sidebar-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery --> 
+	
+<div class="centering">
 	<div class="front-stats"> 
 		<p>Grota-Roweckiego</p>
 		<canvas id="myChart" width="250" height="250"></canvas>
@@ -81,6 +105,24 @@
 	</div>
 	<div class="expenses-history">
 	</div>
+
+	<div class="expenses-history">
+			<div class="expenses-table"> 
+			<p class="name"> Group's History</p>
+			<table class="table table-hover"> 
+					<th>Product</th>
+					<th>Cost</th>
+					<tr> <td>Milk</td> <td> 10 zł </td></tr>
+					<tr> <td>Eggs</td> <td> 12 zł </td> </tr>
+					<tr> <td>Sweets</td> <td> 1 zł </td> </tr>
+					<tr> <td>Bacon</td> <td> 18 zł </td></tr>
+					<tr> <td>Meat</td> <td> 19 zł </td></tr>
+					<tr> <td>Apples</td> <td> 4 zł  </td></tr>
+			</table>
+		</div>
+</div>
+</div>
+
 </body>
 <script>
 		var data = [
@@ -106,4 +148,6 @@
 		var ctx = document.getElementById("myChart").getContext("2d");
 		var myNewChart = new Chart(ctx).Pie(data);
 	</script>
+	<script src="js/bootstrap.min.js"></script>
+    <script src="js/sidebar_menu.js"></script>
 </html>
