@@ -3,12 +3,14 @@
 <head>
 	<title>List</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<script src="js/jquery-2.2.1.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
 	<link rel="stylesheet" href="css/list.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-	<script src="js/jquery-2.2.1.min.js"></script>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/Chart.min.js"> </script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css">
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" >
 </head>
 		<script type="text/javascript"> 
@@ -20,6 +22,17 @@
 	  		else{
 	  			$(".mobile-list").addClass('non-active');
 	  		}
+			});
+			$(".arrowbox-show").click(function() {
+	  			$(".arrow_box").toggle();
+	  		})
+	  		$("#modal-cancel").click(function() {
+	  			$(".dark-background").toggle();
+	  			$(".modal-item").toggle();
+			});
+	  		$(".todo-item").click(function() {
+	  			$(".dark-background").toggle();
+	  			$(".modal-item").toggle();
 			});
 		});
 		$(window).resize(function() {
@@ -54,17 +67,55 @@
 		<nav class="clearfix"> <ul class="clearfix"><li><a href="#">Lists  </a> </li></ul> </nav>
 	</div>
 		<nav class="clearfix">
-		<div class="logo">FLATMATES</div>
+		<div class="logo"> <img src="logo.png"/> </div>
+		<div class="flatname"> Grota Roweckiego  </div>
 		<ul class="clearfix" id="menu-up">
-					<li><a href="#"><i class="fa fa-cart-plus fa-2x fa-active"></i></a> </li>
-				<li><a href="#"><i class="fa fa-pie-chart fa-2x" ></i></a></li>
-				<li><a href="#"><i class="fa fa-cogs fa-2x"></i></a></li>
+				<li><a href="#"><i class="fa fa-cart-plus fa-2x fa-active margin"></i></a> </li>
+				<li><a href="#"><i class="fa fa-bar-chart fa-2x margin" ></i></a></li>
+				<li><a href="#"><i class="fa fa-search fa-2x margin arrowbox-show" ></i></a></li>
+				<li><a href="#"><i class="fa fa-cogs fa-2x margin"></i></a></li>
 				<li><a href="#"></a></li>	
-				<li><a href="#"><i class="fa fa-sign-out fa-2x"></i></a> </li>
+				<li><a href="#"><i class="fa fa-sign-out fa-2x margin"></i></a> </li>
 		</ul>
 		<div class="mobile-menu"> 
 			<i class="fa fa-bars fa-2x"></i>
 		</div>
+	</nav>
+						<div class= "arrow_box">
+	<div class="search">
+	<div class="right-inner-addon">
+        <i class="fa fa-search"></i>
+        <input type="search"
+               class="form-control" 
+               placeholder="Search" />
+	</div>
+    </div>
+            <div class="select">
+         <select class="selectpicker form-control">
+			  <option>Recently Bought</option>
+			  <option>Reserved</option>
+			  <option>Active</option>
+		</select>
+	</div>
+		<button type="button" class="btn btn-primary submit-button">Search</button>
+</div>
+	<nav class="clearfix bottom-bar">
+		<ul class="clearfix" id="menu-up">
+				<li><a href="#" class="active-bottom" >Main list</a></li>
+				<li><a href="#">My list</a></li>
+				<li>
+			<div class="dropdown">
+			  <a href="#" type="button" data-toggle="dropdown" class="dropdown-toggle">Other users
+ 			<span class="caret"></span>
+			  </a>
+			  <ul class="dropdown-menu">
+			    <li><a href="#">Karol</a></li>
+			    <li><a href="#">Pawel</a></li>
+			    <li><a href="#">Jakub</a></li>
+			  </ul>
+			</div></li>
+				<li><a href="#"><i class="fa fa-refresh"></i></a></li>
+		</ul>
 	</nav>
 	  <div id="wrapper" class="toggled-2">
         <!-- Sidebar -->
@@ -74,7 +125,8 @@
                     <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Grota-Roweckiego</a>
                        <ul class="nav-pills nav-stacked" style="list-style-type:none;">
                         <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Karol</a></li>
-                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Artur</a></li>
+                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Paweł</a></li>
+                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Jakub</a></li>
                         <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user-plus fa-stack-1x green "></i></span>Add Member</a></li>
                     </ul>
                 </li>
@@ -110,10 +162,9 @@
 			</header>
 			<section id="main" data-bind="visible: todos().length">
 				<ul id="todo-list" data-bind="foreach: filteredTodos">
-					<li data-bind="css: { completed: completed, editing: editing, reserved:reserved}">
+					<li  data-bind="css: { completed: completed, editing: editing, reserved:reserved} ">
 						<div class="view">
-							<input class="toggle" data-bind="checked: completed" type="checkbox" data-toggle="modal" data-target="#myModal">
-							<label data-bind="text: title, event: { dblclick: reserved }"></label>
+							<label  class="todo-item" data-bind="text: title, event: { dblclick: reserved }"></label>
 							<button class="destroy" data-bind="click: $root.remove"></button>
 						</div>
 						<input class="edit" data-bind="value: title, valueUpdate: 'afterkeydown', enterKey: $root.saveEditing, escapeKey: $root.cancelEditing, selectAndFocus: editing, event: { blur: $root.saveEditing }">
@@ -121,27 +172,27 @@
 				</ul>
 			</section>
 			<footer id="footer" data-bind="visible: completedCount() || remainingCount()">
-				<ul id="filters">
-					<li>
-						<a href="#">Active</a>
-					</li>
-					<li>
-						<a  href="#">Reserved</a>
-					</li>
-					<li>
-						<a href="#">My Reservation</a>
-					</li>
-					<li>
-						<a href="#">Recently Bought</a>
-					</li>
-				</ul>
 			</footer>
 		</section>
 	</div>
 		<script src="js/knockout-latest.js"></script>
 		<script src="js/app.js"></script>
-			<script src="js/bootstrap.min.js"></script>
     <script src="js/sidebar_menu.js"></script>
 </div>
+<div class="modal-item">
+		 <p>Options</p>
+		 <hr>
+		 <div class="modal-options">
+		 	<a href="#">Buy now </a>
+		 	<br>
+		 	<a href="#"> Add to my list</a>
+		 	<br>
+		 	<a href="#">Information</a>
+		 	<br>
+		 	<a href="#" id="modal-cancel">Cancel</a>
+		 </div>
+</div>
+    	<div class="dark-background">
+	</div>
 </body>
 </html>

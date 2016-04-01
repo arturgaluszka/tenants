@@ -9,9 +9,8 @@
 	<script src="js/jquery-2.2.1.min.js"></script>
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<script src="js/bootstrap.min.js"></script>
-	<script src="js/Chart.min.js"> </script> 
 </head>
-		<script type="text/javascript"> 
+<script type="text/javascript"> 
 		$(document).ready(function () {
 			$( ".mobile-menu" ).click(function() {
 	  		if($(".mobile-list").hasClass('non-active')){
@@ -21,13 +20,15 @@
 	  			$(".mobile-list").addClass('non-active');
 	  		}
 			});
+			$(".arrowbox-show").click(function() {
+	  			$(".arrow_box").toggle();
+	  		})
 		});
 		$(window).resize(function() {
 			if($(window).width()>=680){
 				$(".mobile-list").addClass('non-active');
 			};
 		});
-
 		</script>
 <body>
 	<div class="mobile-list non-active">
@@ -36,107 +37,134 @@
 		<nav class="clearfix"> <ul class="clearfix"> <li><a href="#">Logout  </a></li> </ul>  </nav>
 		<nav class="clearfix"> <ul class="clearfix"><li><a href="#">Lists  </a> </li></ul> </nav>
 	</div>
-		<nav class="clearfix">
-		<div class="logo">FLATMATES</div>
+	<nav class="clearfix">
+		<div class="flatname"> Grota Roweckiego, Karol  </div>
+		<div class="logo"> <img src="logo.png"/> </div>
 		<ul class="clearfix" id="menu-up">
-				<li><a href="#"><i class="fa fa-cart-plus fa-2x"></i></a> </li>
-				<li><a href="#"><i class="fa fa-pie-chart fa-2x fa-active" ></i></a></li>
-				<li><a href="#"><i class="fa fa-cogs fa-2x"></i></a></li>
-				<li><a href="#"></a></li>
-				<li><a href="#"><i class="fa fa-sign-out fa-2x"></i></a> </li>
+				<li><a href="#"><i class="fa fa-cart-plus fa-2x fa-active margin"></i></a> </li>
+				<li><a href="#"><i class="fa fa-bar-chart fa-2x margin" ></i></a></li>
+				<li><a href="#"><i class="fa fa-search fa-2x margin arrowbox-show" ></i></a>
+				</li>
+				<li><a href="#"><i class="fa fa-cogs fa-2x margin"></i></a></li>
+				<li><a href="#"></a></li>	
+				<li><a href="#"><i class="fa fa-sign-out fa-2x margin"></i></a> </li>
 		</ul>
 		<div class="mobile-menu"> 
 			<i class="fa fa-bars fa-2x"></i>
 		</div>
 	</nav>
+	<nav class="clearfix bottom-bar">
+		<ul class="clearfix" id="menu-up">
+			<li><a href="#">Main stats</a></li>
+			<li><a href="#" class="active-bottom" >My stats</a></li>
+			<li>
+				<div class="dropdown">
+					<a href="#" type="button" data-toggle="dropdown" class="dropdown-toggle">Other users
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="#">Karol</a></li>
+						<li><a href="#">Pawel</a></li>
+						<li><a href="#">Jakub</a></li>
+					</ul>
+				</div></li>
+				<li><a href="#"><i class="fa fa-refresh"></i></a></li>
+			</ul>
+		</nav>
+		<div class= "arrow_box">
+			<div class="search">
+				<div class="right-inner-addon">
+					<i class="fa fa-search"></i>
+					<input type="search"
+					class="form-control" 
+					placeholder="Search" />
+				</div>
+			</div>
+			<div class="select">
+				<select class="selectpicker form-control">
+					<option>Recently Bought</option>
+					<option>Reserved</option>
+					<option>Active</option>
+				</select>
+			</div>
+			<button type="button" class="btn btn-primary submit-button">Search</button>
+		</div>
+		<div id="wrapper" class="toggled-2">
+		<!-- Sidebar -->
+		<div id="sidebar-wrapper">
+			<ul class="sidebar-nav nav-pills nav-stacked" id="menu">
+				<li>
+					<a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Grota-Roweckiego</a>
+					<ul class="nav-pills nav-stacked" style="list-style-type:none;">
+						<li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Karol</a></li>
+						<li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Artur</a></li>
+						<li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user-plus fa-stack-1x green "></i></span>Add Member</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Czechoslowacka</a>
+					<ul class="nav-pills nav-stacked" style="list-style-type:none;">
+						<li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Jarek</a></li>
+						<li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Kamil</a></li>
+						<li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user-plus fa-stack-1x green "></i></span>Add Member</a></li>
+					</ul>
+				</li>
+			</li>
+			<li>
+				<a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span>Piastowska 47</a>
+				<ul class="nav-pills nav-stacked" style="list-style-type:none;">
+					<li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Jarek</a></li>
+					<li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Kamil</a></li>
+					<li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user-plus fa-stack-1x green "></i></span>Add Member</a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-plus fa-stack-1x green"></i></span>Add Group</a>
+			</li>
+		</ul>
+	</div><!-- /#sidebar-wrapper -->
 </div>
-    <div id="wrapper" class="toggled-2">
-        <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
-                <li>
-                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Grota-Roweckiego</a>
-                       <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Karol</a></li>
-                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Artur</a></li>
-                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user-plus fa-stack-1x green "></i></span>Add Member</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Czechoslowacka</a>
-                    <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Jarek</a></li>
-                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Kamil</a></li>
-                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user-plus fa-stack-1x green "></i></span>Add Member</a></li>
-                    </ul>
-                </li>
-          </li>
-                <li>
-                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span>Piastowska 47</a>
-                        <ul class="nav-pills nav-stacked" style="list-style-type:none;">
-                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Jarek</a></li>
-                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user fa-stack-1x "></i></span>Kamil</a></li>
-                        <li><a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-user-plus fa-stack-1x green "></i></span>Add Member</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="#"><span class="fa-stack fa-lg pull-left"><i class="fa fa-plus fa-stack-1x green"></i></span>Add Group</a>
-                </li>
-            </ul>
-        </div><!-- /#sidebar-wrapper -->
-    </div>
-	<div class="front-stats"> 
-		<p>Grota Roweckiego, Karol</p>
-	<canvas id="myChart" width="300" height="300"></canvas>
-		<div class="expenses-table"> 
-			<p>Six last months</p>
-			<table class="table table-hover"> 
-					<th>Month</th>
-					<th>Expenses</th>
-					<tr> <td>January</td> <td> 100 zł </td></tr>
-					<tr> <td>February</td> <td> 120 zł </td></tr>
-					<tr> <td>March</td> <td> 130 zł </td></tr>
-					<tr> <td>April</td> <td> 140 zł </td></tr>
-					<tr> <td>May</td> <td> 100 zł </td></tr>
-					<tr> <td>July</td> <td> 120 zł </td></tr>
-					<tr class="expenses-sum"> <td>Total sum of expenses</td> <td> 1200 zł </td></tr>
-			</table>
+<div class="expenses-history">
+	<div class="expenses-table"> 
+		<p class="name"> Shop history</p>
+		<table class="table table-hover"> 
+			<th>Product</th>
+			<th>Cost</th>
+			<th style="border:0"> </th>
+			<tr> <td>Milk</td> <td> 10 zł </td>  <td style="border:0"> <i class="fa fa-undo"></i></td></tr>
+			<tr> <td>Eggs</td> <td> 12 zł </td> <td style="border:0"> <i class="fa fa-undo"></i></td></tr>
+			<tr> <td>Sweets</td> <td> 1 zł </td> <td style="border:0"> <i class="fa fa-undo"></i></td></tr>
+			<tr> <td>Bacon</td> <td> 18 zł </td> <td style="border:0"> <i class="fa fa-undo"></i> </td></tr>
+			<tr> <td>Meat</td> <td> 19 zł </td> <td style="border:0"> <i class="fa fa-undo"></i> </td></tr>
+			<tr> <td>Apples</td> <td> 4 zł  </td><td style="border:0"> <i class="fa fa-undo"></i> </td></tr>
+			<tr> <td>Sweets</td> <td> 1 zł </td> <td style="border:0"> <i class="fa fa-undo"></i></td></tr>
+			<tr> <td>Meat</td> <td> 19 zł </td> <td style="border:0"> <i class="fa fa-undo"></i> </td></tr>
+			<tr> <td>Apples</td> <td> 4 zł  </td><td style="border:0"> <i class="fa fa-undo"></i> </td></tr>
+		</table>
+				<div class="pagination-center">
+				  <ul class="pagination pagination-sm">
+		    <li class="page-item">
+		      <a class="page-link" href="#" aria-label="Previous">
+		        <span aria-hidden="true">&laquo;</span>
+		        <span class="sr-only">Previous</span>
+		      </a>
+		    </li>
+		    <li class="page-item"><a class="page-link" href="#">1</a></li>
+		    <li class="page-item"><a class="page-link" href="#">2</a></li>
+		    <li class="page-item"><a class="page-link" href="#">3</a></li>
+		    <li class="page-item"><a class="page-link" href="#">4</a></li>
+		    <li class="page-item"><a class="page-link" href="#">5</a></li>
+		    <li class="page-item"><a class="page-link" href="#">6</a></li>
+		    <li class="page-item">
+		      <a class="page-link" href="#" aria-label="Next">
+		        <span aria-hidden="true">&raquo;</span>
+		        <span class="sr-only">Next</span>
+		      </a>
+		    </li>
+		  </ul>
 		</div>
 	</div>
-	<div class="expenses-history">
-			<div class="expenses-table"> 
-			<p class="name"> Karol's History</p>
-			<table class="table table-hover"> 
-					<th>Product</th>
-					<th>Cost</th>
-					<th style="border:0"> </th>
-					<tr> <td>Milk</td> <td> 10 zł </td>  <td style="border:0"> <i class="fa fa-undo"></i></td></tr>
-					<tr> <td>Eggs</td> <td> 12 zł </td> <td style="border:0"> <i class="fa fa-undo"></i></td></tr>
-					<tr> <td>Sweets</td> <td> 1 zł </td> <td style="border:0"> <i class="fa fa-undo"></i></td></tr>
-					<tr> <td>Bacon</td> <td> 18 zł </td> <td style="border:0"> <i class="fa fa-undo"></i> </td></tr>
-					<tr> <td>Meat</td> <td> 19 zł </td> <td style="border:0"> <i class="fa fa-undo"></i> </td></tr>
-					<tr> <td>Apples</td> <td> 4 zł  </td><td style="border:0"> <i class="fa fa-undo"></i> </td></tr>
-			</table>
-		</div>
 </div>
-				<script>
-			var data = {
-		    labels: ["January", "February", "March","April","May","July"],
-		    datasets: [
-		        {
-		            label: "My First dataset",
-		            fillColor: "rgba(220,220,220,0.5)",
-		            strokeColor: "rgba(220,220,220,0.8)",
-		            highlightFill: "rgba(220,220,220,0.75)",
-		            highlightStroke: "rgba(220,220,220,1)",
-		            data: [100, 120, 130,140,100,120]
-		        }
-		    ]
-		};
-				var ctx = document.getElementById("myChart").getContext("2d");
-				var myNewChart = new Chart(ctx).Bar(data);
-		 </script>
-	<script src="js/bootstrap.min.js"></script>
-    <script src="js/sidebar_menu.js"></script>
+<script src="js/sidebar_menu.js"></script>
 </body>
 </html>

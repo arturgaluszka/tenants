@@ -23,6 +23,10 @@ $("#menu-toggle").click(function(e) {
             checkElement.slideDown('normal');
             return false;
             }
+	else if((checkElement.is('ul')) && (checkElement.is(':visible'))){
+		$('#menu ul:visible').slideUp('normal');
+		return false;
+	}
           }
         );
       }
