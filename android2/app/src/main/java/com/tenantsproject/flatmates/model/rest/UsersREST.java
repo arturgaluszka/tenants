@@ -256,15 +256,18 @@ public class UsersREST {
                 } else{
                     urlConnection.setRequestProperty("Authorization", "");
                 }
-                InputStream in = urlConnection.getInputStream();
 
-                BufferedReader r = new BufferedReader(new InputStreamReader(in));
-
-                String line;
-                while ((line = r.readLine()) != null) {
-                    total.append(line);
-                }
                 response.setMessageCode(urlConnection.getResponseCode());
+                if(response.getMessageCode()==Response.MESSAGE_OK) {
+                    InputStream in = urlConnection.getInputStream();
+
+                    BufferedReader r = new BufferedReader(new InputStreamReader(in));
+
+                    String line;
+                    while ((line = r.readLine()) != null) {
+                        total.append(line);
+                    }
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {

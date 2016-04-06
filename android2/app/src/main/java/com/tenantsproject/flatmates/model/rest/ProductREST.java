@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.tenantsproject.flatmates.model.data.Product;
 import com.tenantsproject.flatmates.security.Authenticator;
 
 import java.io.BufferedReader;
@@ -21,52 +22,139 @@ import java.util.concurrent.ExecutionException;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class FlatREST {
+public class ProductREST {
 
     private Context currentContext;
 
-    public FlatREST() {
+    public ProductREST() {
         SSLUtils.trustEveryone();
     }
 
 
-    public Response createFlat(Context context, String password) {
+    public Response addProduct(Context context, Product product) {
         currentContext = context;
-        CreateFlatTask task = new CreateFlatTask();
+        AddProductTask task = new AddProductTask();
         Response response = new Response();
-        task.execute(password);
+        task.execute(product);
         try {
             response = task.get();
         } catch (InterruptedException | ExecutionException e) {
-            Log.e("REST", "Can't run task: createUser", e);
+            Log.e("REST", "Can't run task: addProduct", e);
         }
         return response;
     }
 
-    public Response getFlatMembers(Context context, int flatID) {
+    public Response removeFromMainList(Context context, Product product) {
         currentContext = context;
-        GetFlatMembersTask task = new GetFlatMembersTask();
+        RemoveFromMainListTask task = new RemoveFromMainListTask();
         Response response = new Response();
-        task.execute(flatID);
+        task.execute(product.getId());
         try {
             response = task.get();
         } catch (InterruptedException | ExecutionException e) {
-            Log.e("REST", "Can't run task: getFlatMembers", e);
+            Log.e("REST", "Can't run task: removeFromMainList", e);
         }
         return response;
     }
 
-    public Response changePassword(Context context, int flatID, String oldPassword, String newPassword) {
+    public Response getFlatProducts(Context context, int flatID, int userID, int filter, int page) {
         currentContext = context;
-        ChangePasswordTask task = new ChangePasswordTask();
+        GetFlatProductsTask task = new GetFlatProductsTask();
         Response response = new Response();
-        task.execute(String.valueOf(flatID), oldPassword, newPassword);
+        task.execute(flatID, userID, filter, page);
         try {
             response = task.get();
         } catch (InterruptedException | ExecutionException e) {
-            Log.e("REST", "Can't run task: changePassword", e);
+            Log.e("REST", "Can't run task: getProducts", e);
         }
         return response;
+    }
+
+    private class AddProductTask extends AsyncTask<Product, Void, Response> {
+
+        private HttpsURLConnection urlConnection;
+
+        @Override
+        protected Response doInBackground(Product... params) {
+            Response response = new Response();
+            StringBuilder total = new StringBuilder();
+            Product product = params[0];
+
+            try {
+                URL url = new URL(Properties.SERVER_SECURE_URL + "products/");
+                urlConnection = (HttpsURLConnection) url.openConnection();
+
+                urlConnection.setDoOutput(true);
+                urlConnection.setDoInput(true);
+                urlConnection.setRequestMethod("POST");
+
+                if (ProductREST.this.currentContext != null) {
+                    urlConnection.setRequestProperty("Authorization", Authenticator.getUserToken(currentContext));
+                } else {
+                    urlConnection.setRequestProperty("Authorization", "");
+                }
+                OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
+                Gson gson = new Gson();
+                String productJson = gson.toJson(product);
+                out.write("product=" + productJson);
+                out.close();
+
+                InputStream in = urlConnection.getInputStream();
+
+                BufferedReader r = new BufferedReader(new InputStreamReader(in));
+
+                String line;
+                while ((line = r.readLine()) != null) {
+                    total.append(line);
+                }
+                response.setMessageCode(urlConnection.getResponseCode());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (!total.toString().isEmpty()) {
+                    response.setObject(Integer.valueOf(total.toString()));
+                }
+                urlConnection.disconnect();
+            }
+            return response;
+        }
+    }
+
+    private class RemoveFromMainListTask extends AsyncTask<Integer, Void, Response> {
+
+        private HttpsURLConnection urlConnection;
+
+        @Override
+        protected Response doInBackground(Integer... params) {
+            Response response = new Response();
+            StringBuilder total = new StringBuilder();
+            int productID = params[0];
+
+            try {
+                URL url = new URL(Properties.SERVER_SECURE_URL + "products/" + productID + "/mainlist");
+                urlConnection = (HttpsURLConnection) url.openConnection();
+
+                urlConnection.setDoOutput(false);
+                urlConnection.setDoInput(false);
+                urlConnection.setRequestMethod("DELETE");
+
+                if (ProductREST.this.currentContext != null) {
+                    urlConnection.setRequestProperty("Authorization", Authenticator.getUserToken(currentContext));
+                } else {
+                    urlConnection.setRequestProperty("Authorization", "");
+                }
+//                OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
+//                out.write("userID=" + userID + "&flatID=" + flatID);
+//                out.close();
+
+                response.setMessageCode(urlConnection.getResponseCode());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                urlConnection.disconnect();
+            }
+            return response;
+        }
     }
 
     private class CreateFlatTask extends AsyncTask<String, Void, Response> {
@@ -87,7 +175,7 @@ public class FlatREST {
                 urlConnection.setDoInput(true);
                 urlConnection.setRequestMethod("POST");
 
-                if (FlatREST.this.currentContext != null) {
+                if (ProductREST.this.currentContext != null) {
                     urlConnection.setRequestProperty("Authorization", Authenticator.getUserToken(currentContext));
                 } else {
                     urlConnection.setRequestProperty("Authorization", "");
@@ -117,7 +205,7 @@ public class FlatREST {
         }
     }
 
-    private class GetFlatMembersTask extends AsyncTask<Integer, Void, Response> {
+    private class GetFlatProductsTask extends AsyncTask<Integer, Void, Response> {
 
         private HttpsURLConnection urlConnection;
 
@@ -126,17 +214,21 @@ public class FlatREST {
             Response response = new Response();
             StringBuilder total = new StringBuilder();
             int flatID = params[0];
-            List<Integer> members;
+            int userID = params[1];
+            int filter = params[2];
+            int page = params[3];
+            List<Product> products;
 
             try {
-                URL url = new URL(Properties.SERVER_SECURE_URL + "flats/" + flatID + "/users");
+                URL url = new URL(Properties.SERVER_SECURE_URL + "products/flat/" + flatID+"/user/"
+                + userID + "/filter/"+filter+"/page/"+page);
                 urlConnection = (HttpsURLConnection) url.openConnection();
 
                 urlConnection.setDoOutput(false);
                 urlConnection.setDoInput(true);
                 urlConnection.setRequestMethod("GET");
 
-                if (FlatREST.this.currentContext != null) {
+                if (ProductREST.this.currentContext != null) {
                     urlConnection.setRequestProperty("Authorization", Authenticator.getUserToken(currentContext));
                 } else {
                     urlConnection.setRequestProperty("Authorization", "");
@@ -155,10 +247,10 @@ public class FlatREST {
                 e.printStackTrace();
             } finally {
                 if (!total.toString().isEmpty()) {
-                    Type listType = new TypeToken<ArrayList<Integer>>() {
+                    Type listType = new TypeToken<ArrayList<Product>>() {
                     }.getType();
-                    members = new Gson().fromJson(total.toString(), listType);
-                    response.setObject(members);
+                    products = new Gson().fromJson(total.toString(), listType);
+                    response.setObject(products);
                 }
                 urlConnection.disconnect();
             }
@@ -166,43 +258,5 @@ public class FlatREST {
         }
     }
 
-    private class ChangePasswordTask extends AsyncTask<String, Void, Response> {
-
-        private HttpsURLConnection urlConnection;
-
-        @Override
-        protected Response doInBackground(String... params) {
-            Response response = new Response();
-            StringBuilder total = new StringBuilder();
-            String flatID = params[0];
-            String oldPassword = params[1];
-            String newPassword = params[2];
-            try {
-                URL url = new URL(Properties.SERVER_SECURE_URL + "flats/" + flatID + "/password/");
-                urlConnection = (HttpsURLConnection) url.openConnection();
-
-                urlConnection.setDoOutput(true);
-                urlConnection.setDoInput(true);
-                urlConnection.setRequestMethod("PUT");
-
-                if (FlatREST.this.currentContext != null) {
-                    urlConnection.setRequestProperty("Authorization", Authenticator.getUserToken(currentContext));
-                } else {
-                    urlConnection.setRequestProperty("Authorization", "");
-                }
-                OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
-                out.write("flatID=" + flatID + "&oldPassword=" + oldPassword + "&newPassword=" + newPassword);
-                out.close();
-
-                response.setMessageCode(urlConnection.getResponseCode());
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-
-                urlConnection.disconnect();
-            }
-            return response;
-        }
-    }
 
 }

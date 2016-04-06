@@ -76,6 +76,6 @@ public class Authenticator {
     public void logOut(Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(AUTHENTICATION_PREFERENCES, Context.MODE_PRIVATE);
         String token = "0";
-        sharedPreferences.edit().putString(USER_TOKEN, token);
+        sharedPreferences.edit().putString(USER_TOKEN, token).commit();
     }
 }

@@ -13,7 +13,7 @@ block content
             span connection must be using TLS
         li 501 its not yet implemented
     br
-    h2 expenses
+    h2 products
     table(border=1)
        tr
          th path
@@ -22,6 +22,23 @@ block content
          th description
          th return
          th codes
+       tr
+         td /products/flat/:id/user/:userID/filter/:filter/page/:page
+         td get
+         td
+            p path:
+            p id - flat ID
+             p user - ID of user (can be 0 for all)
+             p filter - one of predefined numbers
+             ul
+                 li 1 all
+                 li 2 active
+                 li 3 reserved
+             p page - number
+         td retrieves product lists from a flat using given filter
+         td list of products
+         td
+            p 403 - can't check other flat's list
        tr
          td /products/:id/mainlist
          td delete
@@ -51,12 +68,12 @@ block content
        tr
           td /products/
           td post
-          td none
+          td body:
+            p Product object
           td creates new product
-          td none
+          td id - Product id
           td
-             p 404 - already deleted/ product not found
-             p 403 - removing other user's product
+             p 403 - creating other users/flats products
        tr
           td /products/:id/userlist
           td post
@@ -167,7 +184,7 @@ block content
                p 403 - incorrect name or already in use
         tr
             td /users/:id/password
-            td delete
+            td put
             td
                p body:
                p oldPassword - old password sha1 encrypted
@@ -205,6 +222,17 @@ block content
             td none
             td
                 p 403 - not a member of given flat
+        tr
+            td /flats/:id/password
+            td put
+            td
+                p body:
+                p oldPassword - old password sha1 encrypted
+                p newPassword - new password sha1 encrypted
+            td changes flats password
+            td none
+            td
+                p 403 - incorrect password
     h2 stats
     table(border=1)
         tr
@@ -227,23 +255,19 @@ block content
                 p 404 - no such user in given flat
                 p 403 - can't check others' flats stats
         tr
-            td /archive/user/:userID/flat/:flatID
-            td get
-            td
-                p path:
-                p flatID - flat ID
-                p userID - user ID
-            td retrieves archival list of products for given user within given flat
-            td list of Product
-            td
-                p 403 - can't check others' flats stats
-        tr
             td /archive/flat/:flatID
             td get
             td
                 p path:
                 p flatID - flat ID
-            td retrieves archival list of products for given flat
+                br
+                p body:
+                p userID - user ID (can be 0 for all)
+                p filter - one of predefined filters
+                ul
+                    li 1 all
+                p page - page number
+            td retrieves archival list of products for given user within given flat
             td list of Product
             td
                 p 403 - can't check others' flats stats

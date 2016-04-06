@@ -5,9 +5,9 @@ var connection = mysql.createConnection(properties.dbprops);
 connection.connect(function (err) {
 });
 
-function createFlat(flatPassword,callback){
+function createFlat(flatPassword, callback) {
     var a = 'INSERT INTO flats (password)' +
-        'VALUES ("'+flatPassword+'")';
+        'VALUES ("' + flatPassword + '")';
     var b = 'SELECT LAST_INSERT_ID()';
 
     connection.query(a, function (err, rows, fields) {
@@ -25,8 +25,31 @@ function createFlat(flatPassword,callback){
             console.log('Error while performing Query.' + err);
     });
 }
-function getMembers(flatID, callback){
-    connection.query('SELECT userID FROM flatsigns WHERE flatID='+flatID, function (err, rows, fields) {
+function getMembers(flatID, callback) {
+    connection.query('SELECT userID FROM flatsigns WHERE flatID=' + flatID, function (err, rows, fields) {
+        if (!err) {
+            callback(rows);
+        }
+        else
+            console.log('Error while performing Query.' + err);
+    });
+}
+function changePassword(flatID, newPassword, callback) {
+    var a = 'UPDATE flats SET ' +
+        'password="' + newPassword + '"' +
+        ' WHERE id=' + flatID;
+    connection.query(a, function (err, rows, fields) {
+        if (!err) {
+            callback();
+            console.log("Updated user id=" + flatID);
+        }
+        else
+            console.log('Error while performing Query.' + err);
+
+    });
+}
+function matchPasswordForFlat(flatID,callback){
+    connection.query('SELECT password FROM flats WHERE id='+flatID,function(err,rows,fields){
         if (!err) {
             callback(rows);
         }
@@ -37,3 +60,5 @@ function getMembers(flatID, callback){
 
 exports.createFlat = createFlat;
 exports.getMembers = getMembers;
+exports.changePassword = changePassword;
+exports.matchPasswordForFlat=matchPasswordForFlat;

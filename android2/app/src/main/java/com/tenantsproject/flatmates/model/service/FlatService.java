@@ -9,6 +9,7 @@ import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 
 public class FlatService {
+    //TODO: make getID(name), and getName(ID)
     private FlatREST flatREST;
 
     public FlatService() {
@@ -39,7 +40,24 @@ public class FlatService {
      * - MESSAGE_UNAUTHORIZED -  user unauthorized <br>
      */
     public Response getFlatMembers(Context context, int flatID){
-        return flatREST.getFlatMembers(context,flatID);
+        return flatREST.getFlatMembers(context, flatID);
+    }
+
+    /**
+     * @param context Current context
+     * @param flatID ID of flat to change password
+     * @param oldPassword Old password
+     * @param newPassword New password
+     * @return Response object <br>
+     * ErrorCodes: <br>
+     * - MESSAGE_OK - changed <br>
+     * - MESSAGE_FORBIDDEN -  incorrect password <br>
+     */
+
+    public Response changePassword(Context context,int flatID, String oldPassword, String newPassword) {
+        String encryptedOldPassword = String.valueOf(Hex.encodeHex(DigestUtils.sha1(oldPassword)));
+        String encryptedNewPassword = String.valueOf(Hex.encodeHex(DigestUtils.sha1(newPassword)));
+        return flatREST.changePassword(context, flatID, encryptedOldPassword, encryptedNewPassword);
     }
 
 }

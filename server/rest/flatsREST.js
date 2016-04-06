@@ -4,23 +4,25 @@ var usersDB = require('./../db/users');
 function runREST(app) {
     app.post('/flats/', function (req, res) {
         var authenticated = authenticator.authenticateUsingToken(req);
-        if(authenticated) {
+        if (authenticated) {
             var password = req.body.password;
-            flatsDB.createFlat(password,function(rows){
+            flatsDB.createFlat(password, function (rows) {
                 res.send((rows[0]['LAST_INSERT_ID()']).toString());
             });
         } else {
             res.sendStatus(401);
         }
     });
-    app.get('/flats/:flatID/users',function(req, res){
+    app.get('/flats/:flatID/users', function (req, res) {
         var authenticated = authenticator.authenticateUsingToken(req);
-        if(authenticated){
-            authenticator.getLoggedUserID(req,function(id){
-                usersDB.isFlatMember(id,req.params.flatID,function(rows){
-                    if(rows[0].id!=null){
-                        flatsDB.getMembers(req.params.flatID,function(rows){
-                            res.send(rows.map(function(row){return row.userID;}));
+        if (authenticated) {
+            authenticator.getLoggedUserID(req, function (id) {
+                usersDB.isFlatMember(id, req.params.flatID, function (rows) {
+                    if (rows[0].id != null) {
+                        flatsDB.getMembers(req.params.flatID, function (rows) {
+                            res.send(rows.map(function (row) {
+                                return row.userID;
+                            }));
                         })
                     } else {
                         res.sendStatus(403);
@@ -31,6 +33,23 @@ function runREST(app) {
         } else {
             res.sendStatus(401)
         }
+    });
+    app.put('/flats/:id/password', function (req, res) {
+        var flatID = req.params.id;
+        var oldPassword = req.body.oldPassword;
+        var newPassword = req.body.newPassword;
+        flatsDB.matchPasswordForFlat(flatID, function (rows) {
+            if(rows.length==0){
+                res.send(404);
+            }
+            if (oldPassword == rows[0].password) {
+                flatsDB.changePassword(flatID,newPassword,function(rows){
+                    res.sendStatus(200);
+                });
+            } else {
+                res.sendStatus(401);
+            }
+        });
     });
 }
 exports.runREST = runREST;
