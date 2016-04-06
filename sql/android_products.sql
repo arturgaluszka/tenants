@@ -16,28 +16,33 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `flats`
+-- Table structure for table `products`
 --
 
-DROP TABLE IF EXISTS `flats`;
+DROP TABLE IF EXISTS `products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `flats` (
+CREATE TABLE `products` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `password` varchar(45) DEFAULT NULL,
-  `name` varchar(45) DEFAULT NULL,
+  `done` int(11) DEFAULT NULL,
+  `price` decimal(12,0) DEFAULT NULL,
+  `description` varchar(45) DEFAULT NULL,
+  `flat` int(11) DEFAULT NULL,
+  `user` int(11) DEFAULT NULL,
+  `creator` int(11) DEFAULT NULL,
+  `modificationDate` bigint(12) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `flats`
+-- Dumping data for table `products`
 --
 
-LOCK TABLES `flats` WRITE;
-/*!40000 ALTER TABLE `flats` DISABLE KEYS */;
-INSERT INTO `flats` VALUES (2,'3da541559918a808c2402bba5012f6c60b27661c',NULL);
-/*!40000 ALTER TABLE `flats` ENABLE KEYS */;
+LOCK TABLES `products` WRITE;
+/*!40000 ALTER TABLE `products` DISABLE KEYS */;
+INSERT INTO `products` VALUES (1,0,2,'test1',2,NULL,2,1459794318295),(2,0,2,'test1',2,2,2,1459794418434),(3,0,2,'test1',2,2,2,1459794467708);
+/*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
