@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="20dp"
+    android:showAsAction="always">
+
+    <item
+        android:id="@+id/nav_item_draftt"
+        android:title="All" />
+
+    <item
+        android:id="@+id/nav_item_actived"
+        android:layout_marginTop="100dp"
+        android:title="Active" />
+
+    <item
+        android:id="@+id/nav_item_inboxx"
+        android:layout_marginTop="100dp"
+        android:title="Reserved" />
+
+
+</menu>

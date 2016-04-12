@@ -14,6 +14,10 @@ adnroid2/.DS_Store
 android/build
 android/captures
 android/.idea
+adnroid/gradlew.bat
+android/gradle
+android/settings.gradle
+android/gradlew
 *.iml
 server/.idea
 server/node_modules
