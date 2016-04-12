@@ -57,8 +57,28 @@ function matchPasswordForFlat(flatID,callback){
             console.log('Error while performing Query.' + err);
     });
 }
+function getFlatID(name,callback){
+    connection.query('SELECT id FROM flats WHERE name="'+name+'"', function (err, rows, fields) {
+        if (!err) {
+            callback(rows);
+        }
+        else
+            console.log('Error while performing Query.' + err);
+    });
+}
+function getFlatName(flatID,callback){
+    connection.query('SELECT name FROM flats WHERE id='+flatID+'', function (err, rows, fields) {
+        if (!err) {
+            callback(rows);
+        }
+        else
+            console.log('Error while performing Query.' + err);
+    });
+}
 
 exports.createFlat = createFlat;
 exports.getMembers = getMembers;
 exports.changePassword = changePassword;
 exports.matchPasswordForFlat=matchPasswordForFlat;
+exports.getFlatID=getFlatID;
+exports.getflatName=getFlatName;

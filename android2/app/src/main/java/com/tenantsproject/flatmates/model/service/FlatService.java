@@ -60,4 +60,32 @@ public class FlatService {
         return flatREST.changePassword(context, flatID, encryptedOldPassword, encryptedNewPassword);
     }
 
+    /**
+     * Retrieves flat's ID when given name
+     * @param context Current context
+     * @param flatName Name of a flat
+     * @return Response object with ID (int) <br>
+     * ErrorCodes: <br>
+     * - MESSAGE_OK - retrieved<br>
+     * - MESSAGE_NOT_FOUND - flat not found <br>
+     * - MESSAGE_UNAUTHORIZED -  user unauthorized <br>
+     */
+    public Response getUserID(Context context, String flatName) {
+        return flatREST.getFlatID(context, flatName);
+    }
+
+    /**
+     * Retrieves name of given flat
+     * @param context Current context
+     * @param flatID ID of a flat
+     * @return Response object with flat name <br>
+     * ErrorCodes: <br>
+     * - MESSAGE_OK - retrieved <br>
+     * - MESSAGE_NOT_FOUND - flat not found <br>
+     * - MESSAGE_UNAUTHORIZED -  user unauthorized <br>
+     */
+
+    public Response getFlat(Context context, int flatID) {
+        return flatREST.getFlat(context,flatID);
+    }
 }

@@ -48,7 +48,7 @@ function getProduct(id, callback) {
 function getProducts(flatID, userID, filter, page, callback) {
     var pagesize = restproperties.restproperties.pageSize;
     var query = 'SELECT * FROM products WHERE flat=' + flatID;
-    if (userID) {
+    if (userID && userID!=0) {
         query += " AND user=" + userID;
     }
     if (filter == 2) {
@@ -56,13 +56,81 @@ function getProducts(flatID, userID, filter, page, callback) {
     } else if (filter == 3) {
         query += " AND user is not null"
     }
-    query+=" LIMIT "+ pagesize * page;
-    connection.query(query, function (err,rows, fields) {
+    query += " LIMIT " + pagesize * page;
+    connection.query(query, function (err, rows, fields) {
         if (!err) {
             callback(rows.slice((page - 1) * pagesize, page * pagesize));
         }
         //else
         //    console.log('Error while performing Query.' + err);
+    });
+}
+function update(product, callback) {
+    var date = new Date().getTime();
+    var a = 'UPDATE products SET ' +
+        'description="' + product.description + '", ' +
+        'done=' + product.done + ',' +
+        'price=' + product.price +','+
+        'modificationDate=' + date +
+        ' WHERE id=' + product.id;
+    connection.query(a, function (err, rows, fields) {
+        if (!err) {
+            callback();
+            console.log("Updated product id=" + product.id);
+        }
+        else
+            console.log('Error while performing Query.' + err);
+
+    });
+}
+function reserve(product,id, callback) {
+    var date = new Date().getTime();
+    var a = 'UPDATE products SET ' +
+        'user=' + id +','+
+        'modificationDate=' + date +
+        ' WHERE id=' + product.id;
+    connection.query(a, function (err, rows, fields) {
+        if (!err) {
+            callback();
+            console.log("reserved product id=" + product.id);
+        }
+        else
+            console.log('Error while performing Query.' + err);
+
+    });
+}
+function getproductdate(id, userHandler) {
+    connection.query('SELECT id,modificationDate from products WHERE id=' + id, function (err, rows, fields) {
+        if (!err) {
+            userHandler(rows[0]);
+        }
+        else
+            console.log('Error while performing Query.' + err);
+    });
+}
+function getproductuser(id, userHandler) {
+    connection.query('SELECT id,user from products WHERE id=' + id, function (err, rows, fields) {
+        if (!err) {
+            userHandler(rows[0]);
+        }
+        else
+            console.log('Error while performing Query.' + err);
+    });
+}
+function unreserve(productID, callback) {
+    var date = new Date().getTime();
+    var a = 'UPDATE products SET ' +
+        'user=' + 0 +','+
+        'modificationDate=' + date +
+        ' WHERE id=' + productID;
+    connection.query(a, function (err, rows, fields) {
+        if (!err) {
+            callback();
+            console.log("unreserved product id=" + productID);
+        }
+        else
+            console.log('Error while performing Query.' + err);
+
     });
 }
 //
@@ -189,3 +257,8 @@ exports.addProduct = addProduct;
 exports.deleteFromMainList = deleteFromMainList;
 exports.getProduct = getProduct;
 exports.getProducts = getProducts;
+exports.update = update;
+exports.getproductdate = getproductdate;
+exports.reserve = reserve;
+exports.getproductuser = getproductuser;
+exports.unreserve = unreserve;

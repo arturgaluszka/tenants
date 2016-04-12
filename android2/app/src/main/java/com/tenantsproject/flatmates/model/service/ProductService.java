@@ -61,7 +61,7 @@ public class ProductService {
      * - MESSAGE_UNAUTHORIZED -  user unauthorized <br>
      */
     public Response updateProduct(Context context, Product product) {
-        throw new UnsupportedOperationException();
+        return productREST.update(context,product);
     }
 
     /**
@@ -89,10 +89,11 @@ public class ProductService {
      * - MESSAGE_OK - reserved<br>
      * - MESSAGE_NOT_FOUND - product not found <br>
      * - MESSAGE_CONFLICT - somebody already reserved after Product has been loaded <br>
+     * - MESSAGE_FORBIDDEN - reserving other flat's products
      * - MESSAGE_UNAUTHORIZED -  user unauthorized <br>
      */
     public Response reserveProduct(Context context, Product product) {
-        throw new UnsupportedOperationException();
+        return productREST.reserve(context,product);
     }
 
     /**
@@ -112,19 +113,20 @@ public class ProductService {
     }
 
     /**
-     * Reserves given product for current user
+     * Unreserves given product for current user
      *
      * @param context Current context
-     * @param product Product to reserve
+     * @param product Product to unreserve
      * @return Response object
      * ErrorCodes: <br>
      * - MESSAGE_OK - unreserved <br>
      * - MESSAGE_NOT_FOUND - product not found <br>
+     * - MESSAGE_FORBIDDEN - unreserving other users products
      * - MESSAGE_UNAUTHORIZED -  user unauthorized <br>
      */
 
     public Response unreserveProduct(Context context, Product product) {
-        throw new UnsupportedOperationException();
+       return productREST.removeFromUserList(context,product);
     }
 
     /**

@@ -69,6 +69,44 @@ public class ProductREST {
         }
         return response;
     }
+    public Response update(Context context,Product product) {
+        currentContext = context;
+        UpdateProductTask task = new UpdateProductTask();
+        Response response = new Response();
+        task.execute(product);
+        try {
+            response = task.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.e("REST", "Can't run task: updateProduct", e);
+        }
+        return response;
+    }
+
+    public Response reserve(Context context,Product product) {
+        currentContext = context;
+        ReserveProductTask task = new ReserveProductTask();
+        Response response = new Response();
+        task.execute(product);
+        try {
+            response = task.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.e("REST", "Can't run task: updateProduct", e);
+        }
+        return response;
+    }
+
+    public Response removeFromUserList(Context context, Product product) {
+        currentContext = context;
+        RemoveFromUserListTask task = new RemoveFromUserListTask();
+        Response response = new Response();
+        task.execute(product.getId());
+        try {
+            response = task.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.e("REST", "Can't run task: removeFromUserList", e);
+        }
+        return response;
+    }
 
     private class AddProductTask extends AsyncTask<Product, Void, Response> {
 
@@ -257,6 +295,111 @@ public class ProductREST {
             return response;
         }
     }
+    private class UpdateProductTask extends AsyncTask<Product, Void, Response> {
 
+        private HttpsURLConnection urlConnection;
+
+        @Override
+        protected Response doInBackground(Product... params) {
+            Product product = params[0];
+            Gson gson = new Gson();
+            String json = gson.toJson(product);
+            Response response = new Response();
+            try {
+                URL url = new URL(Properties.SERVER_SECURE_URL + "products/" + product.getId());
+                urlConnection = (HttpsURLConnection) url.openConnection();
+
+                urlConnection.setDoInput(false);
+                urlConnection.setDoOutput(true);
+                urlConnection.setRequestMethod("PUT");
+
+                if (ProductREST.this.currentContext != null) {
+                    urlConnection.setRequestProperty("Authorization", Authenticator.getUserToken(currentContext));
+                } else {
+                    urlConnection.setRequestProperty("Authorization", "");
+                }
+
+                OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
+                out.write("product=" + json);
+                out.close();
+                response.setMessageCode(urlConnection.getResponseCode());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                urlConnection.disconnect();
+            }
+            return response;
+        }
+    }
+
+    private class ReserveProductTask extends AsyncTask<Product, Void, Response> {
+
+        private HttpsURLConnection urlConnection;
+
+        @Override
+        protected Response doInBackground(Product... params) {
+            Product product = params[0];
+            Gson gson = new Gson();
+            String json = gson.toJson(product);
+            Response response = new Response();
+            try {
+                URL url = new URL(Properties.SERVER_SECURE_URL + "products/" + product.getId()+"/userlist");
+                urlConnection = (HttpsURLConnection) url.openConnection();
+
+                urlConnection.setDoInput(false);
+                urlConnection.setDoOutput(true);
+                urlConnection.setRequestMethod("POST");
+
+                if (ProductREST.this.currentContext != null) {
+                    urlConnection.setRequestProperty("Authorization", Authenticator.getUserToken(currentContext));
+                } else {
+                    urlConnection.setRequestProperty("Authorization", "");
+                }
+
+                OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
+                out.write("product=" + json);
+                out.close();
+                response.setMessageCode(urlConnection.getResponseCode());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                urlConnection.disconnect();
+            }
+            return response;
+        }
+    }
+
+    private class RemoveFromUserListTask extends AsyncTask<Integer, Void, Response> {
+
+        private HttpsURLConnection urlConnection;
+
+        @Override
+        protected Response doInBackground(Integer... params) {
+            Response response = new Response();
+            StringBuilder total = new StringBuilder();
+            int productID = params[0];
+
+            try {
+                URL url = new URL(Properties.SERVER_SECURE_URL + "products/" + productID + "/userlist");
+                urlConnection = (HttpsURLConnection) url.openConnection();
+
+                urlConnection.setDoOutput(false);
+                urlConnection.setDoInput(false);
+                urlConnection.setRequestMethod("DELETE");
+
+                if (ProductREST.this.currentContext != null) {
+                    urlConnection.setRequestProperty("Authorization", Authenticator.getUserToken(currentContext));
+                } else {
+                    urlConnection.setRequestProperty("Authorization", "");
+                }
+                response.setMessageCode(urlConnection.getResponseCode());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                urlConnection.disconnect();
+            }
+            return response;
+        }
+    }
 
 }

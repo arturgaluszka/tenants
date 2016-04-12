@@ -69,6 +69,32 @@ public class FlatREST {
         return response;
     }
 
+    public Response getFlatID(Context context, String name) {
+        currentContext = context;
+        GetFlatIDTask task = new GetFlatIDTask ();
+        Response response = new Response();
+        task.execute(name);
+        try {
+            response = task.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.e("REST", "Can't run task: getUserID", e);
+        }
+        return response;
+    }
+
+    public Response getFlat(Context context, int flatID) {
+        currentContext = context;
+        GetFlatTask task = new GetFlatTask ();
+        Response response = new Response();
+        task.execute(flatID);
+        try {
+            response = task.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.e("REST", "Can't run task: getUserID", e);
+        }
+        return response;
+    }
+
     private class CreateFlatTask extends AsyncTask<String, Void, Response> {
 
         private HttpsURLConnection urlConnection;
@@ -205,4 +231,97 @@ public class FlatREST {
         }
     }
 
+    private class GetFlatIDTask extends AsyncTask<String, Void, Response> {
+
+        private HttpsURLConnection urlConnection;
+
+        @Override
+        protected Response doInBackground(String... params) {
+            Response response = new Response();
+            StringBuilder total = new StringBuilder();
+            String name = params[0];
+
+            try {
+                URL url = new URL(Properties.SERVER_SECURE_URL + "flats/name/" + name);
+                urlConnection = (HttpsURLConnection) url.openConnection();
+
+                urlConnection.setDoOutput(false);
+                urlConnection.setDoInput(true);
+                urlConnection.setRequestMethod("GET");
+
+                if(FlatREST.this.currentContext!=null){
+                    urlConnection.setRequestProperty("Authorization",Authenticator.getUserToken(currentContext));
+                } else{
+                    urlConnection.setRequestProperty("Authorization", "");
+                }
+
+                response.setMessageCode(urlConnection.getResponseCode());
+                if(response.getMessageCode()==Response.MESSAGE_OK) {
+                    InputStream in = urlConnection.getInputStream();
+
+                    BufferedReader r = new BufferedReader(new InputStreamReader(in));
+
+                    String line;
+                    while ((line = r.readLine()) != null) {
+                        total.append(line);
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if(!total.toString().isEmpty()){
+                    response.setObject(Integer.valueOf(total.toString()));
+                }
+                urlConnection.disconnect();
+            }
+            return response;
+        }
+    }
+
+    private class GetFlatTask extends AsyncTask<Integer, Void, Response> {
+
+        private HttpsURLConnection urlConnection;
+
+        @Override
+        protected Response doInBackground(Integer... params) {
+            Response response = new Response();
+            StringBuilder total = new StringBuilder();
+            int flatID = params[0];
+
+            try {
+                URL url = new URL(Properties.SERVER_SECURE_URL + "flats/" + flatID);
+                urlConnection = (HttpsURLConnection) url.openConnection();
+
+                urlConnection.setDoOutput(false);
+                urlConnection.setDoInput(true);
+                urlConnection.setRequestMethod("GET");
+
+                if(FlatREST.this.currentContext!=null){
+                    urlConnection.setRequestProperty("Authorization",Authenticator.getUserToken(currentContext));
+                } else{
+                    urlConnection.setRequestProperty("Authorization", "");
+                }
+
+                response.setMessageCode(urlConnection.getResponseCode());
+                if(response.getMessageCode()==Response.MESSAGE_OK) {
+                    InputStream in = urlConnection.getInputStream();
+
+                    BufferedReader r = new BufferedReader(new InputStreamReader(in));
+
+                    String line;
+                    while ((line = r.readLine()) != null) {
+                        total.append(line);
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if(!total.toString().isEmpty()){
+                    response.setObject(total.toString());
+                }
+                urlConnection.disconnect();
+            }
+            return response;
+        }
+    }
 }

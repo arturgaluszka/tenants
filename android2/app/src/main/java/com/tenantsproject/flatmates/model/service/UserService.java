@@ -89,7 +89,7 @@ public class UserService {
      * - MESSAGE_NOT_FOUND - user not found <br>
      * - MESSAGE_UNAUTHORIZED -  user unauthorized <br>
      */
-
+    //TODO: make this return user object
     public Response getUser(Context context, int userID) {
         throw new UnsupportedOperationException();
     }

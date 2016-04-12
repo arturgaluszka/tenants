@@ -60,6 +60,21 @@ function runREST(app) {
             res.sendStatus(401);
         }
     });
+    app.get('/users/:id', function (req, res) {
+        var authenticated = authenticator.authenticateUsingToken(req);
+        if(authenticated) {
+            var userID = req.params.id;
+            userDB.getUsername(userID,function(rows){
+                if (rows.length > 0) {
+                    res.send(rows[0].name);
+                } else {
+                    res.sendStatus(404);
+                }
+            });
+        } else {
+            res.sendStatus(401);
+        }
+    });
     app.post('/users/', function (req, res) {
         var username = req.body.username;
         var password = req.body.password;
