@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tenantsproject.flatmates.R;
@@ -45,11 +44,7 @@ public class RowAdapter extends ArrayAdapter<RowBean> {
         RowBean object = data[position];
         holder.txtTitle.setText(object.title);
 //        holder.imgIcon.setImageResource(object.icon);
-        if (position == 0) {
-            row.setBackgroundColor(-1);
-        } else if (position == 4) {
-            row.setBackgroundColor(-7829368);
-        }
+
 
         return row;
     }

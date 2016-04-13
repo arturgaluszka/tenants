@@ -18,7 +18,7 @@ import com.example.tenantsproject.flatmates.main_list.list.RowBean;
 public class UpdatesFragment extends ListFragment {
 
     ListView Mylist;
-
+// my archive
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

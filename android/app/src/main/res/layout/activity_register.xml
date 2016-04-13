@@ -35,10 +35,10 @@ android:background="#238ae1">
 <EditText
     android:layout_width="300dp"
     android:layout_height="30dp"
-    android:inputType="textEmailAddress"
     android:ems="10"
     android:id="@+id/editText4"
-    android:hint="  E-mail"
+    android:hint="  Password"
+    android:inputType="textPassword"
     android:background="@drawable/edit_text_style"
     android:layout_below="@+id/editText3"
     android:layout_centerHorizontal="true"
@@ -53,12 +53,13 @@ android:background="#238ae1">
     android:background="@drawable/edit_text_style"
     android:layout_below="@+id/editText4"
     android:layout_centerHorizontal="true"
-    android:hint=" Password"/>
+    android:hint=" Confirm password"/>
 
 <Button
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Create"
+    android:onClick="save"
     android:id="@+id/button2"
     android:layout_below="@+id/editText5"
     android:layout_marginTop="33dp"
@@ -79,4 +80,16 @@ android:background="#238ae1">
     android:layout_below="@+id/button2"
     android:layout_centerHorizontal="true"
     android:layout_marginTop="21dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="30dp"
+        android:id="@+id/textView15"
+        android:layout_below="@+id/editText5"
+        android:layout_alignLeft="@+id/editText5"
+        android:layout_alignStart="@+id/editText5"
+        android:layout_alignRight="@+id/editText5"
+        android:layout_alignEnd="@+id/editText5"
+        android:textSize="40px"
+        android:textColor="#ff0101" />
 </RelativeLayout>
