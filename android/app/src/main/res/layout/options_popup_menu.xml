@@ -9,14 +9,15 @@
     <item
         android:id="@+id/flat"
         android:layout_marginTop="100dp"
-        android:title="Flat" />
+        android:title="@string/flat"
+        />
 
     <item
         android:id="@+id/account"
-        android:title="Account" />
+        android:title="@string/acc"/>
     <item
         android:id="@+id/nav_item_draftt"
-        android:title="Logout"
+        android:title="@string/logout"
         />
 
 </menu>

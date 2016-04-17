@@ -31,6 +31,7 @@ import com.example.tenantsproject.flatmates.settings.others.Help;
 import com.example.tenantsproject.flatmates.settings.others.Notification;
 import com.example.tenantsproject.flatmates.settings.others.Settings;
 import com.example.tenantsproject.flatmates.settings.others.Statistics;
+import com.example.tenantsproject.flatmates.settings.user.Account;
 
 public class MainActivity extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
@@ -147,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), Flat.class));
                 }
                 if (item.getItemId() == R.id.account) {
+                    startActivity(new Intent(getApplicationContext(), Account.class));
 
                 }
                 Toast.makeText(MainActivity.this, "You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();

@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Options"
+        android:text="@string/opt"
         android:fontFamily="sans-serif-medium"
         android:textColor="#238ae1"
         android:id="@+id/textView3"
@@ -68,7 +68,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Informations"
+        android:text="@string/info"
         android:fontFamily="sans-serif-medium"
         android:id="@+id/textView8"
         android:textSize="18dp"

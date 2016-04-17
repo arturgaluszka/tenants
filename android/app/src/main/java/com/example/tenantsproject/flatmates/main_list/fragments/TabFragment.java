@@ -90,11 +90,11 @@ public class TabFragment extends Fragment {
 
             switch (position) {
                 case 0:
-                    return "Main List";
+                    return getString(R.string.main_list);
                 case 1:
-                    return "My List";
+                    return getString(R.string.my_list);
                 case 2:
-                    return "My Archive";
+                    return getString(R.string.my_archive);
             }
             return null;
         }
