@@ -1,13 +1,18 @@
 var flatsDB = require('./../db/flats');
 var authenticator = require('./../utils/authenticator');
 var usersDB = require('./../db/users');
+var statsDB = require('./../db/stats');
 function runREST(app) {
     app.post('/flats/', function (req, res) {
         var authenticated = authenticator.authenticateUsingToken(req);
         if (authenticated) {
             var password = req.body.password;
             flatsDB.createFlat(password, function (rows) {
-                res.send((rows[0]['LAST_INSERT_ID()']).toString());
+                var newID = rows[0]['LAST_INSERT_ID()'];
+                statsDB.addStatsField(0,newID,function(rows){
+
+                });
+                res.send(newID.toString());
             });
         } else {
             res.sendStatus(401);

@@ -91,7 +91,7 @@ public class UserService {
      */
     //TODO: make this return user object
     public Response getUser(Context context, int userID) {
-        throw new UnsupportedOperationException();
+        return usersREST.getUser(context,userID);
     }
 
     /**
@@ -124,7 +124,21 @@ public class UserService {
     public Response changePassword(Context context,int userID, String oldPassword, String newPassword) {
         String encryptedOldPassword = String.valueOf(Hex.encodeHex(DigestUtils.sha1(oldPassword)));
         String encryptedNewPassword = String.valueOf(Hex.encodeHex(DigestUtils.sha1(newPassword)));
-        return usersREST.changePassword(context,userID,encryptedOldPassword,encryptedNewPassword);
+        return usersREST.changePassword(context, userID, encryptedOldPassword, encryptedNewPassword);
+    }
+
+    /**
+     * Retrieves user's flats (id's)
+     * @param context Current context
+     * @param userID user ID
+     * @return Response object with List of ID (int) <br>
+     * ErrorCodes: <br>
+     * - MESSAGE_OK - retrieved<br>
+     * - MESSAGE_FORBIDDEN -  can't check other user flats <br>
+     * - MESSAGE_UNAUTHORIZED -  user unauthorized <br>
+     */
+    public Response getUserFlats(Context context, int userID) {
+        return usersREST.getUserFlats(context, userID);
     }
 
 

@@ -112,6 +112,15 @@ function isFlatMember(userID, flatID,callback){
             console.log('Error while performing Query.' + err);
     });
 }
+function getUserFlats(userID,callback){
+    connection.query('SELECT id FROM flatsigns WHERE userID='+userID, function (err, rows, fields) {
+        if (!err) {
+            callback(rows);
+        }
+        else
+            console.log('Error while performing Query.' + err);
+    });
+}
 //function getexpenses(id,userHandler) {
 //    connection.query('SELECT id,price,description,done,flat,user FROM expenses WHERE flat='+id, function (err, rows, fields) {
 //        if (!err) {
@@ -215,6 +224,7 @@ exports.createUser = createUser;
 exports.getUsername = getUserName;
 exports.changePassword = changePassword;
 exports.isFlatMember = isFlatMember;
+exports.getUserFlats = getUserFlats;
 
 //
 //exports.getexpenses = getexpenses;

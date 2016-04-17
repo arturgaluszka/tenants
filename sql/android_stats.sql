@@ -16,28 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `flatsigns`
+-- Table structure for table `stats`
 --
 
-DROP TABLE IF EXISTS `flatsigns`;
+DROP TABLE IF EXISTS `stats`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `flatsigns` (
+CREATE TABLE `stats` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userID` int(11) DEFAULT NULL,
+  `userID` int(11) DEFAULT '0',
+  `sum` decimal(12,0) DEFAULT '0',
   `flatID` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `flatsigns`
+-- Dumping data for table `stats`
 --
 
-LOCK TABLES `flatsigns` WRITE;
-/*!40000 ALTER TABLE `flatsigns` DISABLE KEYS */;
-INSERT INTO `flatsigns` VALUES (5,1,2),(6,2,2);
-/*!40000 ALTER TABLE `flatsigns` ENABLE KEYS */;
+LOCK TABLES `stats` WRITE;
+/*!40000 ALTER TABLE `stats` DISABLE KEYS */;
+INSERT INTO `stats` VALUES (1,2,22,2),(2,0,22,2);
+/*!40000 ALTER TABLE `stats` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

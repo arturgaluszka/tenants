@@ -103,5 +103,24 @@ function runREST(app) {
             }
         });
     });
+    app.get('/users/:id/flats', function (req, res) {
+        var authenticated = authenticator.authenticateUsingToken(req);
+        if(authenticated) {
+            var userID = req.params.id;
+            authenticator.getLoggedUserID(req, function (id) {
+                if(id==userID){
+                    usersDB.getUserFlats(userID,function(rows){
+                        res.send(rows.map(function (row) {
+                            return row.id;
+                        }));
+                    });
+                }else{
+                    res.sendStatus(403)
+                }
+            });
+        } else {
+            res.sendStatus(401);
+        }
+    });
 }
 exports.runREST = runREST;

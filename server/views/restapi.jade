@@ -90,11 +90,11 @@ block content
           td /products/:id/purchase
           td post
           td none
-          td creates new product
+          td buys product
           td none
           td
              p 404 - product not found
-             p 409 - somebody already bought after Product has been loaded
+             p 409 - somebody already bought/changed after Product has been loaded
        tr
           td /products/:id/userlist
           td delete
@@ -110,12 +110,13 @@ block content
           td /products/:id/purchase
           td delete
           td path:
-             br
              p id - product ID
-          td cancels purchase
+          td cancels a buy (removes from archive and puts in current list)
           td none
           td
              p 404 - product not found
+             p 403 - its other users product
+             p 409 - product not bought
 
     h2 users
     table(border=1)
@@ -205,6 +206,16 @@ block content
             td none
             td
                p 403 - incorrect password
+        tr
+            td /users/:id/flats
+            td get
+            td
+                p path:
+                p id - user ID
+            td Retrieves user's flats (id's)
+            td List of numbers (ID's)
+            td
+                p 403 - cant check other users flats
 
     h2 flats
     table(border=1)
@@ -284,21 +295,16 @@ block content
             td retrieves stats for given user withing given flat
             td Statistics object
             td
-                p 404 - no such user in given flat
                 p 403 - can't check others' flats stats
         tr
-            td /archive/flat/:flatID
+            td /archive/flat/:id/user/:userID/filter/:filter/page/:page
             td get
             td
                 p path:
-                p flatID - flat ID
-                br
-                p body:
-                p userID - user ID (can be 0 for all)
-                p filter - one of predefined filters
-                ul
-                    li 1 all
-                p page - page number
+                p id - flat ID
+                p userID - ID of a user (buyer)
+                p filter - one of predefined filters (currently only 1)
+                p page - page number (starting at 1)
             td retrieves archival list of products for given user within given flat
             td list of Product
             td
