@@ -1,4 +1,4 @@
-com.tenantsproject.flatmates.model.data
-com.tenantsproject.flatmates.model.rest
-com.tenantsproject.flatmates.model.service
-com.tenantsproject.flatmates.security
+com.example.tenantsproject.flatmates.model.data
+com.example.tenantsproject.flatmates.model.rest
+com.example.tenantsproject.flatmates.model.service
+com.example.tenantsproject.flatmates.security
