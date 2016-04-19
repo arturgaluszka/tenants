@@ -11,7 +11,7 @@ function runREST(app) {
                 res.send(token);
             },
             function (token) {
-                res.send(token);
+                res.sendStatus(403);
             });
     });
     app.post('/users/:userID/flat/', function (req, res) {

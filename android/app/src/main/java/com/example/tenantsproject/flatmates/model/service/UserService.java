@@ -24,8 +24,7 @@ public class UserService {
      * @return Response object with a token <br>
      * ErrorCodes: <br>
      * - MESSAGE_OK - logged in<br>
-     * - MESSAGE_NOT_FOUND - user not found <br>
-     * - MESSAGE_FORBIDDEN -  incorrect password <br>
+     * - MESSAGE_FORBIDDEN -  incorrect password or username <br>
      */
     public Response login(Context context, String username, String password) {
         return usersREST.login(context, username, password);

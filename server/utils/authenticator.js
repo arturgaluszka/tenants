@@ -20,7 +20,7 @@ function authenticateUsingUsernameAndPassword(username,password,successCallback,
         if(row[0].password==password){
             successCallback(createValidToken(username));
         } else {
-            failureCallback(createInvalidToken(username));
+            failureCallback();
         }
     });
 }

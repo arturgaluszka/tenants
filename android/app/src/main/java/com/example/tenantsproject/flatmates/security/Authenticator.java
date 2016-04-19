@@ -32,6 +32,9 @@ public class Authenticator {
         if (response.getMessageCode() == Response.MESSAGE_OK) {
             SharedPreferences sharedPreferences = context.getSharedPreferences(AUTHENTICATION_PREFERENCES, Context.MODE_PRIVATE);
             sharedPreferences.edit().putString(USER_TOKEN, (String) response.getObject()).commit();
+        } else if(response.getMessageCode() == Response.MESSAGE_FORBIDDEN){
+            SharedPreferences sharedPreferences = context.getSharedPreferences(AUTHENTICATION_PREFERENCES, Context.MODE_PRIVATE);
+            sharedPreferences.edit().putString(USER_TOKEN, "0").commit();
         }
         return response;
     }
