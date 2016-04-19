@@ -111,7 +111,7 @@ function runREST(app) {
                 if(id==userID){
                     usersDB.getUserFlats(userID,function(rows){
                         res.send(rows.map(function (row) {
-                            return row.id;
+                            return row.flatID;
                         }));
                     });
                 }else{

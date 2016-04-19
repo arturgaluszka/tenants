@@ -113,7 +113,7 @@ function isFlatMember(userID, flatID,callback){
     });
 }
 function getUserFlats(userID,callback){
-    connection.query('SELECT id FROM flatsigns WHERE userID='+userID, function (err, rows, fields) {
+    connection.query('SELECT flatID FROM flatsigns WHERE userID='+userID, function (err, rows, fields) {
         if (!err) {
             callback(rows);
         }
