@@ -52,9 +52,9 @@ function getProducts(flatID, userID, filter, page, callback) {
         query += " AND user=" + userID;
     }
     if (filter == 2) {
-        query += " AND user is null"
+        query += " AND user = 0"
     } else if (filter == 3) {
-        query += " AND user is not null"
+        query += " AND user!= 0"
     }
     query += " LIMIT " + pagesize * page;
     connection.query(query, function (err, rows, fields) {
