@@ -90,8 +90,8 @@
         android:layout_toEndOf="@+id/textView23" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/back"
         android:onClick="back"
@@ -100,16 +100,17 @@
         android:textColor="#238AE1"
         android:textSize="20sp"
         android:background="@drawable/buttonshape"
-        android:layout_marginTop="32dp"
-        android:layout_below="@+id/button11"
-        android:layout_alignLeft="@+id/button11"
-        android:layout_alignStart="@+id/button11"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
         android:layout_alignRight="@+id/button11"
-        android:layout_alignEnd="@+id/button11" />
+        android:layout_alignEnd="@+id/button11"
+        android:layout_alignLeft="@+id/button11"
+        android:layout_alignStart="@+id/button11" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/change"
         android:onClick="changePass"
@@ -118,11 +119,9 @@
         android:textColor="#238AE1"
         android:textSize="20sp"
         android:background="@drawable/buttonshape"
-        android:layout_marginTop="32dp"
-        android:layout_below="@+id/spinner"
-        android:layout_alignLeft="@+id/textView21"
-        android:layout_alignStart="@+id/textView21"
+        android:layout_above="@+id/button10"
         android:layout_toLeftOf="@+id/editText11"
-        android:layout_toStartOf="@+id/editText11" />
+        android:layout_alignLeft="@+id/textView21"
+        android:layout_alignStart="@+id/textView21" />
 
 </RelativeLayout>

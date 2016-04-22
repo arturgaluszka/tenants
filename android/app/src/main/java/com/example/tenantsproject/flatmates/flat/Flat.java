@@ -26,7 +26,7 @@ public class Flat extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .7), (int) (height * .4));
+        getWindow().setLayout((int) (width * .7), (int) (height * .5));
     }
 
     final int CONTEXT_MENU_ADD = 1;

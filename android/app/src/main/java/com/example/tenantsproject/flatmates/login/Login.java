@@ -26,11 +26,7 @@ public class Login extends AppCompatActivity {
 
     }
 
-    public static int getMyActualFlat() {
-        int actualFlatnumber = 1;
-        return actualFlatnumber;
-        //TODO change actualFlatnumber
-    }
+
 
     public void login(View v) {
         Authenticator authenticator = new Authenticator();

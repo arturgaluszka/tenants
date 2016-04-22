@@ -1,6 +1,5 @@
 package com.example.tenantsproject.flatmates.main_list.list;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,8 +9,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -21,16 +20,11 @@ import android.widget.Toast;
 
 import com.example.tenantsproject.flatmates.R;
 import com.example.tenantsproject.flatmates.archive.list.Archives;
-import com.example.tenantsproject.flatmates.flat.AddFlat;
-import com.example.tenantsproject.flatmates.flat.DeleteFlat;
-import com.example.tenantsproject.flatmates.flat.EditFlat;
 import com.example.tenantsproject.flatmates.flat.Flat;
-import com.example.tenantsproject.flatmates.flat.ViewFlat;
+import com.example.tenantsproject.flatmates.login.Login;
 import com.example.tenantsproject.flatmates.main_list.fragments.TabFragment;
-import com.example.tenantsproject.flatmates.settings.others.Help;
-import com.example.tenantsproject.flatmates.settings.others.Notification;
-import com.example.tenantsproject.flatmates.settings.others.Settings;
-import com.example.tenantsproject.flatmates.settings.others.Statistics;
+import com.example.tenantsproject.flatmates.model.service.ProductService;
+import com.example.tenantsproject.flatmates.security.Authenticator;
 import com.example.tenantsproject.flatmates.settings.user.Account;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager mFragmentManager;
     FragmentTransaction mFragmentTransaction;
     Button searchButton;
+
+    ProductService productService = new ProductService();
+    public static int FILTER = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,8 +86,6 @@ public class MainActivity extends AppCompatActivity {
                 mDrawerLayout.closeDrawers();
 
 
-
-
                 return false;
             }
 
@@ -126,8 +122,18 @@ public class MainActivity extends AppCompatActivity {
         //registering popup with OnMenuItemClickListener
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
-
-                Toast.makeText(MainActivity.this, "You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                if (item.getTitle().equals("All")) {
+                    FILTER = productService.FILTER_ALL;
+                    TabFragment.viewPager.getAdapter().notifyDataSetChanged();
+                }
+                if (item.getTitle().equals("Active")) {
+                    FILTER = productService.FILTER_ACTIVE;
+                    TabFragment.viewPager.getAdapter().notifyDataSetChanged();
+                }
+                if (item.getTitle().equals("Reserved")) {
+                    FILTER = productService.FILTER_RESERVED;
+                    TabFragment.viewPager.getAdapter().notifyDataSetChanged();
+                }
                 return true;
             }
         });
@@ -135,13 +141,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void options(View view) {
-        //Creating the instance of PopupMenu
-
         PopupMenu popup = new PopupMenu(this, view);
-        //Inflating the Popup using xml file
         popup.getMenuInflater().inflate(R.layout.options_popup_menu, popup.getMenu());
-
-        //registering popup with OnMenuItemClickListener
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
                 if (item.getItemId() == R.id.flat) {
@@ -151,7 +152,15 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), Account.class));
 
                 }
+                if (item.getItemId() == R.id.logout){
+                    Authenticator at = new Authenticator();
+                    at.logOut(MainActivity.this);
+                    finish();
+
+                }
+
                 Toast.makeText(MainActivity.this, "You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
+
                 return true;
             }
         });

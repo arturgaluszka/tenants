@@ -31,6 +31,7 @@
     <string name="my_archive">My Archive</string>
     <string name="error">Error, Passwords are not the same</string>
     <string name="success">Success</string>
+    <string name="add_flat">Add Flat</string>
     
     <string-array name="language">
         <item>@string/select</item>

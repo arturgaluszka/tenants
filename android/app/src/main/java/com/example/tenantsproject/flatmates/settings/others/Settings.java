@@ -10,11 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.tenantsproject.flatmates.R;
-import com.example.tenantsproject.flatmates.settings.user.Meil;
-import com.example.tenantsproject.flatmates.settings.user.Nick;
-import com.example.tenantsproject.flatmates.settings.user.Nickname;
-import com.example.tenantsproject.flatmates.settings.user.Password;
-import com.example.tenantsproject.flatmates.settings.user.Phone;
 
 public class Settings extends Activity {
 
@@ -55,32 +50,8 @@ public class Settings extends Activity {
     }
 
     public boolean onContextItemSelected(MenuItem item) {
-
-        if (item.getTitle() == "Avatar") {
-            Intent i = new Intent(this, Nickname.class);
-            startActivity(i);
-        }
-        if (item.getTitle() == "Nickname") {
-            Intent i = new Intent(this, Nick.class);
-            startActivity(i);
-        }
-        if (item.getTitle() == "Password") {
-            Intent i = new Intent(this, Password.class);
-            startActivity(i);
-        }
-        if (item.getTitle() == "Phone number") {
-            Intent i = new Intent(this, Phone.class);
-            startActivity(i);
-        }
-        if (item.getTitle() == "E-mail") {
-            Intent i = new Intent(this, Meil.class);
-            startActivity(i);
-        }
         return super.onContextItemSelected(item);
     }
 
-    public void not1(View v) {
-        Intent i = new Intent(this, Notification.class);
-        startActivity(i);
-    }
+
 }

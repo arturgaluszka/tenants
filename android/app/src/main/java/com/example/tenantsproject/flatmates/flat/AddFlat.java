@@ -5,10 +5,20 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.tenantsproject.flatmates.R;
+import com.example.tenantsproject.flatmates.model.rest.Response;
+import com.example.tenantsproject.flatmates.model.service.FlatService;
 
 public class AddFlat extends Activity {
+
+    String pass ="";
+    TextView txt1;
+    FlatService fltServ;
+    Response res;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,5 +53,11 @@ public class AddFlat extends Activity {
         }
         // let the system handle the event
         return super.onTouchEvent(event);
+    }
+
+    public void createFlat(View v){
+        txt1 = (EditText) findViewById(R.id.editText8);
+        pass = txt1.getText().toString();
+        res = fltServ.createFlat(this, pass);
     }
 }

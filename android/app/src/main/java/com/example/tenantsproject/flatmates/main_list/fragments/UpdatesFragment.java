@@ -12,8 +12,6 @@ import android.widget.ListView;
 
 import com.example.tenantsproject.flatmates.R;
 import com.example.tenantsproject.flatmates.archive.list.MyArchiveList;
-import com.example.tenantsproject.flatmates.main_list.list.RowAdapter;
-import com.example.tenantsproject.flatmates.main_list.list.RowBean;
 
 public class UpdatesFragment extends ListFragment {
 
@@ -25,21 +23,7 @@ public class UpdatesFragment extends ListFragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_messages, container,
                 false);
-        RowBean RowBean_data[] = new RowBean[]{
 
-                new RowBean(R.drawable.avatar2, "Chleb!"),
-                new RowBean(R.drawable.avatar2, "Ketchup"),
-                new RowBean(R.drawable.avatar2, "Parówki"),
-                new RowBean(R.drawable.avatar2, "Parówki"),
-
-        };
-
-        RowAdapter adapterMain = new RowAdapter(getActivity(),
-                R.layout.custom_row, RowBean_data);
-        super.onActivityCreated(savedInstanceState);
-        Mylist = (ListView) rootView.findViewById(R.id.Mylistt);
-
-        setListAdapter(adapterMain);
 
         return rootView;
     }
