@@ -18,14 +18,15 @@ public class FlatService {
     /**
      * @param context Current context
      * @param password password for accessing created flat
+     * @param name name of a flat
      * @return Response object with flat id (int)<br>
      * ErrorCodes: <br>
      * - MESSAGE_OK - created<br>
      * - MESSAGE_UNAUTHORIZED -  user unauthorized <br>
      */
-    public Response createFlat(Context context, String password) {
+    public Response createFlat(Context context, String password,String name) {
         String encryptedPassword = String.valueOf(Hex.encodeHex(DigestUtils.sha1(password)));
-        return flatREST.createFlat(context,encryptedPassword);
+        return flatREST.createFlat(context,encryptedPassword, name);
     }
 
     /**

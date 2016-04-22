@@ -316,43 +316,43 @@ public class UsersREST {
         protected Response doInBackground(Integer... params) {
             Response response = new Response();
             StringBuilder total = new StringBuilder();
-            int userID = params[0];
+        int userID = params[0];
 
-            try {
-                URL url = new URL(Properties.SERVER_SECURE_URL + "users/" + userID);
-                urlConnection = (HttpsURLConnection) url.openConnection();
+        try {
+            URL url = new URL(Properties.SERVER_SECURE_URL + "users/" + userID);
+            urlConnection = (HttpsURLConnection) url.openConnection();
 
-                urlConnection.setDoOutput(false);
-                urlConnection.setDoInput(true);
-                urlConnection.setRequestMethod("GET");
+            urlConnection.setDoOutput(false);
+            urlConnection.setDoInput(true);
+            urlConnection.setRequestMethod("GET");
 
-                if(UsersREST.this.currentContext!=null){
-                    urlConnection.setRequestProperty("Authorization",Authenticator.getUserToken(currentContext));
-                } else{
-                    urlConnection.setRequestProperty("Authorization", "");
-                }
-
-                response.setMessageCode(urlConnection.getResponseCode());
-                if(response.getMessageCode()==Response.MESSAGE_OK) {
-                    InputStream in = urlConnection.getInputStream();
-
-                    BufferedReader r = new BufferedReader(new InputStreamReader(in));
-
-                    String line;
-                    while ((line = r.readLine()) != null) {
-                        total.append(line);
-                    }
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if(!total.toString().isEmpty()){
-                    response.setObject(total.toString());
-                }
-                urlConnection.disconnect();
+            if(UsersREST.this.currentContext!=null){
+                urlConnection.setRequestProperty("Authorization",Authenticator.getUserToken(currentContext));
+            } else{
+                urlConnection.setRequestProperty("Authorization", "");
             }
-            return response;
+
+            response.setMessageCode(urlConnection.getResponseCode());
+            if(response.getMessageCode()==Response.MESSAGE_OK) {
+                InputStream in = urlConnection.getInputStream();
+
+                BufferedReader r = new BufferedReader(new InputStreamReader(in));
+
+                String line;
+                while ((line = r.readLine()) != null) {
+                    total.append(line);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if(!total.toString().isEmpty()){
+                response.setObject(total.toString());
+            }
+            urlConnection.disconnect();
         }
+        return response;
+    }
     }
 
     private class CreateUserTask extends AsyncTask<String, Void, Response> {

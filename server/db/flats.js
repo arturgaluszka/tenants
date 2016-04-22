@@ -5,9 +5,9 @@ var connection = mysql.createConnection(properties.dbprops);
 connection.connect(function (err) {
 });
 
-function createFlat(flatPassword, callback) {
-    var a = 'INSERT INTO flats (password)' +
-        'VALUES ("' + flatPassword + '")';
+function createFlat(flatPassword,name, callback) {
+    var a = 'INSERT INTO flats (password,name)' +
+        'VALUES ("' + flatPassword + '","'+name+'")';
     var b = 'SELECT LAST_INSERT_ID()';
 
     connection.query(a, function (err, rows, fields) {

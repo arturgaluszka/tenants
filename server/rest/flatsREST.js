@@ -7,7 +7,8 @@ function runREST(app) {
         var authenticated = authenticator.authenticateUsingToken(req);
         if (authenticated) {
             var password = req.body.password;
-            flatsDB.createFlat(password, function (rows) {
+            var name = req.body.name;
+            flatsDB.createFlat(password,name, function (rows) {
                 var newID = rows[0]['LAST_INSERT_ID()'];
                 statsDB.addStatsField(0,newID,function(rows){
 

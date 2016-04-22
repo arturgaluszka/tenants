@@ -30,11 +30,11 @@ public class FlatREST {
     }
 
 
-    public Response createFlat(Context context, String password) {
+    public Response createFlat(Context context, String password, String name) {
         currentContext = context;
         CreateFlatTask task = new CreateFlatTask();
         Response response = new Response();
-        task.execute(password);
+        task.execute(password,name);
         try {
             response = task.get();
         } catch (InterruptedException | ExecutionException e) {
@@ -104,6 +104,7 @@ public class FlatREST {
             Response response = new Response();
             StringBuilder total = new StringBuilder();
             String password = params[0];
+            String name = params[1];
 
             try {
                 URL url = new URL(Properties.SERVER_SECURE_URL + "flats/");
@@ -119,7 +120,7 @@ public class FlatREST {
                     urlConnection.setRequestProperty("Authorization", "");
                 }
                 OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
-                out.write("password=" + password);
+                out.write("password=" + password+"&name="+name);
                 out.close();
 
                 InputStream in = urlConnection.getInputStream();
