@@ -64,9 +64,9 @@ function runREST(app) {
         var authenticated = authenticator.authenticateUsingToken(req);
         if(authenticated) {
             var userID = req.params.id;
-            userDB.getUsername(userID,function(rows){
+            usersDB.getUsername(userID,function(rows){
                 if (rows.length > 0) {
-                    res.send(rows[0].name);
+                    res.send(rows[0].username);
                 } else {
                     res.sendStatus(404);
                 }
