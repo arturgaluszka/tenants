@@ -4,19 +4,28 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.tenantsproject.flatmates.R;
+import com.example.tenantsproject.flatmates.model.data.Product;
 
-public class MainList extends Activity {
+import java.io.Serializable;
+
+public class MainList extends Activity{
+    Product prod;
+    Intent in;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_menu);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
+
 
         int width = dm.widthPixels;
         int height = dm.heightPixels;
@@ -25,7 +34,12 @@ public class MainList extends Activity {
     }
 
     public void BuyNow(View view) {
-        startActivity(new Intent(this, BuyNowClick.class));
+        in = getIntent();
+        prod = (Product) in.getExtras().getSerializable("Object");
+        Intent i = new Intent(this, BuyNowClick.class);
+        i.putExtra("Object", prod);
+        Log.d("lol", prod.getDescription());
+        startActivity(i);
         finish();
 
     }

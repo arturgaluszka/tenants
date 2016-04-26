@@ -1,24 +1,28 @@
 package com.example.tenantsproject.flatmates.flat;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.tenantsproject.flatmates.R;
+import com.example.tenantsproject.flatmates.main_list.list.MainActivity;
 import com.example.tenantsproject.flatmates.model.rest.Response;
 import com.example.tenantsproject.flatmates.model.service.FlatService;
 
 public class AddFlat extends Activity {
 
     String pass ="";
+    String name = "";
     TextView txt1;
+    TextView txt2;
     FlatService fltServ;
-    Response res;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +60,18 @@ public class AddFlat extends Activity {
     }
 
     public void createFlat(View v){
+        fltServ = new FlatService();
         txt1 = (EditText) findViewById(R.id.editText8);
-        pass = txt1.getText().toString();
-        res = fltServ.createFlat(this, pass);
+        txt2 = (EditText) findViewById(R.id.editText9);
+        name = txt1.getText().toString();
+        pass = txt2.getText().toString();
+        Response res = fltServ.createFlat(this, pass, name);
+        switch (res.getMessageCode()) {
+            case Response.MESSAGE_OK:
+                this.finish();
+                break;
+            default:
+                Log.d("Bad", "Bad");
+        }
     }
 }

@@ -28,10 +28,10 @@ public class ViewFlat extends Activity {
 
         };
 
-        RowAdapterArchive adapterMain = new RowAdapterArchive(this,
-                R.layout.custom_row_archive, RowBean_data);
+       /* RowAdapterArchive adapterMain = new RowAdapterArchive(this,
+                R.layout.custom_row_archive, RowBean_data);*/
         userList = (ListView) findViewById(R.id.listView);
-        userList.setAdapter(adapterMain);
+       // userList.setAdapter(adapterMain);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);

@@ -35,7 +35,7 @@ function runREST(app) {
         if (authenticated) {
             authenticator.getLoggedUserID(req, function (id) {
                 usersDB.isFlatMember(id, flatID, function (rows) {
-                    if (rows[0].id != null) {
+                    if (rows.length>0 && rows[0].id != null) {
                         archiveDB.getProducts(flatID, userID, filter, page, function (rows) {
                             res.send(rows);
                         });

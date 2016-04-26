@@ -46,6 +46,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
+        android:text="Sign to Flat"
+        android:id="@+id/textView14"
+        android:textSize="18dp"
+        android:clickable="true"
+        android:onClick="addFlat"
+        android:textColor="#0b0a0a"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#c0d1df"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
         android:text="@string/add_flat"
         android:id="@+id/textView13"
         android:textSize="18dp"
@@ -101,27 +123,6 @@
         android:clickable="true"
         android:onClick="viewFlat"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#c0d1df"
-        android:layout_below="@+id/textView3"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="sans-serif-medium"
-        android:text="@string/del_flat"
-        android:id="@+id/textView8"
-        android:textSize="18dp"
-        android:clickable="true"
-        android:onClick="deleteFlat"
-        android:textColor="#0b0a0a"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp" />
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
