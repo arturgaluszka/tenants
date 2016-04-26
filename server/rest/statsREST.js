@@ -10,10 +10,10 @@ function runREST(app) {
             authenticator.getLoggedUserID(req, function (id) {
                 usersDB.isFlatMember(id, req.params.flatID, function (rows) {
                     if (rows[0].id != null) {
-                        statsDB.getValue(req.params.userID,req.params.flatID,function(rows){
+                        statsDB.getValue(req.params.userID, req.params.flatID, function (rows) {
                             var stats = rows;
-                            stats.user=parseInt(req.params.userID);
-                            stats.flat=parseInt(req.params.flatID);
+                            stats.user = parseInt(req.params.userID);
+                            stats.flat = parseInt(req.params.flatID);
                             res.send(stats);
                         });
                     } else {
@@ -35,7 +35,11 @@ function runREST(app) {
         if (authenticated) {
             authenticator.getLoggedUserID(req, function (id) {
                 usersDB.isFlatMember(id, flatID, function (rows) {
+<<<<<<< HEAD
                     if (rows.length>0 && rows[0].id != null) {
+=======
+                    if (rows.length > 0 && rows[0].id != null) {
+>>>>>>> 1985dbcc23d53789bad7d6b97df820382f7d2da3
                         archiveDB.getProducts(flatID, userID, filter, page, function (rows) {
                             res.send(rows);
                         });
