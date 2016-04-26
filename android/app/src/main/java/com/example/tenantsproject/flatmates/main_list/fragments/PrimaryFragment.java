@@ -3,9 +3,11 @@ package com.example.tenantsproject.flatmates.main_list.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +26,9 @@ import com.example.tenantsproject.flatmates.model.service.ProductService;
 import com.example.tenantsproject.flatmates.model.service.UserService;
 import com.example.tenantsproject.flatmates.security.Authenticator;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class PrimaryFragment extends ListFragment implements Updateable {
@@ -37,6 +41,7 @@ public class PrimaryFragment extends ListFragment implements Updateable {
     ArrayList<Product> RowBean_data = new ArrayList<>();
     boolean flag_loading;
     RowAdapter adapterMain;
+    Product prod;
 
     //TODO for Artur FILTERS not working
     @Nullable
@@ -75,9 +80,11 @@ public class PrimaryFragment extends ListFragment implements Updateable {
                 ProductService productService = new ProductService();
                 //TODO for Arur check reserver Product don't working
                 re = productService.reserveProduct(getContext(), RowBean_data.get(position));
+
                 switch (re.getMessageCode()) {
                     case Response.MESSAGE_OK:
                         Toast.makeText(getActivity(), "Added to my list", Toast.LENGTH_LONG).show();
+                        onUpdate();
                         break;
                     default:
                         Toast.makeText(getActivity(), "ERROR, Please check your internet connection", Toast.LENGTH_LONG).show();
@@ -91,8 +98,13 @@ public class PrimaryFragment extends ListFragment implements Updateable {
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            int arg2, long arg3) {
-                Toast.makeText(getActivity(), "On long click listener", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(getActivity(), MainList.class));
+                prod = RowBean_data.get(arg2);
+                Intent i = new Intent(getActivity(), MainList.class);
+                Bundle b = new Bundle();
+                b.putSerializable("Object", prod);
+                i.putExtras(b);
+                Log.d("Lol", prod.getDescription());
+                startActivity(i);
                 return true;
             }
         });
@@ -118,6 +130,7 @@ public class PrimaryFragment extends ListFragment implements Updateable {
     public void additems() {
         Response r5;
         r5 = productService.getFlatProducts(getActivity(), getMyActualFlat(), 0, MainActivity.FILTER, ++page);
+        Log.d(r5.toString(), r5.toString());
         products = (ArrayList<Product>) r5.getObject();
         if (!products.isEmpty()) {
             for (int i = 0; i < products.size(); i++) {

@@ -35,12 +35,12 @@ public class UserArchiveList extends ListFragment {
 
         };
         setHasOptionsMenu(true);
-        RowAdapterArchive adapterMain = new RowAdapterArchive(getActivity(),
-                R.layout.custom_row_archive, RowBean_data);
+      /*  RowAdapterArchive adapterMain = new RowAdapterArchive(getActivity(),
+                R.layout.custom_row_archive, RowBean_data);*/
         super.onActivityCreated(savedInstanceState);
         MainlistArch = (ListView) rootView.findViewById(R.id.MainArchiveList);
 
-        setListAdapter(adapterMain);
+      //  setListAdapter(adapterMain);
 
 
         return rootView;

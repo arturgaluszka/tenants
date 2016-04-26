@@ -9,13 +9,16 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.tenantsproject.flatmates.R;
+import com.example.tenantsproject.flatmates.model.data.Product;
 
-public class RowAdapterArchive extends ArrayAdapter<RowBeanArchive> {
+import java.util.ArrayList;
+
+public class RowAdapterArchive extends ArrayAdapter<Product> {
     Context context;
     int layoutResourceId;
-    RowBeanArchive data[] = null;
+    ArrayList<Product> data = new ArrayList<Product>();
 
-    public RowAdapterArchive(Context context, int layoutResourceId, RowBeanArchive[] data) {
+    public RowAdapterArchive(Context context, int layoutResourceId, ArrayList<Product> data) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
@@ -42,10 +45,10 @@ public class RowAdapterArchive extends ArrayAdapter<RowBeanArchive> {
             holder = (RowBeanHolder) row.getTag();
         }
 
-        RowBeanArchive object = data[position];
-        holder.txtTitle.setText(object.title);
+        Product object = data.get(position);
+        holder.txtTitle.setText(object.getDescription());
     //    holder.imgIcon.setImageResource(object.icon);
-        holder.price.setText(object.price);
+         holder.price.setText(String.valueOf(object.getPrice()));
 
         return row;
     }

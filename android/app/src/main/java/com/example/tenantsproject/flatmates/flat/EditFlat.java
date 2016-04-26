@@ -1,14 +1,27 @@
 package com.example.tenantsproject.flatmates.flat;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.tenantsproject.flatmates.R;
+import com.example.tenantsproject.flatmates.main_list.list.MainActivity;
+import com.example.tenantsproject.flatmates.model.rest.Response;
+import com.example.tenantsproject.flatmates.model.service.FlatService;
 
 public class EditFlat extends AppCompatActivity {
+
+    EditText txt1;
+    EditText txt2;
+    String login = "";
+    String password = "";
+    FlatService fltServ = new FlatService();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +46,27 @@ public class EditFlat extends AppCompatActivity {
     public void onHelp(View v) {
         registerForContextMenu(v);
         openContextMenu(v);
+    }
+
+    public void changePass(View v){
+        txt1 = (EditText) findViewById(R.id.editText11);
+        txt2 = (EditText) findViewById(R.id.editText12);
+        login = txt1.getText().toString();
+        password = txt2.getText().toString();
+
+        Response res1 = fltServ.changePassword(this, 3,login, password);
+        switch (res1.getMessageCode()) {
+            case Response.MESSAGE_OK:
+                Toast.makeText(this, "Pass was changed", Toast.LENGTH_LONG).show();
+                break;
+            default:
+                Toast.makeText(this, "Error", Toast.LENGTH_LONG).show();
+
+        }
+
+
+
+
     }
 
 }
