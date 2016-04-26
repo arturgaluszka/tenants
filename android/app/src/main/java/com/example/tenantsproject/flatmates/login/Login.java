@@ -10,10 +10,7 @@ import android.widget.TextView;
 import com.example.tenantsproject.flatmates.R;
 import com.example.tenantsproject.flatmates.main_list.list.MainActivity;
 import com.example.tenantsproject.flatmates.model.rest.Response;
-import com.example.tenantsproject.flatmates.model.service.UserService;
 import com.example.tenantsproject.flatmates.security.Authenticator;
-
-import java.util.ArrayList;
 
 public class Login extends AppCompatActivity {
     String login = "";
@@ -30,6 +27,7 @@ public class Login extends AppCompatActivity {
     }
 
 
+
     public void login(View v) {
         Authenticator authenticator = new Authenticator();
 
@@ -41,20 +39,8 @@ public class Login extends AppCompatActivity {
         Response res1 = authenticator.login(this, login, password);
         switch (res1.getMessageCode()) {
             case Response.MESSAGE_OK:
-                Response response;
-                UserService userService = new UserService();
-                response = userService.getUserFlats(this, getUserId());
-                ArrayList<Integer> pa;
-                pa = (ArrayList<Integer>) response.getObject();
-                if (pa.isEmpty()) {
-                    Intent intent = new Intent(this, Login_flat.class);
-                    startActivity(intent);
-                    finish();
-                } else {
-                    Intent intent = new Intent(this, MainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
                 break;
             default:
                 err.setText("Incorrect login or password");
@@ -65,14 +51,5 @@ public class Login extends AppCompatActivity {
     public void register(View v) {
         Intent intent = new Intent(this, Register.class);
         startActivity(intent);
-    }
-
-    public int getUserId() {
-        final Authenticator aut = new Authenticator();
-        final UserService userService = new UserService();
-        Response res;
-        res = userService.getUserID(this, aut.getLoggedInUserName(this));
-        int id = (int) res.getObject();
-        return id;
     }
 }

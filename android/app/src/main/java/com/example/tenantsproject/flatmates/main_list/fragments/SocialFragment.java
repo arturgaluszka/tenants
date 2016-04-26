@@ -66,7 +66,8 @@ public class SocialFragment extends ListFragment implements Updateable {
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            int arg2, long arg3) {
-                startActivity(new Intent(getActivity(), MyList.class));
+                Intent i = new Intent(getActivity(), MyList.class);
+                startActivity(i);
                 return true;
             }
         });

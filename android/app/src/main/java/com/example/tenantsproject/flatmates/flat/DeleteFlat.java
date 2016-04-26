@@ -1,19 +1,19 @@
-package com.example.tenantsproject.flatmates.main_list.list;
+package com.example.tenantsproject.flatmates.flat;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
-import android.view.View;
 
 import com.example.tenantsproject.flatmates.R;
 
-public class MyList extends Activity {
+public class DeleteFlat extends Activity {
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.my_list_menu);
+        setContentView(R.layout.activity_delete_flat);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -21,14 +21,7 @@ public class MyList extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .7), (int) (height * .5));
-    }
-
-    public void BuyNow(View view) {
-        Intent i = new Intent(this, BuyNowClick.class);
-        startActivity(i);
-        finish();
-
+        getWindow().setLayout((int) (width * .4), (int) (height * .4));
     }
 
     public boolean onTouchEvent(MotionEvent event) {
@@ -51,5 +44,4 @@ public class MyList extends Activity {
         // let the system handle the event
         return super.onTouchEvent(event);
     }
-
 }

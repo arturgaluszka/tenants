@@ -70,7 +70,7 @@ public class FlatService {
      * - MESSAGE_NOT_FOUND - flat not found <br>
      * - MESSAGE_UNAUTHORIZED -  user unauthorized <br>
      */
-    public Response getFlatID(Context context, String flatName) {
+    public Response getUserID(Context context, String flatName) {
         return flatREST.getFlatID(context, flatName);
     }
 
