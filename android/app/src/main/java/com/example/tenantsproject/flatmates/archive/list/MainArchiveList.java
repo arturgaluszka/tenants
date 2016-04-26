@@ -40,6 +40,7 @@ public class MainArchiveList extends ListFragment {
     TextView txt1;
     Statistics stat = new Statistics();
     boolean flag_loading;
+    double sum = 0;
 
 
     @Nullable
@@ -54,8 +55,8 @@ public class MainArchiveList extends ListFragment {
         txt1 = (TextView) rootView.findViewById(R.id.textView11);
         switch (rs1.getMessageCode()){
             case Response.MESSAGE_OK:
-                //stat.setSum((Double) rs1.getObject());
-                txt1.setText(String.valueOf(stat.getSum()));
+                sum = ((Statistics)rs1.getObject()).getSum();
+                txt1.setText(String.valueOf(sum));
                 break;
             default:
                 txt1.setText("sum");
