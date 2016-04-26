@@ -55,7 +55,12 @@ public class Flat extends Activity {
         return super.onContextItemSelected(item);
     }
 
-    public void addFlat(View v){
+    public void signToFlat(View v) {
+        Intent i = new Intent(this, SignToFlat.class);
+        startActivity(i);
+    }
+
+    public void addFlat(View v) {
         Intent i = new Intent(this, AddFlat.class);
         startActivity(i);
     }

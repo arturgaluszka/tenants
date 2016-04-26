@@ -50,7 +50,7 @@
         android:id="@+id/textView14"
         android:textSize="18dp"
         android:clickable="true"
-        android:onClick="addFlat"
+        android:onClick="signToFlat"
         android:textColor="#0b0a0a"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
