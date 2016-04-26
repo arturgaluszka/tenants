@@ -1,8 +1,6 @@
 package com.example.tenantsproject.flatmates.model.data;
 
-import java.io.Serializable;
-
-public class Product implements Serializable {
+public class Product {
     private int id;
     private int done;
     private double price;

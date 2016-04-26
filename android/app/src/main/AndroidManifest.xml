@@ -38,6 +38,7 @@
         <activity android:name=".login.Login" >
         </activity>
         <activity android:name=".login.Register" />
+        <activity android:name=".login.Login_flat" />
         <activity android:name=".login.Opening" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -70,6 +71,8 @@
         <activity android:name=".settings.user.Account" >
         </activity>
         <activity android:name=".flat.SignToFlat" >
+        </activity>
+        <activity android:name=".login.Register_flat" >
         </activity>
     </application>
 

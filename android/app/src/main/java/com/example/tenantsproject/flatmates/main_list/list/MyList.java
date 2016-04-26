@@ -25,8 +25,7 @@ public class MyList extends Activity {
     }
 
     public void BuyNow(View view) {
-        Intent i = new Intent(this, BuyNowClick.class);
-        startActivity(i);
+        startActivity(new Intent(this, BuyNowClick.class));
         finish();
 
     }
@@ -51,5 +50,4 @@ public class MyList extends Activity {
         // let the system handle the event
         return super.onTouchEvent(event);
     }
-
 }

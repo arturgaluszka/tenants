@@ -76,7 +76,7 @@ function runREST(app) {
         var authenticated = authenticator.authenticateUsingToken(req);
         if(authenticated) {
             var flatID = req.params.id;
-            flatsDB.getflatName(flatID,function(rows){
+            flatDB.getflatName(flatID,function(rows){
                 if (rows.length > 0) {
                     res.send(rows[0].name);
                 } else {
