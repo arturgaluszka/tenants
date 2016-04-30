@@ -20,7 +20,7 @@
             android:ems="10"
             android:id="@+id/editText"
             android:background="@drawable/edit_text_style"
-            android:hint="Flat name"
+            android:hint="@string/flat_name"
             android:layout_above="@+id/editText2"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="10dp"/>
