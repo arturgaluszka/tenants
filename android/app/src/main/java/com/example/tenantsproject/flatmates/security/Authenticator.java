@@ -32,6 +32,9 @@ public class Authenticator {
         if (response.getMessageCode() == Response.MESSAGE_OK) {
             SharedPreferences sharedPreferences = context.getSharedPreferences(AUTHENTICATION_PREFERENCES, Context.MODE_PRIVATE);
             sharedPreferences.edit().putString(USER_TOKEN, (String) response.getObject()).commit();
+        } else if(response.getMessageCode() == Response.MESSAGE_FORBIDDEN){
+            SharedPreferences sharedPreferences = context.getSharedPreferences(AUTHENTICATION_PREFERENCES, Context.MODE_PRIVATE);
+            sharedPreferences.edit().putString(USER_TOKEN, "0").commit();
         }
         return response;
     }
@@ -77,5 +80,19 @@ public class Authenticator {
         SharedPreferences sharedPreferences = context.getSharedPreferences(AUTHENTICATION_PREFERENCES, Context.MODE_PRIVATE);
         String token = "0";
         sharedPreferences.edit().putString(USER_TOKEN, token).commit();
+    }
+
+    /**
+     * retrieves logged in user name
+     * @param context Current context
+     * @return null if not logged in. Username otherwise
+     */
+    public String getLoggedInUserName(Context context){
+        String token = getUserToken(context);
+        if(token.startsWith("0")){
+            return null;
+        } else {
+            return token.substring(1);
+        }
     }
 }

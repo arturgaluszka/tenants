@@ -38,6 +38,7 @@
         <activity android:name=".login.Login" >
         </activity>
         <activity android:name=".login.Register" />
+        <activity android:name=".login.Login_flat" />
         <activity android:name=".login.Opening" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -45,36 +46,17 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".settings.others.Help" />
         <activity
             android:name=".settings.others.Settings"
             android:theme="@style/Theme.D1NoTitleDim" />
         <activity
-            android:name=".settings.user.Nickname"
-            android:theme="@style/Theme.D1NoTitleDim" />
-        <activity
-            android:name=".settings.user.Nick"
-            android:theme="@style/Theme.D1NoTitleDim" />
-        <activity
             android:name=".settings.user.Password"
-            android:theme="@style/Theme.D1NoTitleDim" />
-        <activity
-            android:name=".settings.user.Phone"
-            android:theme="@style/Theme.D1NoTitleDim" />
-        <activity
-            android:name=".settings.user.Meil"
-            android:theme="@style/Theme.D1NoTitleDim" />
-        <activity
-            android:name=".settings.others.Notification"
             android:theme="@style/Theme.D1NoTitleDim" />
         <activity
             android:name=".flat.Flat"
             android:theme="@style/Theme.D1NoTitleDim" />
         <activity
             android:name=".flat.AddFlat"
-            android:theme="@style/Theme.D1NoTitleDim" />
-        <activity
-            android:name=".flat.DeleteFlat"
             android:theme="@style/Theme.D1NoTitleDim" />
         <activity android:name=".flat.EditFlat" />
         <activity
@@ -87,6 +69,12 @@
             android:name=".settings.others.Statistics"
             android:theme="@style/Theme.D1NoTitleDim" />
         <activity android:name=".settings.user.Account" >
+        </activity>
+        <activity android:name=".flat.SignToFlat" >
+        </activity>
+        <activity android:name=".login.Register_flat" >
+        </activity>
+        <activity android:name=".main_list.list.RowAdaperMyList" >
         </activity>
     </application>
 

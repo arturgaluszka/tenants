@@ -108,6 +108,19 @@ public class ProductREST {
         return response;
     }
 
+    public Response buyProduct(Context context, Product product) {
+        currentContext = context;
+        BuyProductTask task = new BuyProductTask();
+        Response response = new Response();
+        task.execute(product);
+        try {
+            response = task.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.e("REST", "Can't run task: addProduct", e);
+        }
+        return response;
+    }
+
     private class AddProductTask extends AsyncTask<Product, Void, Response> {
 
         private HttpsURLConnection urlConnection;
@@ -396,6 +409,56 @@ public class ProductREST {
             } catch (IOException e) {
                 e.printStackTrace();
             } finally {
+                urlConnection.disconnect();
+            }
+            return response;
+        }
+    }
+
+    private class BuyProductTask extends AsyncTask<Product, Void, Response> {
+
+        private HttpsURLConnection urlConnection;
+
+        @Override
+        protected Response doInBackground(Product... params) {
+            Response response = new Response();
+            StringBuilder total = new StringBuilder();
+            Product product = params[0];
+
+            try {
+                URL url = new URL(Properties.SERVER_SECURE_URL + "products/"+product.getId()+"/purchase");
+                urlConnection = (HttpsURLConnection) url.openConnection();
+
+                urlConnection.setDoOutput(true);
+                urlConnection.setDoInput(true);
+                urlConnection.setRequestMethod("POST");
+
+                if (ProductREST.this.currentContext != null) {
+                    urlConnection.setRequestProperty("Authorization", Authenticator.getUserToken(currentContext));
+                } else {
+                    urlConnection.setRequestProperty("Authorization", "");
+                }
+                OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
+                Gson gson = new Gson();
+                String productJson = gson.toJson(product);
+                out.write("product=" + productJson);
+                out.close();
+
+//                InputStream in = urlConnection.getInputStream();
+
+//                BufferedReader r = new BufferedReader(new InputStreamReader(in));
+
+//                String line;
+//                while ((line = r.readLine()) != null) {
+//                    total.append(line);
+//                }
+                response.setMessageCode(urlConnection.getResponseCode());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+//                if (!total.toString().isEmpty()) {
+//                    response.setObject(Integer.valueOf(total.toString()));
+//                }
                 urlConnection.disconnect();
             }
             return response;

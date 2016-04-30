@@ -3,7 +3,13 @@
     <string name="title_activity_main2">Main2Activity</string>
     <string name="pass">Password</string>
     <string name="new_account">No account yet? Register!</string>
+    <string name="passLogFlat">   Flat password</string>
+    <string name="login_Flat">No flat yet? Register!</string>
+    <string name="login_to_flat"> LOGIN TO FLAT</string>
+    <string name="flat_name"> Flat name</string>
     <string name="name"> Name</string>
+    <string name="create_flat"> CREATE FLAT</string>
+    <string name="logg_flat"> Already have flat? Login!</string>
     <string name="conf_pass">Confirm password</string>
     <string name="logg">Already a member? Login!</string>
     <string name="create">Create</string>
@@ -31,6 +37,7 @@
     <string name="my_archive">My Archive</string>
     <string name="error">Error, Passwords are not the same</string>
     <string name="success">Success</string>
+    <string name="add_flat">Add Flat</string>
     
     <string-array name="language">
         <item>@string/select</item>

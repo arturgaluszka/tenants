@@ -32,4 +32,11 @@
     <string name="change">Zmień hasło</string>
     <string name="error">Błąd, hasła się różnią</string>
     <string name="success">Sukces :)</string>
+    <string name="add_flat">Dodaj mieszkanie</string>
+    <string name="create_flat">Stwórz mieszkanie</string>
+    <string name="flat_name">Nazwa mieszkania</string>
+    <string name="logg_flat">Posiadasz już mieszkanie? Zaloguj się!</string>
+    <string name="login_Flat">Nie posiadasz mieszkania? Stwórz nowe!</string>
+    <string name="login_to_flat">Zaloguj do mieszkania</string>
+    <string name="passLogFlat">Hasło do mieszkania</string>
 </resources>

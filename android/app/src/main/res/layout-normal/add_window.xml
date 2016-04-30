@@ -70,7 +70,7 @@
         android:id="@+id/textView5"
         android:textColor="#000000"
         android:textSize="18dp"
-
+        android:onClick="addProduct"
         android:layout_alignTop="@+id/textView6"
         android:layout_alignLeft="@+id/textView3"
         android:layout_alignStart="@+id/textView3"

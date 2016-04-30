@@ -26,7 +26,7 @@ public class Flat extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .7), (int) (height * .4));
+        getWindow().setLayout((int) (width * .7), (int) (height * .5));
     }
 
     final int CONTEXT_MENU_ADD = 1;
@@ -52,20 +52,16 @@ public class Flat extends Activity {
             Intent i = new Intent(this, EditFlat.class);
             startActivity(i);
         }
-        if (item.getTitle() == "Delete") {
-            Intent i = new Intent(this, DeleteFlat.class);
-            startActivity(i);
-        }
         return super.onContextItemSelected(item);
     }
 
-    public void addFlat(View v){
-        Intent i = new Intent(this, AddFlat.class);
+    public void signToFlat(View v) {
+        Intent i = new Intent(this, SignToFlat.class);
         startActivity(i);
     }
 
-    public void deleteFlat(View v){
-        Intent i = new Intent(this, DeleteFlat.class);
+    public void addFlat(View v) {
+        Intent i = new Intent(this, AddFlat.class);
         startActivity(i);
     }
 

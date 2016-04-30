@@ -9,14 +9,17 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.tenantsproject.flatmates.R;
+import com.example.tenantsproject.flatmates.model.data.Product;
 
-public class RowAdapter extends ArrayAdapter<RowBean> {
+import java.util.ArrayList;
+
+public class RowAdapter extends ArrayAdapter<Product> {
 
     Context context;
     int layoutResourceId;
-    RowBean data[] = null;
+    ArrayList<Product> data = new ArrayList<Product>();
 
-    public RowAdapter(Context context, int layoutResourceId, RowBean[] data) {
+    public RowAdapter(Context context, int layoutResourceId,ArrayList<Product> data) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
@@ -33,24 +36,35 @@ public class RowAdapter extends ArrayAdapter<RowBean> {
             row = inflater.inflate(layoutResourceId, parent, false);
 
             holder = new RowBeanHolder();
-          //  holder.imgIcon = (ImageView) row.findViewById(R.id.imgIcon);
             holder.txtTitle = (TextView) row.findViewById(R.id.txtTitle);
 
             row.setTag(holder);
+            if(data.get(position).getUser()!=0){
+            row.setBackgroundColor(0xff888888);
+            }else{
+                row.setBackgroundColor(0xffffffff);
+
+            }
         } else {
+            if(data.get(position).getUser()!=0){
+                row.setBackgroundColor(0xff888888);
+            }else{
+                row.setBackgroundColor(0xffffffff);
+
+            }
             holder = (RowBeanHolder) row.getTag();
+
         }
 
-        RowBean object = data[position];
-        holder.txtTitle.setText(object.title);
-//        holder.imgIcon.setImageResource(object.icon);
-
+        Product object = data.get(position);
+        holder.txtTitle.setText(object.getDescription());
 
         return row;
     }
 
     static class RowBeanHolder {
-  //      ImageView imgIcon;
         TextView txtTitle;
     }
+
+
 }

@@ -60,7 +60,21 @@ public class TabFragment extends Fragment {
         /**
          * Return fragment with respect to Position .
          */
-
+        @Override
+        public int getItemPosition(Object object) {
+            if (object instanceof PrimaryFragment) {
+                PrimaryFragment f = (PrimaryFragment) object;
+                if (f != null) {
+                    f.onUpdate();
+                }
+            } else if (object instanceof SocialFragment) {
+                SocialFragment f = (SocialFragment) object;
+                if (f != null) {
+                    f.onUpdate();
+                }
+            }
+            return super.getItemPosition(object);
+        }
         @Override
         public Fragment getItem(int position) {
             switch (position) {

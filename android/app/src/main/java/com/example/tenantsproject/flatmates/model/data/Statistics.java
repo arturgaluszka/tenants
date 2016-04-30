@@ -4,7 +4,7 @@ public class Statistics {
     private int id;
     private double sum;
     private int flat;
-    private String user;
+    private int user;
 
     public int getId() {
         return id;
@@ -30,11 +30,11 @@ public class Statistics {
         this.flat = flat;
     }
 
-    public String getUser() {
+    public int getUser() {
         return user;
     }
 
-    public void setUser(String user) {
+    public void setUser(int user) {
         this.user = user;
     }
 }

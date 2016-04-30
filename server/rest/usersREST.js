@@ -11,7 +11,7 @@ function runREST(app) {
                 res.send(token);
             },
             function (token) {
-                res.send(token);
+                res.sendStatus(403);
             });
     });
     app.post('/users/:userID/flat/', function (req, res) {
@@ -64,9 +64,9 @@ function runREST(app) {
         var authenticated = authenticator.authenticateUsingToken(req);
         if(authenticated) {
             var userID = req.params.id;
-            userDB.getUsername(userID,function(rows){
+            usersDB.getUsername(userID,function(rows){
                 if (rows.length > 0) {
-                    res.send(rows[0].name);
+                    res.send(rows[0].username);
                 } else {
                     res.sendStatus(404);
                 }
@@ -102,6 +102,25 @@ function runREST(app) {
                 res.sendStatus(404);
             }
         });
+    });
+    app.get('/users/:id/flats', function (req, res) {
+        var authenticated = authenticator.authenticateUsingToken(req);
+        if(authenticated) {
+            var userID = req.params.id;
+            authenticator.getLoggedUserID(req, function (id) {
+                if(id==userID){
+                    usersDB.getUserFlats(userID,function(rows){
+                        res.send(rows.map(function (row) {
+                            return row.flatID;
+                        }));
+                    });
+                }else{
+                    res.sendStatus(403)
+                }
+            });
+        } else {
+            res.sendStatus(401);
+        }
     });
 }
 exports.runREST = runREST;

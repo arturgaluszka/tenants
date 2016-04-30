@@ -8,31 +8,36 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.tenantsproject.flatmates.R;
 import com.example.tenantsproject.flatmates.main_list.list.MyList;
 import com.example.tenantsproject.flatmates.main_list.list.RowAdapter;
-import com.example.tenantsproject.flatmates.main_list.list.RowBean;
+import com.example.tenantsproject.flatmates.main_list.list.RowAdapterMyList;
 import com.example.tenantsproject.flatmates.model.data.Product;
 import com.example.tenantsproject.flatmates.model.rest.Response;
 import com.example.tenantsproject.flatmates.model.service.ProductService;
+import com.example.tenantsproject.flatmates.model.service.UserService;
+import com.example.tenantsproject.flatmates.security.Authenticator;
 
 import java.util.ArrayList;
 
 /**
  * Created by Ratan on 7/29/2015.
  */
-public class SocialFragment extends ListFragment {
+public class SocialFragment extends ListFragment implements Updateable {
     // my list
-    ListView Mainlist;
+    int page = 1;
+    boolean flag_loading;
     SwipeRefreshLayout swipeContainer;
     Response r3 = new Response();
-    ArrayList<Product> products = new ArrayList<Product>();
+    ArrayList<Product> products = new ArrayList<>();
+    ArrayList<Product> RowBean_data = new ArrayList<>();
     ProductService productService = new ProductService();
-    ListView social;
+    RowAdapterMyList adapterMain;
+
 
     @Nullable
     @Override
@@ -40,73 +45,17 @@ public class SocialFragment extends ListFragment {
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_messages, container,
                 false);
+        adapterMain = new RowAdapterMyList(getActivity(),
+                R.layout.custom_row, RowBean_data);
+        setListAdapter(adapterMain);
         swipeContainer = (SwipeRefreshLayout) rootView.findViewById(R.id.swiperefresh);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Toast toast = Toast.makeText(getActivity(), "Refreshed", Toast.LENGTH_LONG);
-                //TODO change parameters
-                r3 = productService.getFlatProducts(getActivity(), 2, 2, ProductService.FILTER_ALL, 1);
-                switch (r3.getMessageCode()) {
-                    case Response.MESSAGE_OK:
-                        products = (ArrayList<Product>) r3.getObject();
-                        break;
-                    case Response.MESSAGE_FORBIDDEN:
-                        toast = Toast.makeText(getActivity(), "ERROR, Please check your internet connection", Toast.LENGTH_LONG);
-                        toast.show();
-                        break;
-                    case Response.MESSAGE_UNAUTHORIZED:
-                        Toast toast1 = Toast.makeText(getActivity(), "ERROR, Please check your internet connection", Toast.LENGTH_LONG);
-                        toast1.show();
-                        break;
-                    default:
-                        Toast toast2 = Toast.makeText(getActivity(), "ERROR, Please check your internet connection", Toast.LENGTH_LONG);
-                        toast2.show();
-
-                }
-                RowBean RowBean_data[] = new RowBean[products.size()];
-                for (int i = 0; i < products.size(); i++) {
-                    RowBean_data[i] = new RowBean(R.drawable.avatar3, products.get(i).getDescription());
-
-                }
-                RowAdapter adapterMain = new RowAdapter(getActivity(),
-                        R.layout.custom_row, RowBean_data);
-                Mainlist = (ListView) rootView.findViewById(R.id.Mainlist);
-                setListAdapter(adapterMain);
-                toast.show();
-                swipeContainer.setRefreshing(false);
+                onUpdate();
             }
-
         });
-        //TODO change parameters
-        r3 = productService.getFlatProducts(getActivity(), 2, 2, ProductService.FILTER_ALL, 1);
-        switch (r3.getMessageCode()) {
-            case Response.MESSAGE_OK:
-                products = (ArrayList<Product>) r3.getObject();
-                break;
-            case Response.MESSAGE_FORBIDDEN:
-                Toast toast = Toast.makeText(getActivity(), "ERROR, Please check your internet connection", Toast.LENGTH_LONG);
-                toast.show();
-                break;
-            case Response.MESSAGE_UNAUTHORIZED:
-                Toast toast1 = Toast.makeText(getActivity(), "ERROR, Please check your internet connection", Toast.LENGTH_LONG);
-                toast1.show();
-                break;
-            default:
-                Toast toast2 = Toast.makeText(getActivity(), "ERROR, Please check your internet connection", Toast.LENGTH_LONG);
-                toast2.show();
-        }
-        RowBean RowBean_data[] = new RowBean[products.size()];
-        for (int i = 0; i < products.size(); i++) {
-            RowBean_data[i] = new RowBean(R.drawable.avatar3, products.get(i).getDescription());
-
-        }
-        RowAdapter adapterMain = new RowAdapter(getActivity(),
-                R.layout.custom_row, RowBean_data);
-        super.onActivityCreated(savedInstanceState);
-        Mainlist = (ListView) rootView.findViewById(R.id.social);
-        setListAdapter(adapterMain);
-
+        onUpdate();
         return rootView;
     }
 
@@ -118,10 +67,101 @@ public class SocialFragment extends ListFragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            int arg2, long arg3) {
-                startActivity(new Intent(getActivity(), MyList.class));
+                Intent i = new Intent(getActivity(), MyList.class);
+                startActivity(i);
                 return true;
             }
         });
+        getListView().setOnScrollListener(new AbsListView.OnScrollListener() {
 
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+
+
+            }
+
+            public void onScroll(AbsListView view, int firstVisibleItem,
+                                 int visibleItemCount, int totalItemCount) {
+
+                if (firstVisibleItem + visibleItemCount == totalItemCount && totalItemCount != 0) {
+                    if (flag_loading == false) {
+                        flag_loading = true;
+                        uploadInBacground();
+                    }
+                }
+            }
+        });
+    }
+
+    public void additems() {
+        Response r5;
+        r5 = productService.getFlatProducts(getActivity(), 2, getUserId(), ProductService.FILTER_ALL, ++page);
+        products = (ArrayList<Product>) r5.getObject();
+        if (!products.isEmpty()) {
+
+            for (int i = 0; i < products.size(); i++) {
+                RowBean_data.add(products.get(i));
+
+            }
+            adapterMain.notifyDataSetChanged();
+            flag_loading = false;
+        }
+        flag_loading = false;
+    }
+
+    public int getUserId() {
+        final Authenticator aut = new Authenticator();
+        final UserService userService = new UserService();
+        Response res;
+        res = userService.getUserID(getContext(), aut.getLoggedInUserName(getContext()));
+        int id = (int) res.getObject();
+        return id;
+    }
+
+    public int getMyActualFlat() {
+        int actualFlatnumber;
+        Response response;
+        UserService userService = new UserService();
+        response = userService.getUserFlats(getContext(), getUserId());
+        ArrayList<Integer> pa;
+        pa = (ArrayList<Integer>) response.getObject();
+        actualFlatnumber = pa.get(0);
+        return actualFlatnumber;
+    }
+    public void uploadInBacground() {
+        getListView().post(new Runnable() {
+            @Override
+            public void run() {
+                additems();
+            }
+        });
+    }
+
+    public void onUpdate() {
+        Response r4;
+        r4 = productService.getFlatProducts(getActivity(), getMyActualFlat(), getUserId(), ProductService.FILTER_ALL, 1);
+        switch (r4.getMessageCode()) {
+            case Response.MESSAGE_OK:
+                page = 2;
+                RowBean_data.clear();
+                products.clear();
+                products = (ArrayList<Product>) r4.getObject();
+                for (int i = 0; i < products.size(); i++) {
+                    RowBean_data.add(products.get(i));
+                }
+                r4 = productService.getFlatProducts(getActivity(), getMyActualFlat(), getUserId(), ProductService.FILTER_ALL, 2);
+                if (!products.isEmpty()) {
+                    products = (ArrayList<Product>) r4.getObject();
+                    for (int i = 0; i < products.size(); i++) {
+                        RowBean_data.add(products.get(i));
+                    }
+                }
+                setHasOptionsMenu(true);
+                adapterMain.notifyDataSetChanged();
+                swipeContainer.setRefreshing(false);
+                break;
+            default:
+                Toast.makeText(getActivity(), "ERROR, Please check your internet connection", Toast.LENGTH_LONG).show();
+                swipeContainer.setRefreshing(false);
+        }
     }
 }

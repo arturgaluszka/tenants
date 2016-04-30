@@ -106,11 +106,11 @@ public class ProductService {
      * ErrorCodes: <br>
      * - MESSAGE_OK - bought<br>
      * - MESSAGE_NOT_FOUND - product not found <br>
-     * - MESSAGE_CONFLICT - somebody already bought after Product has been loaded <br>
+     * - MESSAGE_CONFLICT - somebody already bought/changed after Product has been loaded <br>
      * - MESSAGE_UNAUTHORIZED -  user unauthorized <br>
      */
     public Response buyProduct(Context context, Product product) {
-        throw new UnsupportedOperationException();
+        return productREST.buyProduct(context,product);
     }
 
     /**
@@ -129,21 +129,5 @@ public class ProductService {
     public Response unreserveProduct(Context context, Product product) {
        return productREST.removeFromUserList(context,product);
     }
-
-    /**
-     * Cancels buy of a given product
-     *
-     * @param context Current context
-     * @param product Product to cancel
-     * @return Response object
-     * ErrorCodes: <br>
-     * - MESSAGE_OK - cancelled <br>
-     * - MESSAGE_NOT_FOUND - product not found <br>
-     * - MESSAGE_UNAUTHORIZED -  user unauthorized <br>
-     */
-    public Response cancelBuy(Context context, Product product) {
-        throw new UnsupportedOperationException();
-    }
-
 
 }
