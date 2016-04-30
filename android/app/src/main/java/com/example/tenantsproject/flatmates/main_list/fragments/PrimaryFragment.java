@@ -87,15 +87,11 @@ public class PrimaryFragment extends ListFragment implements Updateable {
                         onUpdate();
                         break;
                     default:
-<<<<<<< HEAD
                         if (RowBean_data.get(position).getUser() != 0) {
                             Toast.makeText(getActivity(), "Product already reserved", Toast.LENGTH_LONG).show();
                         } else {
                             Toast.makeText(getActivity(), "ERROR, Please check your internet connection", Toast.LENGTH_LONG).show();
                         }
-=======
-                        Toast.makeText(getActivity(), "ERROR, Please check your internet connection", Toast.LENGTH_LONG).show();
->>>>>>> e1a3dda09abc260a54f0847185cef34790a24c01
                 }
             }
 
@@ -132,7 +128,6 @@ public class PrimaryFragment extends ListFragment implements Updateable {
                 }
             }
         });
-<<<<<<< HEAD
 
     }
 
@@ -186,59 +181,6 @@ public class PrimaryFragment extends ListFragment implements Updateable {
 
     }
 
-=======
-
-    }
-
-    public void additems() {
-        Response r5;
-        r5 = productService.getFlatProducts(getActivity(), getMyActualFlat(), 0, MainActivity.FILTER, ++page);
-        Log.d(r5.toString(), r5.toString());
-        products = (ArrayList<Product>) r5.getObject();
-        if (!products.isEmpty()) {
-            for (int i = 0; i < products.size(); i++) {
-                RowBean_data.add(products.get(i));
-
-            }
-            adapterMain.notifyDataSetChanged();
-            flag_loading = false;
-        }
-        flag_loading = false;
-    }
-
-    public void uploadInBacground() {
-        getListView().post(new Runnable() {
-            @Override
-            public void run() {
-                additems();
-            }
-        });
-    }
-
-    public int getMyActualFlat() {
-        int actualFlatnumber;
-        Response response;
-        UserService userService = new UserService();
-        response = userService.getUserFlats(getContext(), getUserId());
-        ArrayList<Integer> pa;
-        pa = (ArrayList<Integer>) response.getObject();
-        actualFlatnumber = pa.get(0);
-        return actualFlatnumber;
-    }
-
-    public int getUserId() {
-        final Authenticator aut = new Authenticator();
-        final UserService userService = new UserService();
-        Response res;
-        res = userService.getUserID(getContext(), aut.getLoggedInUserName(getContext()));
-        int id = (int) res.getObject();
-        return id;
-    }
-public void onUpdateInBacground(){
-
-
-}
->>>>>>> e1a3dda09abc260a54f0847185cef34790a24c01
     public void onUpdate() {
         Response r4;
         r4 = productService.getFlatProducts(getActivity(), getMyActualFlat(), 0, MainActivity.FILTER, 1);
