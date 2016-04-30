@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 var flatsDB = require('./../db/flats');
 var authenticator = require('./../utils/authenticator');
 var usersDB = require('./../db/users');
@@ -20,26 +21,49 @@ function runREST(app) {
         }
     });
     app.get('/flats/:flatID/users', function (req, res) {
+=======
+var statsDB = require('./../db/stats');
+var archiveDB = require('./../db/archive');
+var usersDB = require('./../db/users');
+var authenticator = require('./../utils/authenticator');
+function runREST(app) {
+    //getStats
+    app.get('/stats/user/:userID/flat/:flatID', function (req, res) {
+>>>>>>> e1a3dda09abc260a54f0847185cef34790a24c01
         var authenticated = authenticator.authenticateUsingToken(req);
         if (authenticated) {
             authenticator.getLoggedUserID(req, function (id) {
                 usersDB.isFlatMember(id, req.params.flatID, function (rows) {
+<<<<<<< HEAD
                     if (rows[0].id != null) {
                         flatsDB.getMembers(req.params.flatID, function (rows) {
                             res.send(rows.map(function (row) {
                                 return row.userID;
                             }));
                         })
+=======
+                    if (rows.length>0 && rows[0].id != null) {
+                        statsDB.getValue(req.params.userID, req.params.flatID, function (rows) {
+                            var stats = rows;
+                            stats.user = parseInt(req.params.userID);
+                            stats.flat = parseInt(req.params.flatID);
+                            res.send(stats);
+                        });
+>>>>>>> e1a3dda09abc260a54f0847185cef34790a24c01
                     } else {
                         res.sendStatus(403);
                     }
                 });
             });
+<<<<<<< HEAD
 
+=======
+>>>>>>> e1a3dda09abc260a54f0847185cef34790a24c01
         } else {
             res.sendStatus(401)
         }
     });
+<<<<<<< HEAD
     app.put('/flats/:id/password', function (req, res) {
         var flatID = req.params.id;
         var oldPassword = req.body.oldPassword;
@@ -85,6 +109,29 @@ function runREST(app) {
             });
         } else {
             res.sendStatus(401);
+=======
+    //getArchivalProducts
+    app.get('/archive/flat/:id/user/:userID/filter/:filter/page/:page', function (req, res) {
+        var flatID = req.params.id;
+        var userID = req.params.userID;
+        var filter = req.params.filter;
+        var page = req.params.page;
+        var authenticated = authenticator.authenticateUsingToken(req);
+        if (authenticated) {
+            authenticator.getLoggedUserID(req, function (id) {
+                usersDB.isFlatMember(id, flatID, function (rows) {
+                    if (rows.length>0 && rows[0].id != null) {
+                        archiveDB.getProducts(flatID, userID, filter, page, function (rows) {
+                            res.send(rows);
+                        });
+                    } else {
+                        res.sendStatus(403);
+                    }
+                });
+            });
+        } else {
+            res.sendStatus(401)
+>>>>>>> e1a3dda09abc260a54f0847185cef34790a24c01
         }
     });
 }
