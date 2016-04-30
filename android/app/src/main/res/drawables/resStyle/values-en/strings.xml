@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="eng">English</string>
+    <string name="pol">Polish</string>
+    <string name="select">Select</string>
+    <string name="back">Back</string>
+    <string name="change_lang">Change Language</string>
+    <string name="acc_set">Account Settings</string>
+    <string name="app_name">Flatmates</string>
+    <string name="conf_pass">Confirm password</string>
+    <string name="create">Create</string>
+    <string name="logg">Already a member? Login!</string>
+    <string name="name">Name</string>
+    <string name="new_account">No account yet? Register!</string>
+    <string name="pass">Password</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="change_pass">Change Password (press old Password)</string>
+    <string name="logout">Logout</string>
+    <string name="acc">Account</string>
+    <string name="flat">Flat</string>
+    <string name="new_pass">Press New Password</string>
+    <string name="del_flat">Delete Flat</string>
+    <string name="ed_flat">Edit Flat</string>
+    <string name="flat_set">Flat Settings</string>
+    <string name="vw_flat">View Flat</string>
+    <string name="info">Information</string>
+    <string name="main_list">Main List</string>
+    <string name="my_archive">My Archive</string>
+    <string name="opt">Options</string>
+    <string name="login">Login</string>
+    <string name="my_list">My List</string>
+    <string name="change">Change Password</string>
+    <string name="error">Error, Passwords are not the same</string>
+    <string name="success">Success</string>
+</resources>
