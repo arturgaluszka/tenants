@@ -215,6 +215,28 @@ block content
             td List of numbers (ID's)
             td
                 p 403 - cant check other users flats
+        tr
+            td /users/:id/language
+            td get
+            td
+                p path:
+                p id - user ID
+            td Retrieves user's language
+            td string
+            td
+                p 403 - cant check other users language
+        tr
+            td /users/:id/language
+            td put
+            td
+                p path:
+                p id - user ID
+                p body:
+                p language - users new languae
+            td Changes users language
+            td string
+            td
+                p 403 - cant change other users language
 
     h2 flats
     table(border=1)

@@ -121,6 +121,29 @@ function getUserFlats(userID,callback){
             console.log('Error while performing Query.' + err);
     });
 }
+function getUserLanguage(userID,callback){
+    connection.query('SELECT language FROM users WHERE id='+userID, function (err, rows, fields) {
+        if (!err) {
+            callback(rows);
+        }
+        else
+            console.log('Error while performing Query.' + err);
+    });
+}
+function changeUserLanguage(userID, language ,callback){
+    var a = 'UPDATE users SET ' +
+        'language="' + language+ '"'+
+        ' WHERE id=' + userID;
+    connection.query(a, function (err, rows, fields) {
+        if (!err) {
+            callback();
+            console.log("Updated user language, id=" + userID);
+        }
+        else
+            console.log('Error while performing Query.' + err);
+
+    });
+}
 
 exports.matchPasswordForUser = matchPasswordForUser;
 exports.matchPasswordForFlat = matchPasswordForFlat;
@@ -132,3 +155,5 @@ exports.getUsername = getUserName;
 exports.changePassword = changePassword;
 exports.isFlatMember = isFlatMember;
 exports.getUserFlats = getUserFlats;
+exports.getUserLanguage = getUserLanguage;
+exports.changeUserLanguage=changeUserLanguage;
