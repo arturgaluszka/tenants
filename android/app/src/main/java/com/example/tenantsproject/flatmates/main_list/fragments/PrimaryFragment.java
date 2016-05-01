@@ -87,11 +87,7 @@ public class PrimaryFragment extends ListFragment implements Updateable {
                         onUpdate();
                         break;
                     default:
-                        if (RowBean_data.get(position).getUser() != 0) {
-                            Toast.makeText(getActivity(), "Product already reserved", Toast.LENGTH_LONG).show();
-                        } else {
-                            Toast.makeText(getActivity(), "ERROR, Please check your internet connection", Toast.LENGTH_LONG).show();
-                        }
+                        Toast.makeText(getActivity(), "ERROR, Please check your internet connection", Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -175,12 +171,10 @@ public class PrimaryFragment extends ListFragment implements Updateable {
         int id = (int) res.getObject();
         return id;
     }
+public void onUpdateInBacground(){
 
-    public void onUpdateInBacground() {
 
-
-    }
-
+}
     public void onUpdate() {
         Response r4;
         r4 = productService.getFlatProducts(getActivity(), getMyActualFlat(), 0, MainActivity.FILTER, 1);

@@ -36,35 +36,24 @@ public class RowAdapter extends ArrayAdapter<Product> {
             row = inflater.inflate(layoutResourceId, parent, false);
 
             holder = new RowBeanHolder();
+            //  holder.imgIcon = (ImageView) row.findViewById(R.id.imgIcon);
             holder.txtTitle = (TextView) row.findViewById(R.id.txtTitle);
 
             row.setTag(holder);
-            if(data.get(position).getUser()!=0){
-            row.setBackgroundColor(0xff888888);
-            }else{
-                row.setBackgroundColor(0xffffffff);
-
-            }
         } else {
-            if(data.get(position).getUser()!=0){
-                row.setBackgroundColor(0xff888888);
-            }else{
-                row.setBackgroundColor(0xffffffff);
-
-            }
             holder = (RowBeanHolder) row.getTag();
-
         }
 
         Product object = data.get(position);
         holder.txtTitle.setText(object.getDescription());
+//        holder.imgIcon.setImageResource(object.icon);
+
 
         return row;
     }
 
     static class RowBeanHolder {
+        //      ImageView imgIcon;
         TextView txtTitle;
     }
-
-
 }
