@@ -13,13 +13,13 @@ import com.example.tenantsproject.flatmates.model.data.Product;
 
 import java.util.ArrayList;
 
-public class RowAdapter extends ArrayAdapter<Product> {
+public class RowAdapterMyList extends ArrayAdapter<Product> {
 
     Context context;
     int layoutResourceId;
     ArrayList<Product> data = new ArrayList<Product>();
 
-    public RowAdapter(Context context, int layoutResourceId,ArrayList<Product> data) {
+    public RowAdapterMyList(Context context, int layoutResourceId,ArrayList<Product> data) {
         super(context, layoutResourceId, data);
         this.layoutResourceId = layoutResourceId;
         this.context = context;
@@ -39,19 +39,9 @@ public class RowAdapter extends ArrayAdapter<Product> {
             holder.txtTitle = (TextView) row.findViewById(R.id.txtTitle);
 
             row.setTag(holder);
-            if(data.get(position).getUser()!=0){
-            row.setBackgroundColor(0xff888888);
-            }else{
-                row.setBackgroundColor(0xffffffff);
 
-            }
         } else {
-            if(data.get(position).getUser()!=0){
-                row.setBackgroundColor(0xff888888);
-            }else{
-                row.setBackgroundColor(0xffffffff);
 
-            }
             holder = (RowBeanHolder) row.getTag();
 
         }
