@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <string name="add_flat">Add Flat</string>
+    <string name="create_flat">Create Flat</string>
+    <string name="flat_name">Flat name</string>
+    <string name="logg_flat">Already have flat? Login!</string>
+    <string name="login_Flat">No flat yet? Register!</string>
+    <string name="login_to_flat">Login to Flat</string>
+    <string name="passLogFlat">Flat password</string>
 </resources>

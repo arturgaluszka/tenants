@@ -31,7 +31,7 @@ public class Add extends Activity {
         int height = dm.heightPixels;
 
 
-        getWindow().setLayout((int) (width * .4), (int) (height * .2));
+        getWindow().setLayout((int) (width * .7), (int) (height * .3));
     }
 
     public boolean onTouchEvent(MotionEvent event) {
