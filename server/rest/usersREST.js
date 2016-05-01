@@ -122,5 +122,42 @@ function runREST(app) {
             res.sendStatus(401);
         }
     });
+    app.get('/users/:id/language',function(req,res){
+        var authenticated = authenticator.authenticateUsingToken(req);
+        if(authenticated) {
+            var userID = req.params.id;
+            authenticator.getLoggedUserID(req, function (id) {
+                if(id==userID){
+                    usersDB.getUserLanguage(userID,function(rows){
+                        res.send(rows[0].language);
+                    });
+                }else{
+                    res.sendStatus(403)
+                }
+            });
+        } else {
+            res.sendStatus(401);
+        }
+    });
+    app.put('/users/:id/language', function (req, res) {
+        var userID = req.params.id;
+        var language = req.body.language;
+        var authenticated = authenticator.authenticateUsingToken(req);
+        if(authenticated) {
+            var userID = req.params.id;
+            authenticator.getLoggedUserID(req, function (id) {
+                if(id==userID){
+                    usersDB.changeUserLanguage(userID,language,function(rows){
+                        res.sendStatus(200);
+                    });
+                }else{
+                    res.sendStatus(403)
+                }
+            });
+        } else {
+            res.sendStatus(401);
+        }
+
+    });
 }
 exports.runREST = runREST;

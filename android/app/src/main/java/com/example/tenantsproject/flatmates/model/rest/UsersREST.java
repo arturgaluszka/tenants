@@ -129,6 +129,32 @@ public class UsersREST {
         }
         return response;
     }
+
+    public Response changeLanguage(Context context, int userID, String language) {
+        currentContext = context;
+        ChangeLanguageTask task = new ChangeLanguageTask();
+        Response response = new Response();
+        task.execute(String.valueOf(userID),language);
+        try {
+            response = task.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.e("REST", "Can't run task: changeLanguage", e);
+        }
+        return response;
+    }
+    public Response getLanguage(Context context, int userID) {
+        currentContext = context;
+       GetLanguageTask task = new GetLanguageTask();
+        Response response = new Response();
+        task.execute(userID);
+        try {
+            response = task.get();
+        } catch (InterruptedException | ExecutionException e) {
+            Log.e("REST", "Can't run task: getUserFlats", e);
+        }
+        return response;
+    }
+
     private class LoginTask extends AsyncTask<String, Void, Response> {
 
         private HttpsURLConnection urlConnection;
@@ -485,6 +511,90 @@ public class UsersREST {
                     }.getType();
                     flats = new Gson().fromJson(total.toString(), listType);
                     response.setObject(flats);
+                }
+                urlConnection.disconnect();
+            }
+            return response;
+        }
+    }
+    private class ChangeLanguageTask extends AsyncTask<String, Void, Response> {
+
+        private HttpsURLConnection urlConnection;
+
+        @Override
+        protected Response doInBackground(String... params) {
+            Response response = new Response();
+            StringBuilder total = new StringBuilder();
+            String userID = params[0];
+            String language = params[1];
+            try {
+                URL url = new URL(Properties.SERVER_SECURE_URL + "users/" + userID + "/language/");
+                urlConnection = (HttpsURLConnection) url.openConnection();
+
+                urlConnection.setDoOutput(true);
+                urlConnection.setDoInput(true);
+                urlConnection.setRequestMethod("PUT");
+
+                if(UsersREST.this.currentContext!=null){
+                    urlConnection.setRequestProperty("Authorization",Authenticator.getUserToken(currentContext));
+                } else{
+                    urlConnection.setRequestProperty("Authorization", "");
+                }
+                OutputStreamWriter out = new OutputStreamWriter(urlConnection.getOutputStream());
+                out.write("userID=" + userID + "&language=" + language);
+                out.close();
+
+                response.setMessageCode(urlConnection.getResponseCode());
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+
+                urlConnection.disconnect();
+            }
+            return response;
+        }
+    }
+
+    private class GetLanguageTask extends AsyncTask<Integer, Void, Response> {
+
+        private HttpsURLConnection urlConnection;
+
+        @Override
+        protected Response doInBackground(Integer... params) {
+            Response response = new Response();
+            StringBuilder total = new StringBuilder();
+            Integer userID = params[0];
+
+            try {
+                URL url = new URL(Properties.SERVER_SECURE_URL + "users/" + userID+"/language");
+                urlConnection = (HttpsURLConnection) url.openConnection();
+
+                urlConnection.setDoOutput(false);
+                urlConnection.setDoInput(true);
+                urlConnection.setRequestMethod("GET");
+
+                if(UsersREST.this.currentContext!=null){
+                    urlConnection.setRequestProperty("Authorization",Authenticator.getUserToken(currentContext));
+                } else{
+                    urlConnection.setRequestProperty("Authorization", "");
+                }
+
+                response.setMessageCode(urlConnection.getResponseCode());
+                if(response.getMessageCode()==Response.MESSAGE_OK) {
+                    InputStream in = urlConnection.getInputStream();
+
+                    BufferedReader r = new BufferedReader(new InputStreamReader(in));
+
+                    String line;
+                    while ((line = r.readLine()) != null) {
+                        total.append(line);
+                    }
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if(!total.toString().isEmpty()){
+                    response.setObject(total.toString());
                 }
                 urlConnection.disconnect();
             }

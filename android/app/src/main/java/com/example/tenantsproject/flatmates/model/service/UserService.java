@@ -90,7 +90,7 @@ public class UserService {
      */
     //TODO: make this return user object
     public Response getUser(Context context, int userID) {
-        return usersREST.getUser(context,userID);
+        return usersREST.getUser(context, userID);
     }
 
     /**
@@ -106,7 +106,7 @@ public class UserService {
      */
     public Response createUser(Context context,String username, String password) {
         String encryptedPassword = String.valueOf(Hex.encodeHex(DigestUtils.sha1(password)));
-        return usersREST.createUser(context,username,encryptedPassword);
+        return usersREST.createUser(context, username, encryptedPassword);
     }
 
     /**
@@ -140,5 +140,12 @@ public class UserService {
         return usersREST.getUserFlats(context, userID);
     }
 
+    public Response changeLanguage(Context context, int userID, String language){
+        return usersREST.changeLanguage(context,userID,language);
+    }
+
+    public Response getLanguage(Context context,int userID){
+        return usersREST.getLanguage(context,userID);
+    }
 
 }
