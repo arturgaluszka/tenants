@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.jacob6.tabbed2"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="15"
+        android:targetSdkVersion="23" />
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/icon1"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+        <activity android:name="com.example.tenantsproject.flatmates.main_list.list.MainActivity" />
+        <activity
+            android:name="com.example.tenantsproject.flatmates.main_list.list.Add"
+            android:theme="@style/Theme.D1NoTitleDim" />
+        <activity
+            android:name="com.example.tenantsproject.flatmates.main_list.list.SecondActivity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.example.tenantsproject.flatmates.main_list.list.MainList"
+            android:theme="@style/Theme.D1NoTitleDim" />
+        <activity
+            android:name="com.example.tenantsproject.flatmates.main_list.list.BuyNowClick"
+            android:theme="@style/Theme.D1NoTitleDim" />
+        <activity
+            android:name="com.example.tenantsproject.flatmates.main_list.list.MyList"
+            android:theme="@style/Theme.D1NoTitleDim" />
+        <activity
+            android:name="com.example.tenantsproject.flatmates.archive.list.MyArchiveList"
+            android:theme="@style/Theme.D1NoTitleDim" />
+        <activity android:name="com.example.tenantsproject.flatmates.archive.list.Archives" />
+        <activity
+            android:name="com.example.tenantsproject.flatmates.archive.list.MyArchiveListMenu"
+            android:theme="@style/Theme.D1NoTitleDim" />
+        <activity android:name="com.example.tenantsproject.flatmates.login.Login" >
+        </activity>
+        <activity android:name="com.example.tenantsproject.flatmates.login.Register" />
+        <activity android:name="com.example.tenantsproject.flatmates.login.Login_flat" />
+        <activity android:name="com.example.tenantsproject.flatmates.login.Opening" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.example.tenantsproject.flatmates.settings.others.Settings"
+            android:theme="@style/Theme.D1NoTitleDim" />
+        <activity
+            android:name="com.example.tenantsproject.flatmates.settings.user.Password"
+            android:theme="@style/Theme.D1NoTitleDim" />
+        <activity
+            android:name="com.example.tenantsproject.flatmates.flat.Flat"
+            android:theme="@style/Theme.D1NoTitleDim" />
+        <activity
+            android:name="com.example.tenantsproject.flatmates.flat.AddFlat"
+            android:theme="@style/Theme.D1NoTitleDim" />
+        <activity android:name="com.example.tenantsproject.flatmates.flat.EditFlat" />
+        <activity
+            android:name="com.example.tenantsproject.flatmates.flat.ViewFlat"
+            android:theme="@style/Theme.D1NoTitleDim" />
+        <activity
+            android:name="com.example.tenantsproject.flatmates.main_list.list.Information"
+            android:theme="@style/Theme.D1NoTitleDim" />
+        <activity
+            android:name="com.example.tenantsproject.flatmates.settings.others.Statistics"
+            android:theme="@style/Theme.D1NoTitleDim" />
+        <activity android:name="com.example.tenantsproject.flatmates.settings.user.Account" >
+        </activity>
+        <activity android:name="com.example.tenantsproject.flatmates.flat.SignToFlat" >
+        </activity>
+        <activity android:name="com.example.tenantsproject.flatmates.login.Register_flat" >
+        </activity>
+        <activity android:name="com.example.tenantsproject.flatmates.main_list.list.RowAdaperMyList" >
+        </activity>
+    </application>
+
+</manifest>
