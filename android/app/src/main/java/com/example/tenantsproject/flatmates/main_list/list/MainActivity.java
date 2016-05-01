@@ -122,15 +122,15 @@ public class MainActivity extends AppCompatActivity {
         //registering popup with OnMenuItemClickListener
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.all) {
+                if (item.getTitle().equals("All")) {
                     FILTER = productService.FILTER_ALL;
                     TabFragment.viewPager.getAdapter().notifyDataSetChanged();
                 }
-                if (item.getItemId() == R.id.active) {
+                if (item.getTitle().equals("Active")) {
                     FILTER = productService.FILTER_ACTIVE;
                     TabFragment.viewPager.getAdapter().notifyDataSetChanged();
                 }
-                if (item.getItemId() == R.id.reserved) {
+                if (item.getTitle().equals("Reserved")) {
                     FILTER = productService.FILTER_RESERVED;
                     TabFragment.viewPager.getAdapter().notifyDataSetChanged();
                 }
@@ -156,7 +156,6 @@ public class MainActivity extends AppCompatActivity {
                     Authenticator at = new Authenticator();
                     at.logOut(MainActivity.this);
                     finish();
-                    startActivity(new Intent(getApplicationContext(), Login.class));
 
                 }
 

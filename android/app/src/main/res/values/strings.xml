@@ -38,11 +38,6 @@
     <string name="error">Error, Passwords are not the same</string>
     <string name="success">Success</string>
     <string name="add_flat">Add Flat</string>
-    <string name="add">Add</string>
-    <string name="add_item">Add item</string>
-    <string name="all">All</string>
-    <string name="reserved">Reserved</string>
-    <string name="active">Active</string>
     
     <string-array name="language">
         <item>@string/select</item>

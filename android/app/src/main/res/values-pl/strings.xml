@@ -39,9 +39,4 @@
     <string name="login_Flat">Nie posiadasz mieszkania? Stwórz nowe!</string>
     <string name="login_to_flat">Zaloguj do mieszkania</string>
     <string name="passLogFlat">Hasło do mieszkania</string>
-    <string name="add">Dodaj</string>
-    <string name="add_item">Dodaj rzecz</string>
-    <string name="active">Aktywne</string>
-    <string name="all">Wszystkie</string>
-    <string name="reserved">Zarezerwowane</string>
 </resources>
