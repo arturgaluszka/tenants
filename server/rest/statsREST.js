@@ -12,8 +12,8 @@ function runREST(app) {
                     if (rows.length>0 && rows[0].id != null) {
                         statsDB.getValue(req.params.userID, req.params.flatID, function (rows) {
                             var stats = rows;
-                            stats.userID = parseInt(req.params.userID);
-                            stats.flatID = parseInt(req.params.flatID);
+                            stats.user = parseInt(req.params.userID);
+                            stats.flat = parseInt(req.params.flatID);
                             res.send(stats);
                         });
                     } else {

@@ -15,10 +15,7 @@ import android.widget.Toast;
 import com.example.tenantsproject.flatmates.R;
 import com.example.tenantsproject.flatmates.main_list.list.MyList;
 import com.example.tenantsproject.flatmates.main_list.list.RowAdapter;
-<<<<<<< HEAD
 import com.example.tenantsproject.flatmates.main_list.list.RowAdapterMyList;
-=======
->>>>>>> e1a3dda09abc260a54f0847185cef34790a24c01
 import com.example.tenantsproject.flatmates.model.data.Product;
 import com.example.tenantsproject.flatmates.model.rest.Response;
 import com.example.tenantsproject.flatmates.model.service.ProductService;
@@ -39,11 +36,7 @@ public class SocialFragment extends ListFragment implements Updateable {
     ArrayList<Product> products = new ArrayList<>();
     ArrayList<Product> RowBean_data = new ArrayList<>();
     ProductService productService = new ProductService();
-<<<<<<< HEAD
     RowAdapterMyList adapterMain;
-=======
-    RowAdapter adapterMain;
->>>>>>> e1a3dda09abc260a54f0847185cef34790a24c01
 
 
     @Nullable
@@ -52,11 +45,7 @@ public class SocialFragment extends ListFragment implements Updateable {
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_messages, container,
                 false);
-<<<<<<< HEAD
         adapterMain = new RowAdapterMyList(getActivity(),
-=======
-        adapterMain = new RowAdapter(getActivity(),
->>>>>>> e1a3dda09abc260a54f0847185cef34790a24c01
                 R.layout.custom_row, RowBean_data);
         setListAdapter(adapterMain);
         swipeContainer = (SwipeRefreshLayout) rootView.findViewById(R.id.swiperefresh);

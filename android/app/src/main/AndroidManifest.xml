@@ -74,11 +74,8 @@
         </activity>
         <activity android:name=".login.Register_flat" >
         </activity>
-<<<<<<< HEAD
         <activity android:name=".main_list.list.RowAdaperMyList" >
         </activity>
-=======
->>>>>>> e1a3dda09abc260a54f0847185cef34790a24c01
     </application>
 
 </manifest>

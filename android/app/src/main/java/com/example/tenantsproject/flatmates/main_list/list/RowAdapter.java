@@ -36,10 +36,6 @@ public class RowAdapter extends ArrayAdapter<Product> {
             row = inflater.inflate(layoutResourceId, parent, false);
 
             holder = new RowBeanHolder();
-<<<<<<< HEAD
-=======
-            //  holder.imgIcon = (ImageView) row.findViewById(R.id.imgIcon);
->>>>>>> e1a3dda09abc260a54f0847185cef34790a24c01
             holder.txtTitle = (TextView) row.findViewById(R.id.txtTitle);
 
             row.setTag(holder);
@@ -58,13 +54,7 @@ public class RowAdapter extends ArrayAdapter<Product> {
             }
             holder = (RowBeanHolder) row.getTag();
 
-<<<<<<< HEAD
         }
-=======
-        Product object = data.get(position);
-        holder.txtTitle.setText(object.getDescription());
-//        holder.imgIcon.setImageResource(object.icon);
->>>>>>> e1a3dda09abc260a54f0847185cef34790a24c01
 
         Product object = data.get(position);
         holder.txtTitle.setText(object.getDescription());
@@ -73,10 +63,6 @@ public class RowAdapter extends ArrayAdapter<Product> {
     }
 
     static class RowBeanHolder {
-<<<<<<< HEAD
-=======
-        //      ImageView imgIcon;
->>>>>>> e1a3dda09abc260a54f0847185cef34790a24c01
         TextView txtTitle;
     }
 
