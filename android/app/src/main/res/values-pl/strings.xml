@@ -22,7 +22,7 @@
     <string name="del_flat">Usuń mieszkanie</string>
     <string name="ed_flat">Edytuj mieszkanie</string>
     <string name="flat_set">Ustawienia mieszkania</string>
-    <string name="vw_flat">Przejrzyj mieszkanie</string>
+    <string name="vw_flat">Przejrzyj mieszkania</string>
     <string name="main_list">Główna Lista</string>
     <string name="info">Informacje</string>
     <string name="my_archive">Moje Archiwum</string>
@@ -39,4 +39,11 @@
     <string name="login_Flat">Nie posiadasz mieszkania? Stwórz nowe!</string>
     <string name="login_to_flat">Zaloguj do mieszkania</string>
     <string name="passLogFlat">Hasło do mieszkania</string>
+    <string name="active">Aktywne</string>
+    <string name="add">Dodaj</string>
+    <string name="add_item">Dodaj rzecz</string>
+    <string name="all">Wszystkie</string>
+    <string name="reserved">Zarezerwowane</string>
+    <string name="view_user">Zobacz użytkowników</string>
+    <string name="sgn_flat">Zaloguj się do mieszkania</string>
 </resources>

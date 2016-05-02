@@ -20,7 +20,7 @@
     <string name="acc">Account</string>
     <string name="flat_set">Flat Settings</string>
     <string name="ed_flat">Edit Flat</string>
-    <string name="vw_flat">View Flat</string>
+    <string name="vw_flat">View Flats</string>
     <string name="del_flat">Delete Flat</string>
     <string name="info">Information</string>
     <string name="opt">Options</string>
@@ -38,6 +38,13 @@
     <string name="error">Error, Passwords are not the same</string>
     <string name="success">Success</string>
     <string name="add_flat">Add Flat</string>
+    <string name="add">Add</string>
+    <string name="add_item">Add item</string>
+    <string name="all">All</string>
+    <string name="reserved">Reserved</string>
+    <string name="active">Active</string>
+    <string name="view_user">View Users in Flat</string>
+    <string name="sgn_flat">Sign to Flat</string>
     
     <string-array name="language">
         <item>@string/select</item>

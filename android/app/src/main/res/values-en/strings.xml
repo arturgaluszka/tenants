@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="active">Active</string>
+    <string name="add">Add</string>
+    <string name="add_item">Add item</string>
+    <string name="all">All</string>
+    <string name="reserved">Reserved</string>
+    <string name="view_user">View Users in Flat</string>
+    <string name="sgn_flat">Sign to Flat</string>
+</resources>

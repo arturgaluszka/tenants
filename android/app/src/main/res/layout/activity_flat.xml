@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
-        android:text="Sign to Flat"
+        android:text="@string/sgn_flat"
         android:id="@+id/textView14"
         android:textSize="18dp"
         android:clickable="true"
@@ -135,7 +135,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
-        android:text="Back"
+        android:text="@string/view_user"
+        android:id="@+id/textView5"
+        android:textSize="18dp"
+        android:textColor="#0b0a0a"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:clickable="true"
+        android:onClick="viewFlat" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#c0d1df"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/back"
         android:id="@+id/textView9"
         android:textSize="18dp"
         android:textColor="#0b0a0a"

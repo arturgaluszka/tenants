@@ -16,6 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tenantsproject.flatmates.R;
@@ -23,9 +24,14 @@ import com.example.tenantsproject.flatmates.archive.list.Archives;
 import com.example.tenantsproject.flatmates.flat.Flat;
 import com.example.tenantsproject.flatmates.login.Login;
 import com.example.tenantsproject.flatmates.main_list.fragments.TabFragment;
+import com.example.tenantsproject.flatmates.model.rest.Response;
+import com.example.tenantsproject.flatmates.model.service.FlatService;
 import com.example.tenantsproject.flatmates.model.service.ProductService;
+import com.example.tenantsproject.flatmates.model.service.UserService;
 import com.example.tenantsproject.flatmates.security.Authenticator;
 import com.example.tenantsproject.flatmates.settings.user.Account;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
@@ -33,9 +39,11 @@ public class MainActivity extends AppCompatActivity {
     FragmentManager mFragmentManager;
     FragmentTransaction mFragmentTransaction;
     Button searchButton;
+    TextView txt1;
 
     ProductService productService = new ProductService();
     public static int FILTER = 1;
+
 
 
     @Override
@@ -43,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_list);
         searchButton = (Button) findViewById(R.id.searchButton);
+        //Log.d("Strajk", );
+        txt1 = (TextView) findViewById(R.id.textView9);
+        txt1.setText(getMyFlatName());
 
 
         Toolbar toolbar2 = (Toolbar) findViewById(R.id.toolbar2);
@@ -112,6 +123,35 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(this, Add.class));
     }
 
+    public String getMyFlatName(){
+        Response response;
+        String name;
+        FlatService flServ = new FlatService();
+        response = flServ.getFlat(this, getMyActualFlat());
+        name = (String) response.getObject();
+        return name;
+    }
+
+    public int getMyActualFlat() {
+        int actualFlatnumber;
+        Response response;
+        UserService userService = new UserService();
+        response = userService.getUserFlats(this, getUserId());
+        ArrayList<Integer> pa;
+        pa = (ArrayList<Integer>) response.getObject();
+        actualFlatnumber = pa.get(0);
+        return actualFlatnumber;
+    }
+
+    public int getUserId() {
+        final Authenticator aut = new Authenticator();
+        final UserService userService = new UserService();
+        Response res;
+        res = userService.getUserID(this, aut.getLoggedInUserName(this));
+        int id = (int) res.getObject();
+        return id;
+    }
+
     public void search(View view) {
         //Creating the instance of PopupMenu
 
@@ -122,15 +162,15 @@ public class MainActivity extends AppCompatActivity {
         //registering popup with OnMenuItemClickListener
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
-                if (item.getTitle().equals("All")) {
+                if (item.getItemId() == R.id.all) {
                     FILTER = productService.FILTER_ALL;
                     TabFragment.viewPager.getAdapter().notifyDataSetChanged();
                 }
-                if (item.getTitle().equals("Active")) {
+                if (item.getItemId() == R.id.active) {
                     FILTER = productService.FILTER_ACTIVE;
                     TabFragment.viewPager.getAdapter().notifyDataSetChanged();
                 }
-                if (item.getTitle().equals("Reserved")) {
+                if (item.getItemId() == R.id.reserved) {
                     FILTER = productService.FILTER_RESERVED;
                     TabFragment.viewPager.getAdapter().notifyDataSetChanged();
                 }

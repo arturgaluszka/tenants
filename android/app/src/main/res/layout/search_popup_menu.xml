@@ -6,18 +6,18 @@
     android:showAsAction="always">
 
     <item
-        android:id="@+id/nav_item_draftt"
-        android:title="All" />
+        android:id="@+id/all"
+        android:title="@string/all" />
 
     <item
-        android:id="@+id/nav_item_actived"
+        android:id="@+id/active"
         android:layout_marginTop="100dp"
-        android:title="Active" />
+        android:title="@string/active" />
 
     <item
-        android:id="@+id/nav_item_inboxx"
+        android:id="@+id/reserved"
         android:layout_marginTop="100dp"
-        android:title="Reserved" />
+        android:title="@string/reserved" />
 
 
 

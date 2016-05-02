@@ -51,7 +51,7 @@ public class MainArchiveList extends ListFragment {
         View rootView = inflater.inflate(R.layout.archives_amount, container,
                 false);
         setHasOptionsMenu(true);
-       /* Response rs1 = stServ.getStats(getActivity(), 1,2);
+       /*Response rs1 = stServ.getStats(getActivity(), 1,2);
         txt1 = (TextView) rootView.findViewById(R.id.textView11);
         switch (rs1.getMessageCode()){
             case Response.MESSAGE_OK:
@@ -59,8 +59,8 @@ public class MainArchiveList extends ListFragment {
                 txt1.setText(String.valueOf(sum));
                 break;
             default:
-                txt1.setText("sum");*/
-        }
+                txt1.setText("sum");
+        }*/
 
 
 
