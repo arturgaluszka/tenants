@@ -26,7 +26,7 @@ public class Flat extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .7), (int) (height * .5));
+        getWindow().setLayout((int) (width * .7), (int) (height * .6));
     }
 
     final int CONTEXT_MENU_ADD = 1;
@@ -74,6 +74,10 @@ public class Flat extends Activity {
     public void viewFlat(View v) {
         Intent i = new Intent(this, ViewFlat.class);
         startActivity(i);
+    }
+
+    public void flatUsers(View v){
+        startActivity(new Intent(this, ViewFlats.class));
     }
 
     public boolean onTouchEvent(MotionEvent event) {

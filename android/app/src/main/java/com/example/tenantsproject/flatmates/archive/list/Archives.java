@@ -1,5 +1,6 @@
 package com.example.tenantsproject.flatmates.archive.list;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -33,9 +34,13 @@ public class Archives extends AppCompatActivity {
     DrawerLayout mDrawerLayout;
     NavigationView mNavigationView;
     FragmentManager mFragmentManager;
+    FragmentManager mFragmentManager2;
     FragmentTransaction mFragmentTransaction;
+    FragmentTransaction mFragmentTransaction2;
     ArrayList<Integer> usersID = new ArrayList<>();
     ArrayList<String> users = new ArrayList<>();
+    public int idUser;
+    private UserArchiveList userList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,8 +65,10 @@ public class Archives extends AppCompatActivity {
          */
 
         mFragmentManager = getSupportFragmentManager();
+        mFragmentManager2 = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
         mFragmentTransaction.replace(R.id.containerView, new TabFragment_archives()).commit();
+
         /**
          * Setup click events on the Navigation View Items.
          */
@@ -70,9 +77,6 @@ public class Archives extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 mDrawerLayout.closeDrawers();
-
-
-
 
 
                 return false;
@@ -126,6 +130,7 @@ public class Archives extends AppCompatActivity {
     public void archives(View view) {
         mFragmentTransaction = mFragmentManager.beginTransaction();
         mFragmentTransaction.replace(R.id.containerView, new TabFragment_archives()).commit();
+
         // startActivity(new Intent(getApplicationContext(), Archives.class));
         //  finish();
     }
@@ -171,6 +176,13 @@ public class Archives extends AppCompatActivity {
         }
     }
 
+    public int getUserArchiveId(String name){
+        UserService uServ = new UserService();
+        Response rs;
+        rs = uServ.getUserID(this, name);
+        return (int) rs.getObject();
+    }
+
     public void search(View view) {
         //Creating the instance of PopupMenu
 
@@ -185,10 +197,18 @@ public class Archives extends AppCompatActivity {
         //registering popup with OnMenuItemClickListener
         popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             public boolean onMenuItemClick(MenuItem item) {
-
                 Toast.makeText(Archives.this, "You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
+
+                idUser = getUserArchiveId((String) item.getTitle());
+                //userList.refresh();
+
+
+                Log.d("ID mieszkanca", String.valueOf(idUser));
+
                 mFragmentTransaction = mFragmentManager.beginTransaction();
-                mFragmentTransaction.replace(R.id.containerView, new TabFragment_users()).commit();
+                mFragmentTransaction.replace(R.id.containerView, new UserArchiveList()).commit();
+
+
                 return true;
             }
         });

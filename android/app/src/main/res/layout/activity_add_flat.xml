@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Add Flat"
+        android:text="@string/add_flat"
         android:id="@+id/textView20"
         android:layout_marginBottom="20dp"
         android:layout_alignParentTop="true"
@@ -42,7 +42,7 @@
     <Button
         android:layout_width="100dp"
         android:layout_height="30dp"
-        android:text="Save"
+        android:text="@string/save"
         android:onClick="createFlat"
         android:id="@+id/button7"
         android:textColor="#238AE1"

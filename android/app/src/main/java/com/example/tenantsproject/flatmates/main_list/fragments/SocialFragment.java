@@ -94,7 +94,7 @@ public class SocialFragment extends ListFragment implements Updateable {
 
     public void additems() {
         Response r5;
-        r5 = productService.getFlatProducts(getActivity(), 2, getUserId(), ProductService.FILTER_ALL, ++page);
+        r5 = productService.getFlatProducts(getActivity(), getMyActualFlat(), getUserId(), ProductService.FILTER_ALL, ++page);
         products = (ArrayList<Product>) r5.getObject();
         if (!products.isEmpty()) {
 
@@ -160,7 +160,7 @@ public class SocialFragment extends ListFragment implements Updateable {
                 swipeContainer.setRefreshing(false);
                 break;
             default:
-                Toast.makeText(getActivity(), "ERROR, Please check your internet connection", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), getString(R.string.error2), Toast.LENGTH_LONG).show();
                 swipeContainer.setRefreshing(false);
         }
     }

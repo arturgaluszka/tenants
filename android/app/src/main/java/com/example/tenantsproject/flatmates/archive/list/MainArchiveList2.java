@@ -111,7 +111,7 @@ public class MainArchiveList2 extends ListFragment {
                 // swipeContainer.setRefreshing(false);
                 break;
             default:
-                Toast.makeText(getActivity(), "ERROR, Please check your internet connection", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), getString(R.string.error2), Toast.LENGTH_LONG).show();
                 // swipeContainer.setRefreshing(false);
 
         }

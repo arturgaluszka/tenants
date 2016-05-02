@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Edit Flat"
+        android:text="@string/ed_flat"
         android:id="@+id/textView21"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -20,7 +20,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Change Password (press old Password)"
+        android:text="@string/change_pass"
         android:id="@+id/textView23"
         android:textSize="15dp"
         android:layout_alignParentLeft="true"
@@ -54,37 +54,25 @@
         android:layout_toRightOf="@+id/textView23"
         android:layout_toEndOf="@+id/textView23" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Add User"
-        android:id="@+id/textView24"
-        android:layout_marginTop="30dp"
-        android:layout_below="@+id/editText12"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save Changes"
+        android:text="@string/save"
         android:onClick="changePass"
         android:id="@+id/button8"
-        android:layout_below="@+id/textView24"
         android:layout_centerHorizontal="true"
         android:textColor="#238AE1"
         android:textSize="20sp"
         android:background="@drawable/buttonshape"
-        android:layout_marginTop="56dp" />
+        android:layout_marginTop="56dp"
+        android:layout_below="@+id/editText12" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15dp"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Press New Password"
+        android:text="@string/new_pass"
         android:id="@+id/textView25"
         android:layout_below="@+id/textView23"
         android:layout_alignParentLeft="true"

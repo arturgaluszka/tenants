@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,6 +21,7 @@ public class BuyNowClick extends Activity {
     Intent in;
     ProductService prdServ = new ProductService();
     EditText edtText;
+    boolean digitsOnly;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,17 +63,27 @@ public class BuyNowClick extends Activity {
         Response buy;
         in = getIntent();
         prod = (Product) in.getExtras().getSerializable("Object");
-        buy = prdServ.buyProduct(this, prod);
+        digitsOnly = TextUtils.isDigitsOnly(edtText.getText());
+        if(digitsOnly){
+            buy = prdServ.buyProduct(this, prod);
         switch (buy.getMessageCode()) {
             case Response.MESSAGE_OK:
-                Toast.makeText(this, "You buy: " + prod.getDescription(), Toast.LENGTH_LONG).show();
+
+                Toast.makeText(this, getString(R.string.bought)+" " + prod.getDescription(), Toast.LENGTH_LONG).show();
                 prod.setPrice(Double.parseDouble(edtText.getText().toString()));
                 break;
+
             default:
-                Toast toast2 = Toast.makeText(this, "ERROR, Please try again", Toast.LENGTH_LONG);
+                Toast toast2 = Toast.makeText(this, getString(R.string.error4), Toast.LENGTH_LONG);
                 toast2.show();
 
         }
 
+
+    }
+        else{
+            Toast toast2 = Toast.makeText(this, getString(R.string.error3), Toast.LENGTH_LONG);
+            toast2.show();
+        }
     }
 }

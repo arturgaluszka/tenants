@@ -46,4 +46,9 @@
     <string name="reserved">Zarezerwowane</string>
     <string name="view_user">Zobacz użytkowników</string>
     <string name="sgn_flat">Zaloguj się do mieszkania</string>
+    <string name="add_to_list">Dodano do mojej listy</string>
+    <string name="error2">Błąd, sprawdź swoje połączenie z internetem</string>
+    <string name="save">Zapisz</string>
+    <string name="add_list">Dodaj do mojej listy</string>
+    <string name="buy">Kup teraz</string>
 </resources>

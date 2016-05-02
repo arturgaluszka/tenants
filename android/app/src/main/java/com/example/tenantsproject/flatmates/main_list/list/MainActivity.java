@@ -40,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
     FragmentTransaction mFragmentTransaction;
     Button searchButton;
     TextView txt1;
+    Intent in;
+    public int pos;
+
 
     ProductService productService = new ProductService();
     public static int FILTER = 1;
@@ -51,9 +54,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_list);
         searchButton = (Button) findViewById(R.id.searchButton);
-        //Log.d("Strajk", );
         txt1 = (TextView) findViewById(R.id.textView9);
-        txt1.setText(getMyFlatName());
+        try{
+
+                in = getIntent();
+                pos = Integer.parseInt(in.getExtras().getString("Position"));
+                String odb = in.getExtras().getString("Name");
+                Log.d("Name", odb);
+                Log.d("Position", String.valueOf(pos));
+                txt1.setText(odb);
+        }
+        catch (NullPointerException e){
+            txt1.setText(getMyFlatName());
+        }
+
 
 
         Toolbar toolbar2 = (Toolbar) findViewById(R.id.toolbar2);
@@ -122,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
     public void check(View view) {
         startActivity(new Intent(this, Add.class));
     }
+
 
     public String getMyFlatName(){
         Response response;
@@ -196,6 +211,7 @@ public class MainActivity extends AppCompatActivity {
                     Authenticator at = new Authenticator();
                     at.logOut(MainActivity.this);
                     finish();
+                    startActivity(new Intent(getApplicationContext(), Login.class));
 
                 }
 

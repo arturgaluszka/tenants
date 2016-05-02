@@ -98,11 +98,11 @@ public class MainArchiveList extends ListFragment {
                 re = stsServ.undoBuy(getContext(), RowBean_data.get(position));
                 switch (re.getMessageCode()) {
                     case Response.MESSAGE_OK:
-                        Toast.makeText(getActivity(), "Added to my list", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), getString(R.string.add_to_list), Toast.LENGTH_LONG).show();
                         onUpdate();
                         break;
                     default:
-                        Toast.makeText(getActivity(), "ERROR, Please check your internet connection", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), getString(R.string.error2), Toast.LENGTH_LONG).show();
                 }
             }
 
@@ -151,7 +151,7 @@ public class MainArchiveList extends ListFragment {
                // swipeContainer.setRefreshing(false);
                 break;
             default:
-                Toast.makeText(getActivity(), "ERROR, Please check your internet connection", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), getString(R.string.error2), Toast.LENGTH_LONG).show();
                // swipeContainer.setRefreshing(false);
 
         }
