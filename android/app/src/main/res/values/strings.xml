@@ -53,10 +53,14 @@
     <string name="bought">You bought: </string>
     <string name="error3">ERROR, Bad type of input</string>
     <string name="error4">ERROR, Please try again</string>
+    <string name="amount">Amount: </string>
+    <string name="sgn_out">Sign out of flat</string>
+    <string name="error5">Logout failed...</string>
 
     <string-array name="language">
         <item>@string/select</item>
         <item>@string/pol</item>
         <item>@string/eng</item>
     </string-array>
+    <string name="options">Options</string>
 </resources>

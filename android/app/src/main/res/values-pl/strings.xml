@@ -51,4 +51,10 @@
     <string name="save">Zapisz</string>
     <string name="add_list">Dodaj do mojej listy</string>
     <string name="buy">Kup teraz</string>
+    <string name="amount">Suma:</string>
+    <string name="error3">Błąd, złe dane wejściowe</string>
+    <string name="error4">Błąd, spróbuj ponownie</string>
+    <string name="error5">Coś poszło nie tak...</string>
+    <string name="sgn_out">Wyloguj sie z mieszkania</string>
+    <string name="options">Opcje</string>
 </resources>

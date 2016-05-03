@@ -71,6 +71,7 @@ public class BuyNowClick extends Activity {
 
                 Toast.makeText(this, getString(R.string.bought)+" " + prod.getDescription(), Toast.LENGTH_LONG).show();
                 prod.setPrice(Double.parseDouble(edtText.getText().toString()));
+
                 break;
 
             default:

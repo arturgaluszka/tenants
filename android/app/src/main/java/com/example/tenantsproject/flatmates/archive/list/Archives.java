@@ -14,12 +14,14 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tenantsproject.flatmates.R;
 import com.example.tenantsproject.flatmates.archive.fragments.TabFragment_archives;
 import com.example.tenantsproject.flatmates.archive.fragments.TabFragment_users;
 import com.example.tenantsproject.flatmates.flat.Flat;
+import com.example.tenantsproject.flatmates.login.Login;
 import com.example.tenantsproject.flatmates.main_list.fragments.TabFragment;
 import com.example.tenantsproject.flatmates.main_list.list.Add;
 import com.example.tenantsproject.flatmates.main_list.list.MainActivity;
@@ -27,6 +29,8 @@ import com.example.tenantsproject.flatmates.model.data.Product;
 import com.example.tenantsproject.flatmates.model.rest.Response;
 import com.example.tenantsproject.flatmates.model.service.FlatService;
 import com.example.tenantsproject.flatmates.model.service.UserService;
+import com.example.tenantsproject.flatmates.security.Authenticator;
+import com.example.tenantsproject.flatmates.settings.user.Account;
 
 import java.util.ArrayList;
 
@@ -40,13 +44,16 @@ public class Archives extends AppCompatActivity {
     ArrayList<Integer> usersID = new ArrayList<>();
     ArrayList<String> users = new ArrayList<>();
     public int idUser;
+    TextView txt1;
     private UserArchiveList userList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.archives);
-    usersFlatID();
+        usersFlatID();
         getUserName();
+        txt1 = (TextView) findViewById(R.id.textView9);
+        txt1.setText(getMyFlatName());
 
         //   ActionBar actionBar = getSupportActionBar();
         //   actionBar.hide();
@@ -148,7 +155,13 @@ public class Archives extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), Flat.class));
                 }
                 if (item.getItemId() == R.id.account) {
-
+                    startActivity(new Intent(getApplicationContext(), Account.class));
+                }
+                if (item.getItemId() == R.id.logout){
+                    Authenticator at = new Authenticator();
+                    at.logOut(Archives.this);
+                    finish();
+                    startActivity(new Intent(getApplicationContext(), Login.class));
                 }
                 Toast.makeText(Archives.this, "You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
 
@@ -181,6 +194,35 @@ public class Archives extends AppCompatActivity {
         Response rs;
         rs = uServ.getUserID(this, name);
         return (int) rs.getObject();
+    }
+
+    public String getMyFlatName(){
+        Response response;
+        String name;
+        FlatService flServ = new FlatService();
+        response = flServ.getFlat(this, getMyActualFlat());
+        name = (String) response.getObject();
+        return name;
+    }
+
+    public int getMyActualFlat() {
+        int actualFlatnumber;
+        Response response;
+        UserService userService = new UserService();
+        response = userService.getUserFlats(this, getUserId());
+        ArrayList<Integer> pa;
+        pa = (ArrayList<Integer>) response.getObject();
+        actualFlatnumber = pa.get(0);
+        return actualFlatnumber;
+    }
+
+    public int getUserId() {
+        final Authenticator aut = new Authenticator();
+        final UserService userService = new UserService();
+        Response res;
+        res = userService.getUserID(this, aut.getLoggedInUserName(this));
+        int id = (int) res.getObject();
+        return id;
     }
 
     public void search(View view) {

@@ -10,8 +10,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.tenantsproject.flatmates.R;
+import com.example.tenantsproject.flatmates.model.rest.Response;
+import com.example.tenantsproject.flatmates.model.service.UserService;
+import com.example.tenantsproject.flatmates.security.Authenticator;
+
+import java.util.ArrayList;
 
 public class Flat extends Activity {
 
@@ -74,6 +80,47 @@ public class Flat extends Activity {
     public void viewFlat(View v) {
         Intent i = new Intent(this, ViewFlat.class);
         startActivity(i);
+    }
+
+    public void sgnOut(View v){
+        UserService uServ = new UserService();
+        Response r;
+        r = uServ.signOut(this, getUserId(), getMyActualFlat());
+        switch (r.getMessageCode()) {
+            case Response.MESSAGE_OK:
+                switch(r.getMessageCode()){
+                    case Response.MESSAGE_OK:
+                        Toast.makeText(this, getString(R.string.success), Toast.LENGTH_LONG).show();
+                        break;
+                    default:
+                        Toast.makeText(this, getString(R.string.error5), Toast.LENGTH_LONG).show();
+
+                }
+                break;
+            default:
+                Toast.makeText(this, getString(R.string.error2), Toast.LENGTH_LONG).show();
+
+        }
+    }
+
+    public int getMyActualFlat() {
+        int actualFlatnumber;
+        Response response;
+        UserService userService = new UserService();
+        response = userService.getUserFlats(this, getUserId());
+        ArrayList<Integer> pa;
+        pa = (ArrayList<Integer>) response.getObject();
+        actualFlatnumber = pa.get(0);
+        return actualFlatnumber;
+    }
+
+    public int getUserId() {
+        final Authenticator aut = new Authenticator();
+        final UserService userService = new UserService();
+        Response res;
+        res = userService.getUserID(this, aut.getLoggedInUserName(this));
+        int id = (int) res.getObject();
+        return id;
     }
 
     public void flatUsers(View v){

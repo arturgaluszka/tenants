@@ -5,12 +5,17 @@ import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 import com.example.tenantsproject.flatmates.R;
+import com.example.tenantsproject.flatmates.model.data.Product;
 
 public class MyList extends Activity {
+    Product prod;
+    Intent in;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_list_menu);
@@ -21,11 +26,15 @@ public class MyList extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .7), (int) (height * .5));
+        getWindow().setLayout((int) (width * .5), (int) (height * .2));
     }
 
     public void BuyNow(View view) {
+        in = getIntent();
+        prod = (Product) in.getExtras().getSerializable("Object");
         Intent i = new Intent(this, BuyNowClick.class);
+        i.putExtra("Object", prod);
+        Log.d("lol", prod.getDescription());
         startActivity(i);
         finish();
 

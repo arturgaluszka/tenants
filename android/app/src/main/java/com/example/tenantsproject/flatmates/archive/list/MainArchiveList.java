@@ -23,6 +23,8 @@ import com.example.tenantsproject.flatmates.model.data.Statistics;
 import com.example.tenantsproject.flatmates.model.rest.Response;
 import com.example.tenantsproject.flatmates.model.service.ProductService;
 import com.example.tenantsproject.flatmates.model.service.StatsService;
+import com.example.tenantsproject.flatmates.model.service.UserService;
+import com.example.tenantsproject.flatmates.security.Authenticator;
 
 import org.w3c.dom.Text;
 
@@ -51,11 +53,11 @@ public class MainArchiveList extends ListFragment {
         View rootView = inflater.inflate(R.layout.archives_amount, container,
                 false);
         setHasOptionsMenu(true);
-       /*Response rs1 = stServ.getStats(getActivity(), 1,2);
+      /* Response rs1 = stServ.getStats(getActivity(), 2,2);
         txt1 = (TextView) rootView.findViewById(R.id.textView11);
         switch (rs1.getMessageCode()){
             case Response.MESSAGE_OK:
-                sum = ((Statistics)rs1.getObject()).getSum();
+                sum = (Double) rs1.getObject();
                 txt1.setText(String.valueOf(sum));
                 break;
             default:
@@ -112,7 +114,7 @@ public class MainArchiveList extends ListFragment {
 
     public void additems() {
         Response r5;
-        r5 = stServ.getArchivalProducts(getActivity(), 2, 2, StatsService.FILTER_ALL, ++page);
+        r5 = stServ.getArchivalProducts(getActivity(), getMyActualFlat(), 0, StatsService.FILTER_ALL, ++page);
         Log.d(r5.toString(), r5.toString());
         products = (ArrayList<Product>) r5.getObject();
 
@@ -155,6 +157,26 @@ public class MainArchiveList extends ListFragment {
                // swipeContainer.setRefreshing(false);
 
         }
+    }
+
+    public int getMyActualFlat() {
+        int actualFlatnumber;
+        Response response;
+        UserService userService = new UserService();
+        response = userService.getUserFlats(getContext(), getUserId());
+        ArrayList<Integer> pa;
+        pa = (ArrayList<Integer>) response.getObject();
+        actualFlatnumber = pa.get(0);
+        return actualFlatnumber;
+    }
+
+    public int getUserId() {
+        final Authenticator aut = new Authenticator();
+        final UserService userService = new UserService();
+        Response res;
+        res = userService.getUserID(getContext(), aut.getLoggedInUserName(getContext()));
+        int id = (int) res.getObject();
+        return id;
     }
 
 }

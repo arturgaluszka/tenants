@@ -31,6 +31,7 @@ public class SocialFragment extends ListFragment implements Updateable {
     // my list
     int page = 1;
     boolean flag_loading;
+    Product prod;
     SwipeRefreshLayout swipeContainer;
     Response r3 = new Response();
     ArrayList<Product> products = new ArrayList<>();
@@ -67,7 +68,11 @@ public class SocialFragment extends ListFragment implements Updateable {
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            int arg2, long arg3) {
+                prod = RowBean_data.get(arg2);
                 Intent i = new Intent(getActivity(), MyList.class);
+                Bundle b = new Bundle();
+                b.putSerializable("Object", prod);
+                i.putExtras(b);
                 startActivity(i);
                 return true;
             }

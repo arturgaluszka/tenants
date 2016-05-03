@@ -151,7 +151,7 @@ public class PrimaryFragment extends ListFragment implements Updateable {
     public void additems() {
 
         Response r5;
-        r5 = productService.getFlatProducts(getActivity(), getMyActualFlat(), getUserId(), MainActivity.FILTER, ++page);
+        r5 = productService.getFlatProducts(getActivity(), getMyActualFlat(), 0, MainActivity.FILTER, ++page);
         Log.d(r5.toString(), r5.toString());
         products = (ArrayList<Product>) r5.getObject();
         if (!products.isEmpty()) {
@@ -201,7 +201,7 @@ public class PrimaryFragment extends ListFragment implements Updateable {
 
     public void onUpdate() {
         Response r4;
-        r4 = productService.getFlatProducts(getActivity(), getMyActualFlat(), getUserId(), MainActivity.FILTER, 1);
+        r4 = productService.getFlatProducts(getActivity(), getMyActualFlat(), 0, MainActivity.FILTER, 1);
         switch (r4.getMessageCode()) {
             case Response.MESSAGE_OK:
                 page = 2;
@@ -211,7 +211,7 @@ public class PrimaryFragment extends ListFragment implements Updateable {
                 for (int i = 0; i < products.size(); i++) {
                     RowBean_data.add(products.get(i));
                 }
-                r4 = productService.getFlatProducts(getActivity(), getMyActualFlat(), getUserId(), MainActivity.FILTER, 2);
+                r4 = productService.getFlatProducts(getActivity(), getMyActualFlat(), 0, MainActivity.FILTER, 2);
                 products = (ArrayList<Product>) r4.getObject();
                 if (!products.isEmpty()) {
                     for (int i = 0; i < products.size(); i++) {
