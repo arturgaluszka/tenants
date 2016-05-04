@@ -32,7 +32,7 @@ public class Flat extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .7), (int) (height * .6));
+        getWindow().setLayout((int) (width * .7), (int) (height * .7));
     }
 
     final int CONTEXT_MENU_ADD = 1;
@@ -80,6 +80,10 @@ public class Flat extends Activity {
     public void viewFlat(View v) {
         Intent i = new Intent(this, ViewFlat.class);
         startActivity(i);
+    }
+
+    public void back(View v) {
+        this.finish();
     }
 
     public void sgnOut(View v){

@@ -11,6 +11,7 @@
     <string name="create_flat"> CREATE FLAT</string>
     <string name="logg_flat"> Already have flat? Login!</string>
     <string name="conf_pass">Confirm password</string>
+    <string name="conf_new_pass">Confirm new password</string>
     <string name="logg">Already a member? Login!</string>
     <string name="create">Create</string>
     <string name="change_pass">Change Password (press old Password)</string>
@@ -56,6 +57,7 @@
     <string name="amount">Amount: </string>
     <string name="sgn_out">Sign out of flat</string>
     <string name="error5">Logout failed...</string>
+    <string name="change2">Pass was changed</string>
 
     <string-array name="language">
         <item>@string/select</item>

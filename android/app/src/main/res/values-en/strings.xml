@@ -18,4 +18,7 @@
     <string name="error4">ERROR, Please try again</string>
     <string name="error5">Logout failed...</string>
     <string name="sgn_out">Sign out of flat</string>
+    <string name="bought">You bought:</string>
+    <string name="change2">Pass was changed</string>
+    <string name="conf_new_pass">Confirm new password</string>
 </resources>
