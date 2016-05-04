@@ -77,7 +77,7 @@ public class FlatREST {
         try {
             response = task.get();
         } catch (InterruptedException | ExecutionException e) {
-            Log.e("REST", "Can't run task: getUserID", e);
+            Log.e("REST", "Can't run task: getFlatID", e);
         }
         return response;
     }
@@ -90,7 +90,7 @@ public class FlatREST {
         try {
             response = task.get();
         } catch (InterruptedException | ExecutionException e) {
-            Log.e("REST", "Can't run task: getUserID", e);
+            Log.e("REST", "Can't run task: getFlatID", e);
         }
         return response;
     }

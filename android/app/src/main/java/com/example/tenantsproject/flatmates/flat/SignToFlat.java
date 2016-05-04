@@ -1,15 +1,12 @@
 package com.example.tenantsproject.flatmates.flat;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tenantsproject.flatmates.R;
-import com.example.tenantsproject.flatmates.main_list.list.MainActivity;
 import com.example.tenantsproject.flatmates.model.rest.Response;
 import com.example.tenantsproject.flatmates.model.service.FlatService;
 import com.example.tenantsproject.flatmates.model.service.UserService;
@@ -35,7 +32,7 @@ public class SignToFlat extends AppCompatActivity {
         log = login.getText().toString();
         pas = pass.getText().toString();
         Response r;
-        r = flatService.getUserID(this, log);
+        r = flatService.getFlatID(this, log);
         flat = (int)r.getObject();
         switch (r.getMessageCode()) {
             case Response.MESSAGE_OK:

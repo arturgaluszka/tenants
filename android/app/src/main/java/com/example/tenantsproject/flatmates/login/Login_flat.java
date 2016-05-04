@@ -43,7 +43,7 @@ public class Login_flat extends Activity {
         log = login.getText().toString();
         pas = pass.getText().toString();
         Response r;
-        r = flatService.getUserID(this, log);
+        r = flatService.getFlatID(this, log);
         flat = (int)r.getObject();
         switch (r.getMessageCode()) {
             case Response.MESSAGE_OK:
