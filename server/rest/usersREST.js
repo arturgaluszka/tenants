@@ -1,4 +1,5 @@
 var usersDB = require('./../db/users');
+var statsDB = require('./../db/stats');
 var authenticator = require('./../utils/authenticator');
 function runREST(app) {
     app.post('/login', function (req, res) {
@@ -21,7 +22,10 @@ function runREST(app) {
                 if (rows[0].password == req.body.flatPassword) {
                     usersDB.signUserToFlat(req.params.userID, req.body.flatID, function (rows) {
                         //res.send((rows[0]['LAST_INSERT_ID()']).toString());
-                        res.sendStatus(200);
+                        statsDB.addStatsField(req.params.userID,req.body.flatID,function(rows){
+                            res.sendStatus(200);
+                        });
+
                     });
                 } else {
                     res.sendStatus(403);
