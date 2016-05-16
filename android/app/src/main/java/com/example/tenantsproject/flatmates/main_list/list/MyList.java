@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.example.tenantsproject.flatmates.R;
 import com.example.tenantsproject.flatmates.model.data.Product;
+import com.example.tenantsproject.flatmates.model.rest.Response;
 
 public class MyList extends Activity {
     Product prod;
@@ -37,7 +38,6 @@ public class MyList extends Activity {
         Log.d("lol", prod.getDescription());
         startActivity(i);
         finish();
-
     }
 
     public boolean onTouchEvent(MotionEvent event) {

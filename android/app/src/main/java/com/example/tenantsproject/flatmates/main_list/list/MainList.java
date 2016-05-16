@@ -9,9 +9,12 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.tenantsproject.flatmates.R;
 import com.example.tenantsproject.flatmates.model.data.Product;
+import com.example.tenantsproject.flatmates.model.rest.Response;
+import com.example.tenantsproject.flatmates.model.service.ProductService;
 
 import java.io.Serializable;
 
@@ -42,6 +45,17 @@ public class MainList extends Activity{
         startActivity(i);
         finish();
 
+    }
+
+    public void deleteFromMainList(View view) {
+        in = getIntent();
+        prod = (Product) in.getExtras().getSerializable("Object");
+        ProductService ps = new ProductService();
+        Response r;
+        r = ps.removeFromMainList(this, prod);
+        Toast.makeText(this, getString(R.string.deleted)+": " + prod.getDescription(), Toast.LENGTH_LONG).show();
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 
     public void info(View view) {

@@ -21,6 +21,7 @@ import com.example.tenantsproject.flatmates.model.service.FlatService;
 import com.example.tenantsproject.flatmates.model.service.UserService;
 import com.example.tenantsproject.flatmates.security.Authenticator;
 
+import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 
 public class ViewFlats extends Activity {
@@ -55,11 +56,15 @@ public class ViewFlats extends Activity {
                 for (int i = 0; i < flatsID.size(); i++) {
                     if (position == i) {
                         Intent a = new Intent(getBaseContext(), MainActivity.class);
+                        FlatService fServ = new FlatService();
                         flat = flats.get(i);
+                        Response rs = fServ.getFlatID(getBaseContext(), flat);
+                        Log.d("ID mieszkania", String.valueOf(rs.getObject()));
+                        int idFlat = (int)rs.getObject();
                         Log.d("Nazwa", flat);
                         Log.d("Position", String.valueOf(position));
                         a.putExtra("Name", flat);
-                        a.putExtra("Position", String.valueOf(position));
+                        a.putExtra("FlatID", String.valueOf(idFlat));
                        /* Bundle bundle = new Bundle();
                         bundle.putString("Position", String.valueOf(position));
                         android.app.Fragment prim2 = new android.app.Fragment();
@@ -89,6 +94,10 @@ public class ViewFlats extends Activity {
                 Log.d("fsdafa", "Fsafsa");
 
         }
+    }
+
+    void flatId(){
+
     }
 
     public void usersFlatName() {

@@ -42,7 +42,8 @@ public class MainArchiveList extends ListFragment {
     TextView txt1;
     Statistics stat = new Statistics();
     boolean flag_loading;
-    double sum = 0;
+    ///double sum = 0;
+    int a = -1;
 
 
     @Nullable
@@ -53,8 +54,9 @@ public class MainArchiveList extends ListFragment {
         View rootView = inflater.inflate(R.layout.archives_amount, container,
                 false);
         setHasOptionsMenu(true);
-      /* Response rs1 = stServ.getStats(getActivity(), 2,2);
         txt1 = (TextView) rootView.findViewById(R.id.textView11);
+      /* Response rs1 = stServ.getStats(getActivity(), 2,2);
+
         switch (rs1.getMessageCode()){
             case Response.MESSAGE_OK:
                 sum = (Double) rs1.getObject();
@@ -64,6 +66,20 @@ public class MainArchiveList extends ListFragment {
                 txt1.setText("sum");
         }*/
 
+        Response response = new StatsService().getStats(getActivity(), 2, getMyActualFlat());
+        Statistics stats = null;
+        if(response.getMessageCode()==Response.MESSAGE_OK){
+            stats = (Statistics) response.getObject();
+        }
+        double sum = 0;
+        if(stats!=null) {
+            sum = stats.getSum();
+            txt1.setText(String.valueOf(sum));
+        }
+
+        Archives activity = (Archives) getActivity();
+        a = activity.flatID;
+        Log.d("zmienna", String.valueOf(a));
 
 
 
@@ -114,7 +130,11 @@ public class MainArchiveList extends ListFragment {
 
     public void additems() {
         Response r5;
-        r5 = stServ.getArchivalProducts(getActivity(), getMyActualFlat(), 0, StatsService.FILTER_ALL, ++page);
+        if(a<-1){
+        r5 = stServ.getArchivalProducts(getActivity(), getMyActualFlat(), 0, StatsService.FILTER_ALL, ++page);}
+        else{
+            r5 = stServ.getArchivalProducts(getActivity(), a, 0, StatsService.FILTER_ALL, ++page);
+        }
         Log.d(r5.toString(), r5.toString());
         products = (ArrayList<Product>) r5.getObject();
 
@@ -131,7 +151,12 @@ public class MainArchiveList extends ListFragment {
 
     public void onUpdate(){
         Response r1;
-        r1 = stServ.getArchivalProducts(getActivity(), 2, 2, StatsService.FILTER_ALL, 1);
+        if(a==-1){
+        r1 = stServ.getArchivalProducts(getActivity(), getMyActualFlat(), 2, StatsService.FILTER_ALL, 1);}
+        else{
+            r1 = stServ.getArchivalProducts(getActivity(), a, 2, StatsService.FILTER_ALL, 1);
+        }
+
         switch (r1.getMessageCode()) {
             case Response.MESSAGE_OK:
                 page = 2;
@@ -141,7 +166,11 @@ public class MainArchiveList extends ListFragment {
                 for (int i = 0; i < products.size(); i++) {
                     RowBean_data.add(products.get(i));
                 }
-                r1 = stServ.getArchivalProducts(getActivity(), 2, 2, StatsService.FILTER_ALL, 2);
+                if(a==1){
+                    r1 = stServ.getArchivalProducts(getActivity(), getMyActualFlat(), 2, StatsService.FILTER_ALL, 2);}
+                else{
+                    r1 = stServ.getArchivalProducts(getActivity(), a, 2, StatsService.FILTER_ALL, 2);
+                }
                 products = (ArrayList<Product>) r1.getObject();
                 if (!products.isEmpty()) {
                     for (int i = 0; i < products.size(); i++) {

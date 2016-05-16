@@ -42,7 +42,7 @@ public class PrimaryFragment extends ListFragment implements Updateable {
     boolean flag_loading;
     RowAdapter adapterMain;
     Product prod;
-    int flat;
+    int flat = -1;
     MainActivity mn = new MainActivity();
 
 
@@ -151,7 +151,11 @@ public class PrimaryFragment extends ListFragment implements Updateable {
     public void additems() {
 
         Response r5;
-        r5 = productService.getFlatProducts(getActivity(), getMyActualFlat(), 0, MainActivity.FILTER, ++page);
+        if(flat > -1){
+        r5 = productService.getFlatProducts(getActivity(), flat, 0, MainActivity.FILTER, ++page);}
+        else{
+            r5 = productService.getFlatProducts(getActivity(), getMyActualFlat(), 0, MainActivity.FILTER, ++page);
+        }
         Log.d(r5.toString(), r5.toString());
         products = (ArrayList<Product>) r5.getObject();
         if (!products.isEmpty()) {
@@ -164,6 +168,8 @@ public class PrimaryFragment extends ListFragment implements Updateable {
         }
         flag_loading = false;
     }
+
+
 
     public void uploadInBacground() {
         getListView().post(new Runnable() {
@@ -201,7 +207,8 @@ public class PrimaryFragment extends ListFragment implements Updateable {
 
     public void onUpdate() {
         Response r4;
-        r4 = productService.getFlatProducts(getActivity(), getMyActualFlat(), 0, MainActivity.FILTER, 1);
+        if(flat > -1){r4 = productService.getFlatProducts(getActivity(), flat, 0, MainActivity.FILTER, 1);}
+        else{r4 = productService.getFlatProducts(getActivity(), getMyActualFlat(), 0, MainActivity.FILTER, 1);}
         switch (r4.getMessageCode()) {
             case Response.MESSAGE_OK:
                 page = 2;
@@ -211,7 +218,9 @@ public class PrimaryFragment extends ListFragment implements Updateable {
                 for (int i = 0; i < products.size(); i++) {
                     RowBean_data.add(products.get(i));
                 }
-                r4 = productService.getFlatProducts(getActivity(), getMyActualFlat(), 0, MainActivity.FILTER, 2);
+
+                if(flat > -1){r4 = productService.getFlatProducts(getActivity(), flat, 0, MainActivity.FILTER, 2);}
+                else{r4 = productService.getFlatProducts(getActivity(), getMyActualFlat(), 0, MainActivity.FILTER, 2);}
                 products = (ArrayList<Product>) r4.getObject();
                 if (!products.isEmpty()) {
                     for (int i = 0; i < products.size(); i++) {

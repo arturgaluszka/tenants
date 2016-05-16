@@ -35,8 +35,8 @@ import com.example.tenantsproject.flatmates.settings.user.Account;
 import java.util.ArrayList;
 
 public class Archives extends AppCompatActivity {
-    DrawerLayout mDrawerLayout;
-    NavigationView mNavigationView;
+    //DrawerLayout mDrawerLayout;
+   // NavigationView mNavigationView;
     FragmentManager mFragmentManager;
     FragmentManager mFragmentManager2;
     FragmentTransaction mFragmentTransaction;
@@ -45,6 +45,8 @@ public class Archives extends AppCompatActivity {
     ArrayList<String> users = new ArrayList<>();
     public int idUser;
     TextView txt1;
+    public int flatID = -1;
+    Intent in;
     private UserArchiveList userList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +54,19 @@ public class Archives extends AppCompatActivity {
         setContentView(R.layout.archives);
         usersFlatID();
         getUserName();
+        in = getIntent();
         txt1 = (TextView) findViewById(R.id.textView9);
-        txt1.setText(getMyFlatName());
+        if(flatID > -1){
+            txt1.setText(in.getExtras().getString("Name"));
+        }
+        else{
+            txt1.setText(getMyFlatName());
+        }
+
+        flatID = in.getExtras().getInt("FlatID");
+        Log.d("fsafasfasf", String.valueOf(flatID));
+
+
 
         //   ActionBar actionBar = getSupportActionBar();
         //   actionBar.hide();
@@ -63,8 +76,8 @@ public class Archives extends AppCompatActivity {
          *Setup the DrawerLayout and NavigationView
          */
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        mNavigationView = (NavigationView) findViewById(R.id.shitstuff);
+        //mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+       // mNavigationView = (NavigationView) findViewById(R.id.shitstuff);
 
         /**
          * Lets inflate the very first fragment
@@ -80,7 +93,7 @@ public class Archives extends AppCompatActivity {
          * Setup click events on the Navigation View Items.
          */
 
-        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+       /* mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 mDrawerLayout.closeDrawers();
@@ -89,19 +102,19 @@ public class Archives extends AppCompatActivity {
                 return false;
             }
 
-        });
+        });*/
 
         /**
          * Setup Drawer Toggle of the Toolbar
          */
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.app_name,
-                R.string.app_name);
+       /* ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this, toolbar, R.string.app_name,
+                R.string.app_name);*/
 
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
+      //  mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        mDrawerToggle.syncState();
+      //  mDrawerToggle.syncState();
 
     }
 
@@ -173,7 +186,7 @@ public class Archives extends AppCompatActivity {
 
     void usersFlatID(){
         FlatService fServ = new FlatService();
-        Response rs = fServ.getFlatMembers(this, 2);
+        Response rs = fServ.getFlatMembers(this, flatID);
         switch(rs.getMessageCode()){
             case Response.MESSAGE_OK:
                 usersID = (ArrayList<Integer>) rs.getObject();
@@ -227,7 +240,7 @@ public class Archives extends AppCompatActivity {
 
     public void search(View view) {
         //Creating the instance of PopupMenu
-
+        Log.d("fasfa","fsafsafsa");
         PopupMenu popup = new PopupMenu(this, view);
         //Inflating the Popup using xml file
         for(int i = 0; i<users.size(); i++){

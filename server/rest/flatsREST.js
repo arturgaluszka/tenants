@@ -24,7 +24,7 @@ function runREST(app) {
         if (authenticated) {
             authenticator.getLoggedUserID(req, function (id) {
                 usersDB.isFlatMember(id, req.params.flatID, function (rows) {
-                    if (rows[0].id != null) {
+                    if (rows.length > 0 && rows[0].id != null) {
                         flatsDB.getMembers(req.params.flatID, function (rows) {
                             res.send(rows.map(function (row) {
                                 return row.userID;

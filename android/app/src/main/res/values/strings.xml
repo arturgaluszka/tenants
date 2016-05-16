@@ -58,6 +58,8 @@
     <string name="sgn_out">Sign out of flat</string>
     <string name="error5">Logout failed...</string>
     <string name="change2">Pass was changed</string>
+    <string name="delete">Delete</string>
+    <string name="deleted">Deleted</string>
 
     <string-array name="language">
         <item>@string/select</item>
