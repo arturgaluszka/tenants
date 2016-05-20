@@ -16,29 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `stats`
+-- Table structure for table `flatsigns`
 --
 
-DROP TABLE IF EXISTS `stats`;
+DROP TABLE IF EXISTS `flatsigns`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `stats` (
+CREATE TABLE `flatsigns` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userID` int(11) DEFAULT '0',
-  `sum` decimal(12,0) DEFAULT '0',
+  `userID` int(11) DEFAULT NULL,
   `flatID` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `stats`
+-- Dumping data for table `flatsigns`
 --
 
-LOCK TABLES `stats` WRITE;
-/*!40000 ALTER TABLE `stats` DISABLE KEYS */;
-INSERT INTO `stats` VALUES (1,2,22,2),(2,0,22,2);
-/*!40000 ALTER TABLE `stats` ENABLE KEYS */;
+LOCK TABLES `flatsigns` WRITE;
+/*!40000 ALTER TABLE `flatsigns` DISABLE KEYS */;
+INSERT INTO `flatsigns` VALUES (1,2,1),(2,3,1),(3,4,1),(4,5,1),(5,2,2),(6,6,2),(7,7,2);
+/*!40000 ALTER TABLE `flatsigns` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-17 22:45:52
+-- Dump completed on 2016-05-20  7:00:31

@@ -16,14 +16,14 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `archive`
+-- Table structure for table `products`
 --
 
-DROP TABLE IF EXISTS `archive`;
+DROP TABLE IF EXISTS `products`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `archive` (
-  `id` int(11) NOT NULL,
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `done` int(11) DEFAULT NULL,
   `price` decimal(12,0) DEFAULT NULL,
   `description` varchar(45) DEFAULT NULL,
@@ -32,17 +32,17 @@ CREATE TABLE `archive` (
   `creator` int(11) DEFAULT NULL,
   `modificationDate` bigint(12) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `archive`
+-- Dumping data for table `products`
 --
 
-LOCK TABLES `archive` WRITE;
-/*!40000 ALTER TABLE `archive` DISABLE KEYS */;
-INSERT INTO `archive` VALUES (4,1,22,'next',2,2,2,1459794467708);
-/*!40000 ALTER TABLE `archive` ENABLE KEYS */;
+LOCK TABLES `products` WRITE;
+/*!40000 ALTER TABLE `products` DISABLE KEYS */;
+INSERT INTO `products` VALUES (1,0,0,'Mleko',1,0,2,1461742318555),(2,0,0,'Papier',1,2,3,1461742318555),(3,0,0,'Szynka',1,0,4,1461742318555),(4,0,0,'Plyn',1,0,5,1461742318555),(5,0,0,'Jajka',1,2,2,1461742318555),(6,0,0,'Orzechy',1,2,3,1461742318555),(7,0,0,'Jablka',1,0,4,1461742318555),(8,0,0,'Gruszki',1,0,5,1461742318555),(9,0,0,'Talerz',1,0,2,1461742318555),(10,0,0,'Widelec',1,2,3,1461742318555),(11,0,0,'Czekolada',1,0,4,1461742318555),(12,0,0,'Kwiatek',1,0,5,1461742318555),(13,0,0,'Lody',1,0,2,1461742318555),(14,0,0,'Proszek',1,0,3,1461742318555),(15,0,0,'Maka',2,2,2,1461742318555),(16,0,0,'Drozdze',2,2,2,1461742318555),(17,0,0,'Woda',2,0,2,1461742318555),(18,0,0,'Sol',2,2,2,1461742318555),(19,0,0,'Cukier',2,0,6,1461742318555),(20,0,0,'Worki',2,0,7,1461742318555);
+/*!40000 ALTER TABLE `products` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-17 22:45:53
+-- Dump completed on 2016-05-20  7:00:31
