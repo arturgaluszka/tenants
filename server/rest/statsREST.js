@@ -10,7 +10,7 @@ function runREST(app) {
             authenticator.getLoggedUserID(req, function (id) {
                 usersDB.isFlatMember(id, req.params.flatID, function (rows) {
                     if (rows.length>0 && rows[0].id != null) {
-                        usersDB.isFlatMember(req.params.userID, req.params.flatID, function (rows) {
+                        usersDB.isFlatMember(id, req.params.flatID, function (rows) {
                             if (rows.length>0 && rows[0].id != null) {
 
                                 statsDB.getValue(req.params.userID, req.params.flatID, function (rows) {
