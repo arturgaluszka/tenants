@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import com.example.tenantsproject.flatmates.R;
+import com.example.tenantsproject.flatmates.main_list.list.MainActivity;
 import com.example.tenantsproject.flatmates.main_list.list.MyList;
 import com.example.tenantsproject.flatmates.main_list.list.RowAdapter;
 import com.example.tenantsproject.flatmates.main_list.list.RowAdapterMyList;
@@ -38,6 +40,7 @@ public class SocialFragment extends ListFragment implements Updateable {
     ArrayList<Product> RowBean_data = new ArrayList<>();
     ProductService productService = new ProductService();
     RowAdapterMyList adapterMain;
+    int flat = -1;
 
 
     @Nullable
@@ -56,6 +59,17 @@ public class SocialFragment extends ListFragment implements Updateable {
                 onUpdate();
             }
         });
+
+        try{
+            MainActivity activity = (MainActivity) getActivity();
+            int a = activity.pos;
+            flat = a;
+            Log.d("liczba", String.valueOf(a));
+        }
+        catch (NullPointerException e){
+            Log.d("liczba", "lol");
+            flat = getMyActualFlat();
+        }
         onUpdate();
         return rootView;
     }
@@ -99,7 +113,11 @@ public class SocialFragment extends ListFragment implements Updateable {
 
     public void additems() {
         Response r5;
-        r5 = productService.getFlatProducts(getActivity(), getMyActualFlat(), getUserId(), ProductService.FILTER_ALL, ++page);
+        if(flat > -1){
+            r5 = productService.getFlatProducts(getActivity(), flat, 0, MainActivity.FILTER, ++page);}
+        else{
+            r5 = productService.getFlatProducts(getActivity(), getMyActualFlat(), 0, MainActivity.FILTER, ++page);
+        }
         products = (ArrayList<Product>) r5.getObject();
         if (!products.isEmpty()) {
 
@@ -143,7 +161,8 @@ public class SocialFragment extends ListFragment implements Updateable {
 
     public void onUpdate() {
         Response r4;
-        r4 = productService.getFlatProducts(getActivity(), getMyActualFlat(), getUserId(), ProductService.FILTER_ALL, 1);
+        if(flat > -1){r4 = productService.getFlatProducts(getActivity(), flat, getUserId(), MainActivity.FILTER, 1);}
+        else{r4 = productService.getFlatProducts(getActivity(), getMyActualFlat(), getUserId(), MainActivity.FILTER, 1);}
         switch (r4.getMessageCode()) {
             case Response.MESSAGE_OK:
                 page = 2;
@@ -153,7 +172,8 @@ public class SocialFragment extends ListFragment implements Updateable {
                 for (int i = 0; i < products.size(); i++) {
                     RowBean_data.add(products.get(i));
                 }
-                r4 = productService.getFlatProducts(getActivity(), getMyActualFlat(), getUserId(), ProductService.FILTER_ALL, 2);
+                if(flat > -1){r4 = productService.getFlatProducts(getActivity(), flat, getUserId(), MainActivity.FILTER, 2);}
+                else{r4 = productService.getFlatProducts(getActivity(), getMyActualFlat(), getUserId(), MainActivity.FILTER, 2);}
                 if (!products.isEmpty()) {
                     products = (ArrayList<Product>) r4.getObject();
                     for (int i = 0; i < products.size(); i++) {

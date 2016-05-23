@@ -1,14 +1,23 @@
 package com.example.tenantsproject.flatmates.archive.list;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
+import android.view.View;
 
 import com.example.tenantsproject.flatmates.R;
+import com.example.tenantsproject.flatmates.main_list.list.ArchInformation;
+import com.example.tenantsproject.flatmates.main_list.list.Information;
+import com.example.tenantsproject.flatmates.model.data.Product;
 
 public class MyArchiveList extends Activity {
+
+    Product prod;
+    Intent in;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_archive_list);
@@ -41,5 +50,14 @@ public class MyArchiveList extends Activity {
         }
         // let the system handle the event
         return super.onTouchEvent(event);
+    }
+
+    public void info(View view) {
+        in = getIntent();
+        prod = (Product) in.getExtras().getSerializable("Object");
+        Intent i = new Intent(this, ArchInformation.class);
+        i.putExtra("Object", prod);
+        startActivity(i);
+        finish();
     }
 }

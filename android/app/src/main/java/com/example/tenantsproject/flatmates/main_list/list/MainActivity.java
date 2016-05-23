@@ -34,14 +34,15 @@ import com.example.tenantsproject.flatmates.settings.user.Account;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    DrawerLayout mDrawerLayout;
-    NavigationView mNavigationView;
+    //DrawerLayout mDrawerLayout;
+   // NavigationView mNavigationView;
     FragmentManager mFragmentManager;
     FragmentTransaction mFragmentTransaction;
     Button searchButton;
     TextView txt1;
     Intent in;
-    public int pos;
+    public int pos = -1;
+    String name;
 
 
     ProductService productService = new ProductService();
@@ -58,11 +59,11 @@ public class MainActivity extends AppCompatActivity {
         try{
 
                 in = getIntent();
-                pos = Integer.parseInt(in.getExtras().getString("Position"));
-                String odb = in.getExtras().getString("Name");
-                Log.d("Name", odb);
-                Log.d("Position", String.valueOf(pos));
-                txt1.setText(odb);
+                pos = Integer.parseInt(in.getExtras().getString("FlatID"));
+                name = in.getExtras().getString("Name");
+                Log.d("Name", name);
+                Log.d("FlatID", String.valueOf(pos));
+                txt1.setText(name);
         }
         catch (NullPointerException e){
             txt1.setText(getMyFlatName());
@@ -90,8 +91,8 @@ public class MainActivity extends AppCompatActivity {
          *Setup the DrawerLayout and NavigationView
          */
 
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
-        mNavigationView = (NavigationView) findViewById(R.id.shitstuff);
+        //mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+       // mNavigationView = (NavigationView) findViewById(R.id.shitstuff);
 
         /**
          * Lets inflate the very first fragment
@@ -105,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
          * Setup click events on the Navigation View Items.
          */
 
-        mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+       /* mNavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 mDrawerLayout.closeDrawers();
@@ -114,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
 
-        });
+        });*/
 
 
         /**
@@ -122,12 +123,12 @@ public class MainActivity extends AppCompatActivity {
          */
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.app_name,
+      /* ActionBarDrawerToggle mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, toolbar, R.string.app_name,
                 R.string.app_name);
 
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        mDrawerToggle.syncState();
+        mDrawerToggle.syncState();*/
 
 
     }
@@ -207,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(new Intent(getApplicationContext(), Account.class));
 
                 }
-                if (item.getItemId() == R.id.logout){
+                if (item.getItemId() == R.id.logout) {
                     Authenticator at = new Authenticator();
                     at.logOut(MainActivity.this);
                     finish();
@@ -229,7 +230,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void archives(View view) {
-        startActivity(new Intent(getApplicationContext(), Archives.class));
+        Intent i;
+        i = new Intent(getApplicationContext(), Archives.class);
+        i.putExtra("Name", name);
+        i.putExtra("FlatID", pos);
+        startActivity(i);
         finish();
     }
 

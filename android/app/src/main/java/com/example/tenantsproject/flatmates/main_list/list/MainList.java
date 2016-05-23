@@ -9,9 +9,15 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.tenantsproject.flatmates.R;
+import com.example.tenantsproject.flatmates.main_list.fragments.PrimaryFragment;
 import com.example.tenantsproject.flatmates.model.data.Product;
+import com.example.tenantsproject.flatmates.model.rest.Response;
+import com.example.tenantsproject.flatmates.model.service.ProductService;
+import com.example.tenantsproject.flatmates.model.service.UserService;
+import com.example.tenantsproject.flatmates.security.Authenticator;
 
 import java.io.Serializable;
 
@@ -39,13 +45,54 @@ public class MainList extends Activity{
         Intent i = new Intent(this, BuyNowClick.class);
         i.putExtra("Object", prod);
         Log.d("lol", prod.getDescription());
+        if(getUserName(prod.getUser()).equals(getUserName(getUserId()))){
         startActivity(i);
-        finish();
+        finish();}
+        else{
+            Toast.makeText(this, getString(R.string.cant_delete), Toast.LENGTH_LONG).show();
+        }
 
     }
 
+    public void deleteFromMainList(View view) {
+        in = getIntent();
+        prod = (Product) in.getExtras().getSerializable("Object");
+        ProductService ps = new ProductService();
+        UserService us = new UserService();
+        Response r;
+        if(getUserName(prod.getCreator()).equals(getUserName(getUserId()))){
+        r = ps.removeFromMainList(this, prod);
+        Toast.makeText(this, getString(R.string.deleted)+": " + prod.getDescription(), Toast.LENGTH_LONG).show();
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);}
+        else{
+            Toast.makeText(this, getString(R.string.cant_delete), Toast.LENGTH_LONG).show();
+        }
+
+    }
+
+    public int getUserId() {
+        final Authenticator aut = new Authenticator();
+        final UserService userService = new UserService();
+        Response res;
+        res = userService.getUserID(this, aut.getLoggedInUserName(this));
+        int id = (int) res.getObject();
+        return id;
+    }
+
+    public String getUserName(int id){
+        Response rs;
+        UserService nf = new UserService();
+        rs = nf.getUser(this, id);
+        return String.valueOf(rs.getObject());
+    }
+
     public void info(View view) {
-        startActivity(new Intent(this, Information.class));
+        in = getIntent();
+        prod = (Product) in.getExtras().getSerializable("Object");
+        Intent i = new Intent(this, Information.class);
+        i.putExtra("Object", prod);
+        startActivity(i);
         finish();
     }
 
@@ -68,5 +115,16 @@ public class MainList extends Activity{
         }
         // let the system handle the event
         return super.onTouchEvent(event);
+    }
+    public void addToMyList(View view){
+        Response re;
+        in = getIntent();
+        prod = (Product) in.getExtras().getSerializable("Object");
+        ProductService productService = new ProductService();
+        re = productService.reserveProduct(this, prod);
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+        finish();
+        Toast.makeText(this, "Added to my list", Toast.LENGTH_LONG).show();
     }
 }

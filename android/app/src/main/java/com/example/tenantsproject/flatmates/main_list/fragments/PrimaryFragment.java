@@ -42,12 +42,12 @@ public class PrimaryFragment extends ListFragment implements Updateable {
     boolean flag_loading;
     RowAdapter adapterMain;
     Product prod;
-    int flat;
+    int flat = -1;
     MainActivity mn = new MainActivity();
 
 
     //TODO for Artur FILTERS not working
-    @Nullable
+
     @Override
 
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container,
@@ -94,22 +94,35 @@ public class PrimaryFragment extends ListFragment implements Updateable {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Response re;
+                int act = 0;
                 ProductService productService = new ProductService();
-                //TODO for Arur check reserver Product don't working
-                re = productService.reserveProduct(getContext(), RowBean_data.get(position));
-
+                if (RowBean_data.get(position).getUser()==getUserId()){
+                    re =productService.unreserveProduct(getContext(),RowBean_data.get(position));
+                    act = 1;
+                }else {
+                    re = productService.reserveProduct(getContext(), RowBean_data.get(position));
+                }
                 switch (re.getMessageCode()) {
                     case Response.MESSAGE_OK:
+                        if(act==0){
                         Toast.makeText(getActivity(), getString(R.string.add_to_list), Toast.LENGTH_LONG).show();
+                        }else{
+                            Toast.makeText(getActivity(), "Product unreserved", Toast.LENGTH_LONG).show();
+                        }
                         onUpdate();
                         break;
                     default:
                         if (RowBean_data.get(position).getUser() != 0) {
                             Toast.makeText(getActivity(), "Product already reserved", Toast.LENGTH_LONG).show();
                         } else {
-                            Toast.makeText(getActivity(), getString(R.string.error2), Toast.LENGTH_LONG).show();
+                            if(products.isEmpty()){
+                                Toast.makeText(getActivity(), getString(R.string.error6), Toast.LENGTH_LONG).show();
+                            }
+                            else{
+                                Toast.makeText(getActivity(), getString(R.string.error2), Toast.LENGTH_LONG).show();}
                         }
                 }
+
             }
 
         });
@@ -126,6 +139,7 @@ public class PrimaryFragment extends ListFragment implements Updateable {
                 i.putExtras(b);
                 Log.d("Lol", prod.getDescription());
                 startActivity(i);
+                onUpdate();
                 return true;
             }
         });
@@ -151,7 +165,11 @@ public class PrimaryFragment extends ListFragment implements Updateable {
     public void additems() {
 
         Response r5;
-        r5 = productService.getFlatProducts(getActivity(), getMyActualFlat(), 0, MainActivity.FILTER, ++page);
+        if(flat > -1){
+        r5 = productService.getFlatProducts(getActivity(), flat, 0, MainActivity.FILTER, ++page);}
+        else{
+            r5 = productService.getFlatProducts(getActivity(), getMyActualFlat(), 0, MainActivity.FILTER, ++page);
+        }
         Log.d(r5.toString(), r5.toString());
         products = (ArrayList<Product>) r5.getObject();
         if (!products.isEmpty()) {
@@ -164,6 +182,9 @@ public class PrimaryFragment extends ListFragment implements Updateable {
         }
         flag_loading = false;
     }
+
+
+
 
     public void uploadInBacground() {
         getListView().post(new Runnable() {
@@ -201,7 +222,8 @@ public class PrimaryFragment extends ListFragment implements Updateable {
 
     public void onUpdate() {
         Response r4;
-        r4 = productService.getFlatProducts(getActivity(), getMyActualFlat(), 0, MainActivity.FILTER, 1);
+        if(flat > -1){r4 = productService.getFlatProducts(getActivity(), flat, 0, MainActivity.FILTER, 1);}
+        else{r4 = productService.getFlatProducts(getActivity(), getMyActualFlat(), 0, MainActivity.FILTER, 1);}
         switch (r4.getMessageCode()) {
             case Response.MESSAGE_OK:
                 page = 2;
@@ -211,7 +233,9 @@ public class PrimaryFragment extends ListFragment implements Updateable {
                 for (int i = 0; i < products.size(); i++) {
                     RowBean_data.add(products.get(i));
                 }
-                r4 = productService.getFlatProducts(getActivity(), getMyActualFlat(), 0, MainActivity.FILTER, 2);
+
+                if(flat > -1){r4 = productService.getFlatProducts(getActivity(), flat, 0, MainActivity.FILTER, 2);}
+                else{r4 = productService.getFlatProducts(getActivity(), getMyActualFlat(), 0, MainActivity.FILTER, 2);}
                 products = (ArrayList<Product>) r4.getObject();
                 if (!products.isEmpty()) {
                     for (int i = 0; i < products.size(); i++) {

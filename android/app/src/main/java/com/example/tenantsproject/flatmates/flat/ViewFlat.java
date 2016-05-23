@@ -15,6 +15,7 @@ import com.example.tenantsproject.flatmates.archive.list.RowAdapterArchive;
 import com.example.tenantsproject.flatmates.model.rest.Response;
 import com.example.tenantsproject.flatmates.model.service.FlatService;
 import com.example.tenantsproject.flatmates.model.service.UserService;
+import com.example.tenantsproject.flatmates.security.Authenticator;
 
 import java.util.ArrayList;
 
@@ -71,7 +72,7 @@ public class ViewFlat extends Activity {
 
     void usersFlatID(){
         FlatService fServ = new FlatService();
-        Response rs = fServ.getFlatMembers(this, 2);
+        Response rs = fServ.getFlatMembers(this, getMyActualFlat());
         switch(rs.getMessageCode()){
             case Response.MESSAGE_OK:
                 usersID = (ArrayList<Integer>) rs.getObject();
@@ -85,6 +86,26 @@ public class ViewFlat extends Activity {
                 Log.d("fsdafa", "Fsafsa");
 
         }
+    }
+
+    public int getMyActualFlat() {
+        int actualFlatnumber;
+        Response response;
+        UserService userService = new UserService();
+        response = userService.getUserFlats(this, getUserId());
+        ArrayList<Integer> pa;
+        pa = (ArrayList<Integer>) response.getObject();
+        actualFlatnumber = pa.get(0);
+        return actualFlatnumber;
+    }
+
+    public int getUserId() {
+        final Authenticator aut = new Authenticator();
+        final UserService userService = new UserService();
+        Response res;
+        res = userService.getUserID(this, aut.getLoggedInUserName(this));
+        int id = (int) res.getObject();
+        return id;
     }
 
     public void getUserName(){

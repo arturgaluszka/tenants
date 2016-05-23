@@ -1,7 +1,7 @@
 var dbprops = {
     host: 'localhost',
     user: 'root',
-    password: 'Parasol3',
+    password: 'Asseco',
     database: 'android'
 };
 exports.dbprops = dbprops;

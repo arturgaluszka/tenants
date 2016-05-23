@@ -8,9 +8,14 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.tenantsproject.flatmates.R;
 import com.example.tenantsproject.flatmates.model.data.Product;
+import com.example.tenantsproject.flatmates.model.rest.Response;
+import com.example.tenantsproject.flatmates.model.service.ProductService;
+import com.example.tenantsproject.flatmates.model.service.UserService;
+import com.example.tenantsproject.flatmates.security.Authenticator;
 
 public class MyList extends Activity {
     Product prod;
@@ -26,7 +31,7 @@ public class MyList extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .5), (int) (height * .2));
+        getWindow().setLayout((int) (width * .5), (int) (height * .5));
     }
 
     public void BuyNow(View view) {
@@ -37,7 +42,31 @@ public class MyList extends Activity {
         Log.d("lol", prod.getDescription());
         startActivity(i);
         finish();
+    }
 
+    public void deleteFromMainList1(View view) {
+        in = getIntent();
+        prod = (Product) in.getExtras().getSerializable("Object");
+        ProductService ps = new ProductService();
+        UserService us = new UserService();
+        Response r;
+        if((String.valueOf(prod.getCreator()).equals(us.getUser(this, getUserId())))){
+        r = ps.removeFromMainList(this, prod);
+        Toast.makeText(this, getString(R.string.deleted) + ": " + prod.getDescription(), Toast.LENGTH_LONG).show();
+        Intent i = new Intent(this, MyList.class);
+        startActivity(i);}
+        else{
+            Toast.makeText(this, getString(R.string.cant_delete), Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void info(View view) {
+        in = getIntent();
+        prod = (Product) in.getExtras().getSerializable("Object");
+        Intent i = new Intent(this, Information.class);
+        i.putExtra("Object", prod);
+        startActivity(i);
+        finish();
     }
 
     public boolean onTouchEvent(MotionEvent event) {
@@ -60,5 +89,24 @@ public class MyList extends Activity {
         // let the system handle the event
         return super.onTouchEvent(event);
     }
+    public void addToMainList(View view){
+        Response re;
+        in = getIntent();
+        prod = (Product) in.getExtras().getSerializable("Object");
+        ProductService productService = new ProductService();
+        re = productService.unreserveProduct(this, prod);
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+        finish();
+        Toast.makeText(this, "Added to main list", Toast.LENGTH_LONG).show();
+    }
 
+    public int getUserId() {
+        final Authenticator aut = new Authenticator();
+        final UserService userService = new UserService();
+        Response res;
+        res = userService.getUserID(this, aut.getLoggedInUserName(this));
+        int id = (int) res.getObject();
+        return id;
+    }
 }

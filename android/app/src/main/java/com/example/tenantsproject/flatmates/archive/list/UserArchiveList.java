@@ -13,11 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tenantsproject.flatmates.R;
 import com.example.tenantsproject.flatmates.archive.fragments.TabFragment_users;
 import com.example.tenantsproject.flatmates.model.data.Product;
+import com.example.tenantsproject.flatmates.model.data.Statistics;
 import com.example.tenantsproject.flatmates.model.rest.Response;
 import com.example.tenantsproject.flatmates.model.service.StatsService;
 import com.example.tenantsproject.flatmates.model.service.UserService;
@@ -35,6 +37,8 @@ public class UserArchiveList extends ListFragment {
     ListView mainArchiveList;
     SwipeRefreshLayout swipeContainer;
     int userID;
+    int a = -1;
+    TextView txt1;
 
     @Nullable
     @Override
@@ -49,6 +53,7 @@ public class UserArchiveList extends ListFragment {
                 R.layout.custom_row_archive, RowBean_data); */
         mainArchiveList = (ListView) rootView.findViewById(R.id.MainArchiveList);
         setListAdapter(adapterMain);
+        txt1 = (TextView) rootView.findViewById(R.id.textView11);
 
         /*TabFragment_users f1 = new TabFragment_users();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -72,6 +77,29 @@ public class UserArchiveList extends ListFragment {
             Log.d("ID po przejsciu", "lol");
             userID = getUserId();
         }
+        Response response;
+        if(a == -1){
+        response = new StatsService().getStats(getActivity(), userID, a);
+        }
+        else{
+            response = new StatsService().getStats(getActivity(), userID, getMyActualFlat());
+        }
+        Statistics stats = null;
+        if(response.getMessageCode()==Response.MESSAGE_OK){
+            stats = (Statistics) response.getObject();
+        }
+        double sum = 0;
+        if(stats!=null) {
+            sum = stats.getSum();
+            txt1.setText(String.valueOf(sum));
+        }
+        else{
+            txt1.setText(String.valueOf(sum));
+        }
+
+        Archives activity = (Archives) getActivity();
+        a = activity.flatID;
+        Log.d("zmienna", String.valueOf(a));
         onUpdate();
         setHasOptionsMenu(true);
       /*  RowAdapterArchive adapterMain = new RowAdapterArchive(getActivity(),
@@ -109,7 +137,7 @@ public class UserArchiveList extends ListFragment {
 
     public void onUpdate(){
         Response r1;
-        r1 = stServ.getArchivalProducts(getActivity(), getMyActualFlat(), userID, StatsService.FILTER_ALL, 1);
+        r1 = stServ.getArchivalProducts(getActivity(), userID, getMyActualFlat(), StatsService.FILTER_ALL, 1);
         switch (r1.getMessageCode()) {
             case Response.MESSAGE_OK:
                 page = 2;
@@ -119,7 +147,7 @@ public class UserArchiveList extends ListFragment {
                 for (int i = 0; i < products.size(); i++) {
                     RowBean_data.add(products.get(i));
                 }
-                r1 = stServ.getArchivalProducts(getActivity(), getMyActualFlat(), userID, StatsService.FILTER_ALL, 2);
+                r1 = stServ.getArchivalProducts(getActivity(), userID, getMyActualFlat(), StatsService.FILTER_ALL, 2);
                 products = (ArrayList<Product>) r1.getObject();
                 if (!products.isEmpty()) {
                     for (int i = 0; i < products.size(); i++) {

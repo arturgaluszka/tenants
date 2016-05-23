@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Information extends Activity {
+public class ArchInformation extends Activity {
 
     Product prod;
     Intent in;
@@ -30,7 +30,7 @@ public class Information extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_informations);
+        setContentView(R.layout.activity_arch_information);
 
         txt1 = (TextView) findViewById(R.id.textView28);
         txt2 = (TextView) findViewById(R.id.textView29);
@@ -39,7 +39,7 @@ public class Information extends Activity {
         in = getIntent();
         prod = (Product) in.getExtras().getSerializable("Object");
 
-        txt1.setText(getNameById(prod.getCreator()));
+        txt1.setText(getNameById(prod.getUser()));
         txt2.setText(prod.getDescription());
         txt3.setText(String.valueOf(prod.getModificationDate()));
 

@@ -44,7 +44,7 @@
     <string name="all">All</string>
     <string name="reserved">Reserved</string>
     <string name="active">Active</string>
-    <string name="view_user">View Users in Flat</string>
+    <string name="view_user">View Users</string>
     <string name="sgn_flat">Sign to Flat</string>
     <string name="add_to_list">Added to my list</string>
     <string name="error2">ERROR, Please check your internet connection</string>
@@ -57,7 +57,11 @@
     <string name="amount">Amount: </string>
     <string name="sgn_out">Sign out of flat</string>
     <string name="error5">Logout failed...</string>
+    <string name="error6">Your list is empty</string>
     <string name="change2">Pass was changed</string>
+    <string name="delete">Delete</string>
+    <string name="deleted">Deleted</string>
+    <string name="cant_delete">You cannot delete this product</string>
 
     <string-array name="language">
         <item>@string/select</item>

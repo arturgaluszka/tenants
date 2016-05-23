@@ -58,31 +58,33 @@ public class BuyNowClick extends Activity {
         return super.onTouchEvent(event);
     }
 
-    public void buy(View v){
+    public void buy(View v) {
         edtText = (EditText) findViewById(R.id.editText);
         Response buy;
         in = getIntent();
         prod = (Product) in.getExtras().getSerializable("Object");
         digitsOnly = TextUtils.isDigitsOnly(edtText.getText());
-        if(digitsOnly){
+        if (digitsOnly) {
+            prod.setPrice(Double.parseDouble(edtText.getText().toString()));
             buy = prdServ.buyProduct(this, prod);
-        switch (buy.getMessageCode()) {
-            case Response.MESSAGE_OK:
+            switch (buy.getMessageCode()) {
+                case Response.MESSAGE_OK:
 
-                Toast.makeText(this, getString(R.string.bought)+" " + prod.getDescription(), Toast.LENGTH_LONG).show();
-                prod.setPrice(Double.parseDouble(edtText.getText().toString()));
-
-                break;
-
-            default:
-                Toast toast2 = Toast.makeText(this, getString(R.string.error4), Toast.LENGTH_LONG);
-                toast2.show();
-
-        }
+                    Toast.makeText(this, getString(R.string.bought) + " " + prod.getDescription(), Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(this, MainActivity.class);
+                    startActivity(i);
 
 
-    }
-        else{
+                    break;
+
+                default:
+                    Toast toast2 = Toast.makeText(this, getString(R.string.error4), Toast.LENGTH_LONG);
+                    toast2.show();
+
+            }
+
+
+        } else {
             Toast toast2 = Toast.makeText(this, getString(R.string.error3), Toast.LENGTH_LONG);
             toast2.show();
         }

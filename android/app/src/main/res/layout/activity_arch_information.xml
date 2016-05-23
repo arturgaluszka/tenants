@@ -47,7 +47,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_margin="10dp"
             android:textColor="@color/black"
-            android:text="Author:"
+            android:text="Buyer:"
             android:id="@+id/textView24"
             android:layout_below="@+id/view"
             android:visibility="visible" />
