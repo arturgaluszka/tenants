@@ -41,8 +41,14 @@ public class MyList extends Activity {
         Intent i = new Intent(this, BuyNowClick.class);
         i.putExtra("Object", prod);
         Log.d("lol", prod.getDescription());
+        UserService us = new UserService();
+        Response r;
+        if((String.valueOf(prod.getCreator()).equals(us.getUser(this, getUserId())))){
         startActivity(i);
-        finish();
+        finish();}
+        else{
+            Toast.makeText(this, getString(R.string.cant_delete), Toast.LENGTH_LONG).show();
+        }
 
     }
 

@@ -216,7 +216,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
 
-                Toast.makeText(MainActivity.this, "You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, "You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
 
                 return true;
             }

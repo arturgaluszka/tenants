@@ -80,10 +80,10 @@ public class UserArchiveList extends ListFragment {
 
         Response response;
         if(a == -1){
-        response = new StatsService().getStats(getActivity(), userID, a);
+        response = new StatsService().getStats(getActivity(), userID, getMyActualFlat());
         }
         else{
-            response = new StatsService().getStats(getActivity(), userID, getMyActualFlat());
+            response = new StatsService().getStats(getActivity(), userID, a);
         }
 
         Statistics stats = null;

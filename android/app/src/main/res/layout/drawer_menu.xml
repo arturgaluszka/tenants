@@ -3,17 +3,4 @@
     android:layout_width="wrap_content"
     >
 
-    <item android:title="My Flats"
-        android:layout_marginTop="100dp"
-        android:id="@+id/MyFlat"
-        android:icon="@drawable/three" />
-    <item
-        android:id="@+id/MyFlat1"
-        android:title="My Flat1" />
-
-    <item
-        android:id="@+id/Myflat2"
-        android:title="My Flat2"
-        />
-
 </menu>
