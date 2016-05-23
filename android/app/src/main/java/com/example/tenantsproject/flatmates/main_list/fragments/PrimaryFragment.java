@@ -185,7 +185,10 @@ public class PrimaryFragment extends ListFragment implements Updateable {
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d615d36a526aacb054df3d9149c5d63002f7be61
     public void uploadInBacground() {
         getListView().post(new Runnable() {
             @Override

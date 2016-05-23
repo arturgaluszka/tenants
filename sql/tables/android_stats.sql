@@ -16,28 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `flats`
+-- Table structure for table `stats`
 --
 
-DROP TABLE IF EXISTS `flats`;
+DROP TABLE IF EXISTS `stats`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `flats` (
+CREATE TABLE `stats` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `password` varchar(45) DEFAULT NULL,
-  `name` varchar(45) DEFAULT NULL,
+  `userID` int(11) DEFAULT '0',
+  `sum` decimal(12,0) DEFAULT '0',
+  `flatID` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `flats`
+-- Dumping data for table `stats`
 --
 
-LOCK TABLES `flats` WRITE;
-/*!40000 ALTER TABLE `flats` DISABLE KEYS */;
-INSERT INTO `flats` VALUES (2,'3da541559918a808c2402bba5012f6c60b27661c','flat1');
-/*!40000 ALTER TABLE `flats` ENABLE KEYS */;
+LOCK TABLES `stats` WRITE;
+/*!40000 ALTER TABLE `stats` DISABLE KEYS */;
+INSERT INTO `stats` VALUES (1,2,91,1),(2,3,18,1),(3,4,8,1),(4,5,10,1),(5,6,56,2),(6,7,47,2),(7,0,127,1),(8,0,277,2),(9,2,174,2);
+/*!40000 ALTER TABLE `stats` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-17 22:45:52
+-- Dump completed on 2016-05-20  7:00:31

@@ -16,28 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `flatsigns`
+-- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `flatsigns`;
+DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `flatsigns` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `userID` int(11) DEFAULT NULL,
-  `flatID` int(11) DEFAULT NULL,
+  `username` varchar(45) DEFAULT NULL,
+  `password` varchar(45) DEFAULT NULL,
+  `language` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `flatsigns`
+-- Dumping data for table `users`
 --
 
-LOCK TABLES `flatsigns` WRITE;
-/*!40000 ALTER TABLE `flatsigns` DISABLE KEYS */;
-INSERT INTO `flatsigns` VALUES (5,1,2),(6,2,2);
-/*!40000 ALTER TABLE `flatsigns` ENABLE KEYS */;
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'test','a94a8fe5ccb19ba61c4c0873d391e987982fbbd3','PL'),(2,'Kuba','1d60c7d63f19450cd67c2331630ab0e5df3b9a5d','PL'),(3,'Pawel','53755a9fffb23470a040f163a7c621749a239af8','PL'),(4,'Adrian','5815f22f5440e0a5747fca85e5da3f942434da18','PL'),(5,'Mikolaj','2b8c1c2994fd0a237d7559a9cfd3370b93cb37e0','PL'),(6,'Piekarz','a387757aabd0ab15067ee958320fda92209fc60b','PL'),(7,'Sprzedawca','c66c76d1a1f3b65b6d481c2ceea2a3d56a15946f','PL');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -49,4 +50,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-17 22:45:52
+-- Dump completed on 2016-05-20  7:00:31

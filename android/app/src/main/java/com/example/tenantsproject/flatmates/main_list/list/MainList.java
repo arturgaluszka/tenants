@@ -16,8 +16,11 @@ import com.example.tenantsproject.flatmates.main_list.fragments.PrimaryFragment;
 import com.example.tenantsproject.flatmates.model.data.Product;
 import com.example.tenantsproject.flatmates.model.rest.Response;
 import com.example.tenantsproject.flatmates.model.service.ProductService;
+<<<<<<< HEAD
 import com.example.tenantsproject.flatmates.model.service.UserService;
 import com.example.tenantsproject.flatmates.security.Authenticator;
+=======
+>>>>>>> d615d36a526aacb054df3d9149c5d63002f7be61
 
 import java.io.Serializable;
 
@@ -58,6 +61,7 @@ public class MainList extends Activity{
         in = getIntent();
         prod = (Product) in.getExtras().getSerializable("Object");
         ProductService ps = new ProductService();
+<<<<<<< HEAD
         UserService us = new UserService();
         Response r;
         if(getUserName(prod.getCreator()).equals(getUserName(getUserId()))){
@@ -85,6 +89,13 @@ public class MainList extends Activity{
         UserService nf = new UserService();
         rs = nf.getUser(this, id);
         return String.valueOf(rs.getObject());
+=======
+        Response r;
+        r = ps.removeFromMainList(this, prod);
+        Toast.makeText(this, getString(R.string.deleted)+": " + prod.getDescription(), Toast.LENGTH_LONG).show();
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+>>>>>>> d615d36a526aacb054df3d9149c5d63002f7be61
     }
 
     public void info(View view) {

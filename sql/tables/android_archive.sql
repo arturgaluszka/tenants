@@ -16,14 +16,14 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `products`
+-- Table structure for table `archive`
 --
 
-DROP TABLE IF EXISTS `products`;
+DROP TABLE IF EXISTS `archive`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `products` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `archive` (
+  `id` int(11) NOT NULL,
   `done` int(11) DEFAULT NULL,
   `price` decimal(12,0) DEFAULT NULL,
   `description` varchar(45) DEFAULT NULL,
@@ -32,17 +32,17 @@ CREATE TABLE `products` (
   `creator` int(11) DEFAULT NULL,
   `modificationDate` bigint(12) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `products`
+-- Dumping data for table `archive`
 --
 
-LOCK TABLES `products` WRITE;
-/*!40000 ALTER TABLE `products` DISABLE KEYS */;
-INSERT INTO `products` VALUES (1,0,15,'readded',2,2,2,1460921665708),(2,0,40,'test1',2,2,2,1460918907082),(3,0,2,'test1',2,2,2,1459794467708);
-/*!40000 ALTER TABLE `products` ENABLE KEYS */;
+LOCK TABLES `archive` WRITE;
+/*!40000 ALTER TABLE `archive` DISABLE KEYS */;
+INSERT INTO `archive` VALUES (21,1,3,'Cola',1,2,2,1461742318600),(22,1,4,'Nasiona',1,2,3,1461742318600),(23,1,5,'Szklanka',1,2,4,1461742318600),(24,1,3,'Maslo',1,2,5,1461742318600),(25,1,4,'Ketchup',1,2,2,1461742318600),(26,1,12,'Kawa',1,2,3,1461742318600),(27,1,19,'Herbata',1,2,4,1461742318600),(28,1,15,'Mieso',1,2,5,1461742318600),(29,1,9,'Syrop',1,2,2,1461742318600),(30,1,2,'Pieprz',1,2,3,1461742318600),(31,1,8,'Baterie',1,2,4,1461742318600),(32,1,7,'Lody',1,2,5,1461742318600),(33,1,30,'Wegiel',2,2,2,1461742318600),(34,1,50,'Maka',2,2,6,1461742318600),(35,1,34,'E666',2,2,7,1461742318600),(36,1,33,'E667',2,2,2,1461742318600),(37,1,5,'Sezam',2,2,6,1461742318600),(38,1,22,'Przepis',2,2,7,1461742318600),(39,1,6,'Pepsi',1,3,4,1461742318600),(40,1,4,'Worki',1,4,5,1461742318600),(41,1,7,'Dlugopis',1,5,2,1461742318600),(42,1,12,'Kartki',1,3,5,1461742318600),(43,1,4,'Gabki',1,4,3,1461742318600),(44,1,3,'Serek',1,5,4,1461742318600),(45,1,50,'Maka',2,6,2,1461742318600),(46,1,44,'Noz',2,7,2,1461742318600),(47,1,6,'Tacka',2,6,7,1461742318600),(48,1,3,'Chleb',2,7,6,1461742318600);
+/*!40000 ALTER TABLE `archive` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-17 22:45:52
+-- Dump completed on 2016-05-20  7:00:31

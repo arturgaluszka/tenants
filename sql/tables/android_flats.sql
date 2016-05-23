@@ -16,29 +16,28 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `users`
+-- Table structure for table `flats`
 --
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `flats`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users` (
+CREATE TABLE `flats` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(45) DEFAULT NULL,
   `password` varchar(45) DEFAULT NULL,
-  `language` varchar(45) DEFAULT NULL,
+  `name` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `flats`
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'NOVA','3da541559918a808c2402bba5012f6c60b27661c','PL'),(2,'Strajk','3da541559918a808c2402bba5012f6c60b27661c','EN'),(3,'Bajlo','3da541559918a808c2402bba5012f6c60b27661c','PL');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+LOCK TABLES `flats` WRITE;
+/*!40000 ALTER TABLE `flats` DISABLE KEYS */;
+INSERT INTO `flats` VALUES (1,'388755dff29377f3288247a1f943bddd1aa5970b','kobierzynska'),(2,'d09e0ccb191adcf639b3b74280edf157b545952a','piekarnia');
+/*!40000 ALTER TABLE `flats` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -50,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-05-01 19:26:10
+-- Dump completed on 2016-05-20  7:00:31

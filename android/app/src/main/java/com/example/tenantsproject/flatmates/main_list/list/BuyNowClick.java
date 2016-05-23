@@ -64,15 +64,24 @@ public class BuyNowClick extends Activity {
         in = getIntent();
         prod = (Product) in.getExtras().getSerializable("Object");
         digitsOnly = TextUtils.isDigitsOnly(edtText.getText());
+<<<<<<< HEAD
         if (digitsOnly) {
+=======
+        if(digitsOnly){
+>>>>>>> d615d36a526aacb054df3d9149c5d63002f7be61
             prod.setPrice(Double.parseDouble(edtText.getText().toString()));
             buy = prdServ.buyProduct(this, prod);
             switch (buy.getMessageCode()) {
                 case Response.MESSAGE_OK:
 
+<<<<<<< HEAD
                     Toast.makeText(this, getString(R.string.bought) + " " + prod.getDescription(), Toast.LENGTH_LONG).show();
                     Intent i = new Intent(this, MainActivity.class);
                     startActivity(i);
+=======
+                Toast.makeText(this, getString(R.string.bought)+" " + prod.getDescription(), Toast.LENGTH_LONG).show();
+
+>>>>>>> d615d36a526aacb054df3d9149c5d63002f7be61
 
 
                     break;

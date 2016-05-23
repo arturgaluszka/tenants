@@ -61,7 +61,10 @@
     <string name="change2">Pass was changed</string>
     <string name="delete">Delete</string>
     <string name="deleted">Deleted</string>
+<<<<<<< HEAD
     <string name="cant_delete">You cannot delete this product</string>
+=======
+>>>>>>> d615d36a526aacb054df3d9149c5d63002f7be61
 
     <string-array name="language">
         <item>@string/select</item>
