@@ -77,7 +77,7 @@ public class UserArchiveList extends ListFragment {
             Log.d("ID po przejsciu", "lol");
             userID = getUserId();
         }
-<<<<<<< HEAD
+
         Response response;
         if(a == -1){
         response = new StatsService().getStats(getActivity(), userID, a);
@@ -85,9 +85,7 @@ public class UserArchiveList extends ListFragment {
         else{
             response = new StatsService().getStats(getActivity(), userID, getMyActualFlat());
         }
-=======
-        Response response = new StatsService().getStats(getActivity(), 2, a);
->>>>>>> d615d36a526aacb054df3d9149c5d63002f7be61
+
         Statistics stats = null;
         if(response.getMessageCode()==Response.MESSAGE_OK){
             stats = (Statistics) response.getObject();
@@ -97,12 +95,11 @@ public class UserArchiveList extends ListFragment {
             sum = stats.getSum();
             txt1.setText(String.valueOf(sum));
         }
-<<<<<<< HEAD
+
         else{
             txt1.setText(String.valueOf(sum));
         }
-=======
->>>>>>> d615d36a526aacb054df3d9149c5d63002f7be61
+
 
         Archives activity = (Archives) getActivity();
         a = activity.flatID;

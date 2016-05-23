@@ -22,11 +22,7 @@
 
     <View
         android:layout_width="match_parent"
-<<<<<<< HEAD
         android:layout_height="1dp"
-=======
-        android:layout_height="4dp"
->>>>>>> d615d36a526aacb054df3d9149c5d63002f7be61
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/textView3"
@@ -64,15 +60,11 @@
         android:clickable="true"
         android:fontFamily="sans-serif-medium"
         android:text="@string/add_list"
-<<<<<<< HEAD
         android:onClick="addToMyList"
         android:textColor="#0b0a0a"
         android:textSize="18dp" />
-=======
-        android:textColor="#0b0a0a"
-        android:textSize="18dp" />
 
->>>>>>> d615d36a526aacb054df3d9149c5d63002f7be61
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -81,7 +73,7 @@
         android:layout_below="@+id/textView3"
         android:background="#c0d1df" />
 
-<<<<<<< HEAD
+
     <TextView
         android:id="@+id/textView19"
         android:layout_width="wrap_content"
@@ -96,8 +88,7 @@
         android:textColor="#0b0a0a"
         android:textSize="18dp" />
 
-=======
->>>>>>> d615d36a526aacb054df3d9149c5d63002f7be61
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

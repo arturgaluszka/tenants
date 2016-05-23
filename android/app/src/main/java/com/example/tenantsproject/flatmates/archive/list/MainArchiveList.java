@@ -35,7 +35,7 @@ public class MainArchiveList extends ListFragment {
     ListView mainArchiveList;
     SwipeRefreshLayout swipeContainer;
     ArrayList<Product> products = new ArrayList<>();
-   // PrimaryFragment.RowBean_data;
+    // PrimaryFragment.RowBean_data;
     StatsService stServ = new StatsService();
     ArrayList<Product> RowBean_data = new ArrayList<>();
     RowAdapterArchive adapterMain;
@@ -66,11 +66,7 @@ public class MainArchiveList extends ListFragment {
                 txt1.setText("sum");
         }*/
 
-<<<<<<< HEAD
         Response response = new StatsService().getStats(getActivity(), 0, getMyActualFlat());
-=======
-        Response response = new StatsService().getStats(getActivity(), 2, getMyActualFlat());
->>>>>>> d615d36a526aacb054df3d9149c5d63002f7be61
         Statistics stats = null;
         if(response.getMessageCode()==Response.MESSAGE_OK){
             stats = (Statistics) response.getObject();
@@ -80,13 +76,9 @@ public class MainArchiveList extends ListFragment {
             sum = stats.getSum();
             txt1.setText(String.valueOf(sum));
         }
-<<<<<<< HEAD
-        else
-        {
+        else {
             txt1.setText(String.valueOf(sum));
         }
-=======
->>>>>>> d615d36a526aacb054df3d9149c5d63002f7be61
 
         Archives activity = (Archives) getActivity();
         a = activity.flatID;
@@ -143,42 +135,12 @@ public class MainArchiveList extends ListFragment {
 
     }
 
-<<<<<<< HEAD
     public void onUpdate(){
         Response r1;
         if(a==-1){
-        r1 = stServ.getArchivalProducts(getActivity(), 0, getMyActualFlat(), StatsService.FILTER_ALL, 1);}
+            r1 = stServ.getArchivalProducts(getActivity(), 0, getMyActualFlat(), StatsService.FILTER_ALL, 1);}
         else{
             r1 = stServ.getArchivalProducts(getActivity(), 0, a, StatsService.FILTER_ALL, 1);
-=======
-    public void additems() {
-        Response r5;
-        if(a<-1){
-        r5 = stServ.getArchivalProducts(getActivity(), getMyActualFlat(), 0, StatsService.FILTER_ALL, ++page);}
-        else{
-            r5 = stServ.getArchivalProducts(getActivity(), a, 0, StatsService.FILTER_ALL, ++page);
-        }
-        Log.d(r5.toString(), r5.toString());
-        products = (ArrayList<Product>) r5.getObject();
-
-        if (!products.isEmpty()) {
-            for (int i = 0; i < products.size(); i++) {
-                RowBean_data.add(products.get(i));
-
-            }
-            adapterMain.notifyDataSetChanged();
-            flag_loading = false;
-        }
-        flag_loading = false;
-    }
-
-    public void onUpdate(){
-        Response r1;
-        if(a==-1){
-        r1 = stServ.getArchivalProducts(getActivity(), getMyActualFlat(), 2, StatsService.FILTER_ALL, 1);}
-        else{
-            r1 = stServ.getArchivalProducts(getActivity(), a, 2, StatsService.FILTER_ALL, 1);
->>>>>>> d615d36a526aacb054df3d9149c5d63002f7be61
         }
 
         switch (r1.getMessageCode()) {
@@ -190,17 +152,10 @@ public class MainArchiveList extends ListFragment {
                 for (int i = 0; i < products.size(); i++) {
                     RowBean_data.add(products.get(i));
                 }
-<<<<<<< HEAD
                 if(a==-1){
                     r1 = stServ.getArchivalProducts(getActivity(), 0, getMyActualFlat(), StatsService.FILTER_ALL, 2);}
                 else{
                     r1 = stServ.getArchivalProducts(getActivity(), 0, a, StatsService.FILTER_ALL, 2);
-=======
-                if(a==1){
-                    r1 = stServ.getArchivalProducts(getActivity(), getMyActualFlat(), 2, StatsService.FILTER_ALL, 2);}
-                else{
-                    r1 = stServ.getArchivalProducts(getActivity(), a, 2, StatsService.FILTER_ALL, 2);
->>>>>>> d615d36a526aacb054df3d9149c5d63002f7be61
                 }
                 products = (ArrayList<Product>) r1.getObject();
                 if (!products.isEmpty()) {
@@ -210,7 +165,7 @@ public class MainArchiveList extends ListFragment {
                 }
                 adapterMain.notifyDataSetChanged();
                 setHasOptionsMenu(true);
-               // swipeContainer.setRefreshing(false);
+                // swipeContainer.setRefreshing(false);
                 break;
             default:
                 if(products.isEmpty()){

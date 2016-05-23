@@ -13,12 +13,10 @@ import android.widget.Toast;
 import com.example.tenantsproject.flatmates.R;
 import com.example.tenantsproject.flatmates.model.data.Product;
 import com.example.tenantsproject.flatmates.model.rest.Response;
-<<<<<<< HEAD
 import com.example.tenantsproject.flatmates.model.service.ProductService;
 import com.example.tenantsproject.flatmates.model.service.UserService;
 import com.example.tenantsproject.flatmates.security.Authenticator;
-=======
->>>>>>> d615d36a526aacb054df3d9149c5d63002f7be61
+
 
 public class MyList extends Activity {
     Product prod;
@@ -45,7 +43,7 @@ public class MyList extends Activity {
         Log.d("lol", prod.getDescription());
         startActivity(i);
         finish();
-<<<<<<< HEAD
+
     }
 
     public void deleteFromMainList1(View view) {
@@ -71,8 +69,7 @@ public class MyList extends Activity {
         i.putExtra("Object", prod);
         startActivity(i);
         finish();
-=======
->>>>>>> d615d36a526aacb054df3d9149c5d63002f7be61
+
     }
 
     public boolean onTouchEvent(MotionEvent event) {

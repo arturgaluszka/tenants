@@ -186,7 +186,6 @@ public class Archives extends AppCompatActivity {
 
     void usersFlatID(){
         FlatService fServ = new FlatService();
-<<<<<<< HEAD
         if(flatID>-1) {
             Response rs = fServ.getFlatMembers(this, flatID);
             switch(rs.getMessageCode()){
@@ -196,15 +195,6 @@ public class Archives extends AppCompatActivity {
                         for (int i = 0; i < usersID.size(); i++) {
                             Log.d("LOL", String.valueOf(usersID.get(i)));
                         }
-=======
-        Response rs = fServ.getFlatMembers(this, flatID);
-        switch(rs.getMessageCode()){
-            case Response.MESSAGE_OK:
-                usersID = (ArrayList<Integer>) rs.getObject();
-                if (!usersID.isEmpty()) {
-                    for (int i = 0; i < usersID.size(); i++) {
-                        Log.d("LOL", String.valueOf(usersID.get(i)));
->>>>>>> d615d36a526aacb054df3d9149c5d63002f7be61
                     }
                     break;
                 default:
