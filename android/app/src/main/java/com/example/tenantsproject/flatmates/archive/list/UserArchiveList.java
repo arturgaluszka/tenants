@@ -3,8 +3,6 @@ package com.example.tenantsproject.flatmates.archive.list;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -17,7 +15,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tenantsproject.flatmates.R;
-import com.example.tenantsproject.flatmates.archive.fragments.TabFragment_users;
 import com.example.tenantsproject.flatmates.model.data.Product;
 import com.example.tenantsproject.flatmates.model.data.Statistics;
 import com.example.tenantsproject.flatmates.model.rest.Response;
@@ -40,7 +37,7 @@ public class UserArchiveList extends ListFragment {
     int a = -1;
     TextView txt1;
 
-    @Nullable
+
     @Override
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -130,8 +127,8 @@ public class UserArchiveList extends ListFragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            int arg2, long arg3) {
-                Toast.makeText(getActivity(), "On long click listener", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(getActivity(), MyArchiveListMenu.class));
+                //Toast.makeText(getActivity(), "On long click listener", Toast.LENGTH_LONG).show();
+                startActivity(new Intent(getActivity(), MyArchiveList.class));
 
                 return true;
             }
@@ -163,8 +160,13 @@ public class UserArchiveList extends ListFragment {
                 // swipeContainer.setRefreshing(false);
                 break;
             default:
-                Toast.makeText(getActivity(), getString(R.string.error2), Toast.LENGTH_LONG).show();
-                // swipeContainer.setRefreshing(false);
+                if(products.isEmpty()){
+                    Toast.makeText(getActivity(), getString(R.string.error6), Toast.LENGTH_LONG).show();
+
+                }
+                else{
+                    Toast.makeText(getActivity(), getString(R.string.error2), Toast.LENGTH_LONG).show();
+                    }
 
         }
     }

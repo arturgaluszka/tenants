@@ -2,7 +2,6 @@ package com.example.tenantsproject.flatmates.archive.list;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -15,18 +14,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tenantsproject.flatmates.R;
-import com.example.tenantsproject.flatmates.main_list.fragments.PrimaryFragment;
-import com.example.tenantsproject.flatmates.main_list.list.MainActivity;
-import com.example.tenantsproject.flatmates.main_list.list.RowAdapter;
 import com.example.tenantsproject.flatmates.model.data.Product;
 import com.example.tenantsproject.flatmates.model.data.Statistics;
 import com.example.tenantsproject.flatmates.model.rest.Response;
-import com.example.tenantsproject.flatmates.model.service.ProductService;
 import com.example.tenantsproject.flatmates.model.service.StatsService;
 import com.example.tenantsproject.flatmates.model.service.UserService;
 import com.example.tenantsproject.flatmates.security.Authenticator;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -44,9 +37,8 @@ public class MainArchiveList extends ListFragment {
     boolean flag_loading;
     ///double sum = 0;
     int a = -1;
+    Product prod;
 
-
-    @Nullable
     @Override
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -76,7 +68,7 @@ public class MainArchiveList extends ListFragment {
             sum = stats.getSum();
             txt1.setText(String.valueOf(sum));
         }
-        else {
+        else{
             txt1.setText(String.valueOf(sum));
         }
 
@@ -113,7 +105,7 @@ public class MainArchiveList extends ListFragment {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Response re;
+               /* Response re;
                 StatsService stsServ = new StatsService();
                 //TODO for Arur check reserver Product don't working
                 re = stsServ.undoBuy(getContext(), RowBean_data.get(position));
@@ -128,8 +120,16 @@ public class MainArchiveList extends ListFragment {
                         }
                         else{
                             Toast.makeText(getActivity(), getString(R.string.error2), Toast.LENGTH_LONG).show();}
-                }
+                }*/
+                prod = RowBean_data.get(position);
+                Intent i = new Intent(getActivity(), MyArchiveList.class);
+                Bundle b = new Bundle();
+                b.putSerializable("Object", prod);
+                i.putExtras(b);
+                startActivity(i);
+
             }
+
 
         });
 

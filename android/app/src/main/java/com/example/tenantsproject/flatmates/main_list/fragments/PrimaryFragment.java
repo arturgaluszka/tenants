@@ -3,8 +3,6 @@ package com.example.tenantsproject.flatmates.main_list.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -26,9 +24,7 @@ import com.example.tenantsproject.flatmates.model.service.ProductService;
 import com.example.tenantsproject.flatmates.model.service.UserService;
 import com.example.tenantsproject.flatmates.security.Authenticator;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Objects;
 
 
 public class PrimaryFragment extends ListFragment implements Updateable {
@@ -247,8 +243,13 @@ public class PrimaryFragment extends ListFragment implements Updateable {
                 swipeContainer.setRefreshing(false);
                 break;
             default:
-                Toast.makeText(getActivity(), getString(R.string.error2), Toast.LENGTH_LONG).show();
-                swipeContainer.setRefreshing(false);
+                if(products.isEmpty()){
+                    Toast.makeText(getActivity(), getString(R.string.error6), Toast.LENGTH_LONG).show();
+                    swipeContainer.setRefreshing(false);
+                }
+                else{
+                    Toast.makeText(getActivity(), getString(R.string.error2), Toast.LENGTH_LONG).show();
+                    swipeContainer.setRefreshing(false);}
 
         }
 

@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.tenantsproject.flatmates.R;
+import com.example.tenantsproject.flatmates.login.Login_flat;
 import com.example.tenantsproject.flatmates.model.rest.Response;
 import com.example.tenantsproject.flatmates.model.service.UserService;
 import com.example.tenantsproject.flatmates.security.Authenticator;
@@ -32,7 +33,7 @@ public class Flat extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .7), (int) (height * .7));
+        getWindow().setLayout((int) (width * .7), (int) (height * .62));
     }
 
     final int CONTEXT_MENU_ADD = 1;
@@ -95,6 +96,8 @@ public class Flat extends Activity {
                 switch(r.getMessageCode()){
                     case Response.MESSAGE_OK:
                         Toast.makeText(this, getString(R.string.success), Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(this, Login_flat.class));
+                        finish();
                         break;
                     default:
                         Toast.makeText(this, getString(R.string.error5), Toast.LENGTH_LONG).show();

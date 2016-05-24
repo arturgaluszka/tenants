@@ -25,7 +25,7 @@ public class Information extends Activity {
     TextView txt1;
     TextView txt2;
     TextView txt3;
-    DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss.SSS");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,10 +38,11 @@ public class Information extends Activity {
 
         in = getIntent();
         prod = (Product) in.getExtras().getSerializable("Object");
+        long data = prod.getModificationDate();
 
         txt1.setText(getNameById(prod.getCreator()));
         txt2.setText(prod.getDescription());
-        txt3.setText(String.valueOf(prod.getModificationDate()));
+        txt3.setText(String.valueOf(new Date(data)));
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -49,7 +50,7 @@ public class Information extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .7), (int) (height * .4));
+        getWindow().setLayout((int) (width * .7), (int) (height * .35));
     }
 
     public String getNameById(int id){

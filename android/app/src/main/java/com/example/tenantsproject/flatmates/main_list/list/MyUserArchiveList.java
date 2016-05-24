@@ -11,18 +11,19 @@ import android.widget.Toast;
 
 import com.example.tenantsproject.flatmates.R;
 import com.example.tenantsproject.flatmates.main_list.list.ArchInformation;
+import com.example.tenantsproject.flatmates.main_list.list.MainActivity;
 import com.example.tenantsproject.flatmates.model.data.Product;
 import com.example.tenantsproject.flatmates.model.rest.Response;
 import com.example.tenantsproject.flatmates.model.service.StatsService;
 
-public class MyArchiveList extends Activity {
+public class MyUserArchiveList extends Activity {
 
     Product prod;
     Intent in;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.my_archive_list);
+        setContentView(R.layout.activity_my_user_archive_list);
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -70,7 +71,7 @@ public class MyArchiveList extends Activity {
         StatsService stsServ = new StatsService();
         //TODO for Arur check reserver Product don't working
         re = stsServ.undoBuy(this, prod);
-        Intent i = new Intent(this, Archives.class);
+        Intent i = new Intent(this, MainActivity.class);
         Toast.makeText(this, getString(R.string.undo), Toast.LENGTH_SHORT).show();
         startActivity(i);
         finish();

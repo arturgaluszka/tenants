@@ -2,9 +2,9 @@ package com.example.tenantsproject.flatmates.main_list.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +17,10 @@ import android.widget.Toast;
 import com.example.tenantsproject.flatmates.R;
 import com.example.tenantsproject.flatmates.archive.list.MyArchiveList;
 import com.example.tenantsproject.flatmates.archive.list.RowAdapterArchive;
-import com.example.tenantsproject.flatmates.main_list.list.MainList;
+import com.example.tenantsproject.flatmates.main_list.list.MainActivity;
 import com.example.tenantsproject.flatmates.model.data.Product;
 import com.example.tenantsproject.flatmates.model.data.Statistics;
 import com.example.tenantsproject.flatmates.model.rest.Response;
-import com.example.tenantsproject.flatmates.model.service.ProductService;
 import com.example.tenantsproject.flatmates.model.service.StatsService;
 import com.example.tenantsproject.flatmates.model.service.UserService;
 import com.example.tenantsproject.flatmates.security.Authenticator;
@@ -41,6 +40,7 @@ public class UpdatesFragment extends ListFragment {
     boolean flag_loading;
     TextView txt1;
     Product prod;
+    int flat = -1;
 // my archive
 
     @Override
@@ -61,8 +61,22 @@ public class UpdatesFragment extends ListFragment {
                 onUpdate();
             }
         }); */
+        try{
+            MainActivity activity = (MainActivity) getActivity();
+            int a = activity.pos;
+            flat = a;
+            Log.d("liczba", String.valueOf(a));
+        }
+        catch (NullPointerException e){
+            Log.d("liczba", "lol");
+            flat = getMyActualFlat();
+        }
+        
         txt1 = (TextView) rootView.findViewById(R.id.textView11);
-        Response response = new StatsService().getStats(getActivity(), getUserId(), getMyActualFlat());
+        Response response;
+        if(flat > -1){response = new StatsService().getStats(getActivity(), getUserId(), flat);}
+        else{response = new StatsService().getStats(getActivity(), getUserId(), getMyActualFlat());}
+
         Statistics stats = null;
         if(response.getMessageCode()==Response.MESSAGE_OK){
             stats = (Statistics) response.getObject();
@@ -118,7 +132,13 @@ public class UpdatesFragment extends ListFragment {
 
     public void onUpdate(){
         Response r1;
-        r1 = stServ.getArchivalProducts(getActivity(), getUserId(), getMyActualFlat(), StatsService.FILTER_ALL, 1);
+        if(flat > -1){
+            r1 = stServ.getArchivalProducts(getActivity(), getUserId(), flat, StatsService.FILTER_ALL, 1);
+        }
+        else {
+            r1 = stServ.getArchivalProducts(getActivity(), getUserId(), getMyActualFlat(), StatsService.FILTER_ALL, 1);
+        }
+
         switch (r1.getMessageCode()) {
             case Response.MESSAGE_OK:
                 page = 2;
@@ -128,7 +148,12 @@ public class UpdatesFragment extends ListFragment {
                 for (int i = 0; i < products.size(); i++) {
                     RowBean_data.add(products.get(i));
                 }
-                r1 = stServ.getArchivalProducts(getActivity(),  getUserId(), getMyActualFlat(), StatsService.FILTER_ALL, 2);
+                if(flat > -1){
+                    r1 = stServ.getArchivalProducts(getActivity(), getUserId(), flat, StatsService.FILTER_ALL, 2);
+                }
+                else {
+                    r1 = stServ.getArchivalProducts(getActivity(), getUserId(), getMyActualFlat(), StatsService.FILTER_ALL, 2);
+                }
                 products = (ArrayList<Product>) r1.getObject();
                 if (!products.isEmpty()) {
                     for (int i = 0; i < products.size(); i++) {

@@ -63,8 +63,14 @@ public class Archives extends AppCompatActivity {
             txt1.setText(getMyFlatName());
         }
 
-        flatID = in.getExtras().getInt("FlatID");
-        Log.d("fsafasfasf", String.valueOf(flatID));
+        try {
+            flatID = in.getExtras().getInt("FlatID");
+            Log.d("fsafasfasf", String.valueOf(flatID));
+        }
+
+        catch (Exception e){
+
+        }
 
 
 
@@ -176,7 +182,7 @@ public class Archives extends AppCompatActivity {
                     finish();
                     startActivity(new Intent(getApplicationContext(), Login.class));
                 }
-                Toast.makeText(Archives.this, "You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Archives.this, "You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
 
                 return true;
             }

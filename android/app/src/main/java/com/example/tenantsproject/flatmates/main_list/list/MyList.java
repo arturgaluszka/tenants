@@ -32,7 +32,7 @@ public class MyList extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .5), (int) (height * .5));
+        getWindow().setLayout((int) (width * .5), (int) (height * .4));
     }
 
     public void BuyNow(View view) {
@@ -43,13 +43,8 @@ public class MyList extends Activity {
         Log.d("lol", prod.getDescription());
         UserService us = new UserService();
         Response r;
-        if((String.valueOf(prod.getCreator()).equals(us.getUser(this, getUserId())))){
         startActivity(i);
-        finish();}
-        else{
-            Toast.makeText(this, getString(R.string.cant_delete), Toast.LENGTH_LONG).show();
-        }
-
+        finish();
     }
 
     public void deleteFromMainList1(View view) {
@@ -58,14 +53,11 @@ public class MyList extends Activity {
         ProductService ps = new ProductService();
         UserService us = new UserService();
         Response r;
-        if((String.valueOf(prod.getCreator()).equals(us.getUser(this, getUserId())))){
         r = ps.removeFromMainList(this, prod);
         Toast.makeText(this, getString(R.string.deleted) + ": " + prod.getDescription(), Toast.LENGTH_LONG).show();
         Intent i = new Intent(this, MyList.class);
-        startActivity(i);}
-        else{
-            Toast.makeText(this, getString(R.string.cant_delete), Toast.LENGTH_LONG).show();
-        }
+        startActivity(i);
+        finish();
     }
 
     public void info(View view) {

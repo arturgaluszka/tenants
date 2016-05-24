@@ -3,7 +3,6 @@ package com.example.tenantsproject.flatmates.archive.list;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
@@ -37,7 +36,7 @@ public class MainArchiveList2 extends ListFragment {
     TextView txt1;
     int a = -1;
 
-    @Nullable
+
     @Override
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -86,7 +85,7 @@ public class MainArchiveList2 extends ListFragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            int arg2, long arg3) {
-                Toast.makeText(getActivity(), "On long click listener", Toast.LENGTH_LONG).show();
+                //Toast.makeText(getActivity(), "On long click listener", Toast.LENGTH_LONG).show();
                 startActivity(new Intent(getActivity(), MyArchiveListMenu.class));
 
                 return true;

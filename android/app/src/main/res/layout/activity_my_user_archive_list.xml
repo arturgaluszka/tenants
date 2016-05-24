@@ -9,18 +9,18 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-medium"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/options"
+        android:text="Options"
         android:textColor="#238ae1"
         android:id="@+id/textView3"
-        android:textSize="24dp"
+        android:textSize="28dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="20dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginTop="5dp" />
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp" />
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="4dp"
         android:background="#238ae1"
         android:layout_below="@+id/textView3"
         android:layout_alignParentLeft="true"

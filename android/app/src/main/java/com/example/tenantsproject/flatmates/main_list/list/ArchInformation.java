@@ -36,12 +36,14 @@ public class ArchInformation extends Activity {
         txt2 = (TextView) findViewById(R.id.textView29);
         txt3 = (TextView) findViewById(R.id.textView30);
 
+
         in = getIntent();
         prod = (Product) in.getExtras().getSerializable("Object");
+        long data = prod.getModificationDate();
 
         txt1.setText(getNameById(prod.getUser()));
         txt2.setText(prod.getDescription());
-        txt3.setText(String.valueOf(prod.getModificationDate()));
+        txt3.setText(String.valueOf(new Date(data)));
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -49,7 +51,7 @@ public class ArchInformation extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .7), (int) (height * .4));
+        getWindow().setLayout((int) (width * .7), (int) (height * .35));
     }
 
     public String getNameById(int id){

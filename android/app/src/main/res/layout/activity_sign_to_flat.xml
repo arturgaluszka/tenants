@@ -5,6 +5,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
+    android:background="@color/white"
     tools:context=".flat.AddFlat">
 
     <TextView
@@ -15,7 +16,8 @@
         android:id="@+id/textView20"
         android:layout_marginBottom="20dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textColor="#238ae1"/>
 
     <EditText
         android:hint="@string/flat_name"

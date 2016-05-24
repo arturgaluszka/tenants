@@ -59,7 +59,7 @@
         android:layout_marginTop="10dp"
         android:clickable="true"
         android:fontFamily="sans-serif-medium"
-        android:text="@string/add_list"
+        android:text="@string/add_list2"
         android:onClick="addToMainList"
         android:textColor="#0b0a0a"
         android:textSize="18dp" />

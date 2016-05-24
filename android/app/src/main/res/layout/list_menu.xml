@@ -15,7 +15,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
         android:fontFamily="sans-serif-medium"
-        android:text="@string/opt"
+        android:text="@string/options"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="#238ae1"
         android:textSize="28dp" />

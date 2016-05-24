@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="add_list2">Dodaj do głównej listy</string>
+    <string name="alrd">Już zarezerwowane</string>
+    <string name="cant_delete">Nie możesz usunąć tego produktu</string>
+    <string name="delete">Usuń</string>
+    <string name="deleted">Usunięto</string>
+    <string name="error6">Twoja lista jest pusta</string>
+    <string name="undo">Cofnięto zakup</string>
+    <string name="unreserved">Odrezerowano</string>
+    <string name="author">Autor:</string>
+    <string name="date">Data:</string>
+    <string name="name2">Nazwa:</string>
+    <string name="buyer">Kupujący:</string>
 </resources>

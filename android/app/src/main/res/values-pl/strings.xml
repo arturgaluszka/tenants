@@ -60,4 +60,16 @@
     <string name="bought">Kupiłeś:</string>
     <string name="change2">Hasło zostało zmienione</string>
     <string name="conf_new_pass">Potwierdź nowe hasło</string>
+    <string name="delete">Usuń</string>
+    <string name="deleted">Usunięto</string>
+    <string name="cant_delete">Nie możesz usunąć tego przedmiotu</string>
+    <string name="alrd">Już zarezerwowane</string>
+    <string name="unreserved">Zarezerwowane</string>
+    <string name="undo">Cofnięto zakup</string>
+    <string name="add_list2">Dodaj do głównej listy</string>
+    <string name="author">Autor:</string>
+    <string name="name2">Nazwa:</string>
+    <string name="date">Data:</string>
+    <string name="buyer">Kupujący:</string>
+    <string name="error6">Twoja lista jest pusta</string>
 </resources>

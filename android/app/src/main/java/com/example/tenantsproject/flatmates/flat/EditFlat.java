@@ -78,4 +78,8 @@ public class EditFlat extends AppCompatActivity {
 
     }
 
+    public void back(View v){
+        this.finish();
+    }
+
 }

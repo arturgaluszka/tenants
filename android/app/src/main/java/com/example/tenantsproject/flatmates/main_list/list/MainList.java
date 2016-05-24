@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -12,15 +11,11 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.tenantsproject.flatmates.R;
-import com.example.tenantsproject.flatmates.main_list.fragments.PrimaryFragment;
 import com.example.tenantsproject.flatmates.model.data.Product;
 import com.example.tenantsproject.flatmates.model.rest.Response;
 import com.example.tenantsproject.flatmates.model.service.ProductService;
 import com.example.tenantsproject.flatmates.model.service.UserService;
 import com.example.tenantsproject.flatmates.security.Authenticator;
-
-
-import java.io.Serializable;
 
 public class MainList extends Activity{
     Product prod;
@@ -37,7 +32,7 @@ public class MainList extends Activity{
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .7), (int) (height * .5));
+        getWindow().setLayout((int) (width * .7), (int) (height * .4));
     }
 
     public void BuyNow(View view) {
@@ -127,6 +122,7 @@ public class MainList extends Activity{
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
         finish();
-        Toast.makeText(this, "Added to my list", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.add_to_list), Toast.LENGTH_LONG).show();
+
     }
 }

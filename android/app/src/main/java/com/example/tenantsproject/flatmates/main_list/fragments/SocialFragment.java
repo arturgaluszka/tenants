@@ -2,7 +2,6 @@ package com.example.tenantsproject.flatmates.main_list.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ListFragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
@@ -16,7 +15,6 @@ import android.widget.Toast;
 import com.example.tenantsproject.flatmates.R;
 import com.example.tenantsproject.flatmates.main_list.list.MainActivity;
 import com.example.tenantsproject.flatmates.main_list.list.MyList;
-import com.example.tenantsproject.flatmates.main_list.list.RowAdapter;
 import com.example.tenantsproject.flatmates.main_list.list.RowAdapterMyList;
 import com.example.tenantsproject.flatmates.model.data.Product;
 import com.example.tenantsproject.flatmates.model.rest.Response;
@@ -43,7 +41,7 @@ public class SocialFragment extends ListFragment implements Updateable {
     int flat = -1;
 
 
-    @Nullable
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -161,6 +159,7 @@ public class SocialFragment extends ListFragment implements Updateable {
 
     public void onUpdate() {
         Response r4;
+
         if(flat > -1){r4 = productService.getFlatProducts(getActivity(), flat, getUserId(), MainActivity.FILTER, 1);}
         else{r4 = productService.getFlatProducts(getActivity(), getMyActualFlat(), getUserId(), MainActivity.FILTER, 1);}
         switch (r4.getMessageCode()) {
@@ -185,8 +184,14 @@ public class SocialFragment extends ListFragment implements Updateable {
                 swipeContainer.setRefreshing(false);
                 break;
             default:
-                Toast.makeText(getActivity(), getString(R.string.error2), Toast.LENGTH_LONG).show();
-                swipeContainer.setRefreshing(false);
+                if(products.isEmpty()){
+                    Toast.makeText(getActivity(), getString(R.string.error6), Toast.LENGTH_LONG).show();
+                    swipeContainer.setRefreshing(false);
+                }
+                else{
+                    Toast.makeText(getActivity(), getString(R.string.error2), Toast.LENGTH_LONG).show();
+                    swipeContainer.setRefreshing(false);}
+
         }
     }
 }
