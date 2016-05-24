@@ -1,0 +1,91 @@
+/*font for logo*/
+/*background image*/
+@font-face {
+    font-family: sketch;
+    src: url(SketchFlow.ttf);
+}
+
+body{
+    background-color: #238ae1 !important;
+}
+.front-welcome h1 {
+    margin: 0px;
+}
+/*signin box*/
+hr {
+    margin-top: 10px !important;
+    margin: -10px;
+}
+
+.flatmates-text {
+    font-size: 130px;
+    color:white;
+    text-align:center;
+ margin-top:30px;
+ margin-bottom: 50px;
+ font-family: sketch;
+}
+
+.front-signin{
+    color:white;
+    background-color: #238ae1;
+    position: relative;
+    border-radius: 2%; 
+    height: 153px;
+    width: 300px;
+    padding:10px;
+    margin-left: auto;
+    margin-right:auto;
+    margin-bottom: 35px;
+}
+#signin-submit{
+    display: block !important;
+    width:70px;
+    margin-left: auto;
+    margin-right:auto;
+}
+
+.checkbox {
+    float:left;
+}
+/*signup box*/
+.front-signup{
+    margin-top: 10px;
+    background-color: #238ae1;
+    margin-left:100%;
+    margin-right:100%;
+    border-radius: 2%; 
+    height: 200px;
+    width: 300px;
+    padding:10px;
+}
+
+.signup-text {
+    color:white;
+    font-weight: bold;
+}
+
+.btnCenter{
+    text-align: center;
+}
+
+button {
+    background-color: #1662a1 !important;
+    border-color: #1662a1 !important;
+}
+
+
+.container{
+    margin-left:20px !important;
+}
+.front-signup {
+    margin-top:10px;
+    margin-left:auto;
+    margin-right:auto;
+    float:none;
+}
+.front-signin {
+    margin-left:auto;
+    margin-right:auto;
+    float:none;
+}
