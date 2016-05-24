@@ -19,7 +19,7 @@ public class MyArchiveListMenu extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .7), (int) (height * .3));
+        getWindow().setLayout((int) (width * .7), (int) (height * .23));
     }
 
     public boolean onTouchEvent(MotionEvent event) {

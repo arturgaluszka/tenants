@@ -19,7 +19,7 @@ import com.example.tenantsproject.flatmates.security.Authenticator;
 
 import java.util.ArrayList;
 
-public class ViewFlat extends Activity {
+public class ViewUsers extends Activity {
     ListView userList;
     ArrayList<Integer> usersID = new ArrayList<>();
     ArrayList<String> users = new ArrayList<>();

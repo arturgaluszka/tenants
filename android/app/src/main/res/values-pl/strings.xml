@@ -72,4 +72,6 @@
     <string name="date">Data:</string>
     <string name="buyer">Kupujący:</string>
     <string name="error6">Twoja lista jest pusta</string>
+    <string name="main_archive">Główne Archiwum</string>
+    <string name="all_users">Wszyscy Użytkownicy</string>
 </resources>

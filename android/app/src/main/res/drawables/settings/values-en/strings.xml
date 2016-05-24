@@ -1,22 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="add_flat">Add Flat</string>
-    <string name="create_flat">Create Flat</string>
-    <string name="flat_name">Flat name</string>
-    <string name="logg_flat">Already have flat? Login!</string>
-    <string name="login_Flat">No flat yet? Register!</string>
-    <string name="login_to_flat">Login to Flat</string>
-    <string name="passLogFlat">Flat password</string>
-    <string name="add_list2">Add to main list</string>
-    <string name="alrd">Already reserved</string>
-    <string name="cant_delete">You cannot delete this product</string>
-    <string name="delete">Delete</string>
-    <string name="deleted">Deleted</string>
-    <string name="error6">Your list is empty</string>
-    <string name="undo">Revoked purchase</string>
-    <string name="unreserved">Unreserved</string>
-    <string name="author">Author:</string>
-    <string name="date">Date:</string>
-    <string name="name2">Name:</string>
-    <string name="buyer">Buyer:</string>
+
+    <string name="error7">You cannot undo this product</string>
 </resources>

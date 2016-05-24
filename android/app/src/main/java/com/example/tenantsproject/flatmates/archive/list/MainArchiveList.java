@@ -48,7 +48,6 @@ public class MainArchiveList extends ListFragment {
         setHasOptionsMenu(true);
         txt1 = (TextView) rootView.findViewById(R.id.textView11);
       /* Response rs1 = stServ.getStats(getActivity(), 2,2);
-
         switch (rs1.getMessageCode()){
             case Response.MESSAGE_OK:
                 sum = (Double) rs1.getObject();

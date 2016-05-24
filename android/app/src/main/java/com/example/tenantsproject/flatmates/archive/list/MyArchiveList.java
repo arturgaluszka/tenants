@@ -14,6 +14,8 @@ import com.example.tenantsproject.flatmates.main_list.list.ArchInformation;
 import com.example.tenantsproject.flatmates.model.data.Product;
 import com.example.tenantsproject.flatmates.model.rest.Response;
 import com.example.tenantsproject.flatmates.model.service.StatsService;
+import com.example.tenantsproject.flatmates.model.service.UserService;
+import com.example.tenantsproject.flatmates.security.Authenticator;
 
 public class MyArchiveList extends Activity {
 
@@ -69,10 +71,30 @@ public class MyArchiveList extends Activity {
         prod = (Product) in.getExtras().getSerializable("Object");
         StatsService stsServ = new StatsService();
         //TODO for Arur check reserver Product don't working
+        if(getUserName(prod.getUser()).equals(getUserName(getUserId()))){
         re = stsServ.undoBuy(this, prod);
         Intent i = new Intent(this, Archives.class);
         Toast.makeText(this, getString(R.string.undo), Toast.LENGTH_SHORT).show();
         startActivity(i);
-        finish();
+        finish();}
+        else{
+            Toast.makeText(this, getString(R.string.error7), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public String getUserName(int id){
+        Response rs;
+        UserService nf = new UserService();
+        rs = nf.getUser(this, id);
+        return String.valueOf(rs.getObject());
+    }
+
+    public int getUserId() {
+        final Authenticator aut = new Authenticator();
+        final UserService userService = new UserService();
+        Response res;
+        res = userService.getUserID(this, aut.getLoggedInUserName(this));
+        int id = (int) res.getObject();
+        return id;
     }
 }

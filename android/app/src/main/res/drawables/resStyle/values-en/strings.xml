@@ -72,4 +72,6 @@
     <string name="bought">You bought:</string>
     <string name="change2">Pass was changed</string>
     <string name="conf_new_pass">Confirm new password</string>
+    <string name="main_archive">Main Archive</string>
+    <string name="all_users">All Users</string>
 </resources>

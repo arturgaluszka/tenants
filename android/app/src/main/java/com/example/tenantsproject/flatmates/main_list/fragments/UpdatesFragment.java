@@ -71,7 +71,7 @@ public class UpdatesFragment extends ListFragment {
             Log.d("liczba", "lol");
             flat = getMyActualFlat();
         }
-        
+
         txt1 = (TextView) rootView.findViewById(R.id.textView11);
         Response response;
         if(flat > -1){response = new StatsService().getStats(getActivity(), getUserId(), flat);}

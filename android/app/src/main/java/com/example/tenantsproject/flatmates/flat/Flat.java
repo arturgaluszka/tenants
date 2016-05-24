@@ -79,7 +79,7 @@ public class Flat extends Activity {
     }
 
     public void viewFlat(View v) {
-        Intent i = new Intent(this, ViewFlat.class);
+        Intent i = new Intent(this, ViewUsers.class);
         startActivity(i);
     }
 

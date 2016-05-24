@@ -1,13 +1,9 @@
 package com.example.tenantsproject.flatmates.archive.list;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -15,17 +11,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.tenantsproject.flatmates.R;
-import com.example.tenantsproject.flatmates.archive.fragments.TabFragment_archives;
-import com.example.tenantsproject.flatmates.archive.fragments.TabFragment_users;
+import com.example.tenantsproject.flatmates.archive.fragments.TabArchives;
 import com.example.tenantsproject.flatmates.flat.Flat;
 import com.example.tenantsproject.flatmates.login.Login;
-import com.example.tenantsproject.flatmates.main_list.fragments.TabFragment;
 import com.example.tenantsproject.flatmates.main_list.list.Add;
 import com.example.tenantsproject.flatmates.main_list.list.MainActivity;
-import com.example.tenantsproject.flatmates.model.data.Product;
 import com.example.tenantsproject.flatmates.model.rest.Response;
 import com.example.tenantsproject.flatmates.model.service.FlatService;
 import com.example.tenantsproject.flatmates.model.service.UserService;
@@ -47,6 +39,8 @@ public class Archives extends AppCompatActivity {
     TextView txt1;
     public int flatID = -1;
     Intent in;
+    MainActivity main = new MainActivity();
+    int flatPos = main.pos;
     private UserArchiveList userList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +50,7 @@ public class Archives extends AppCompatActivity {
         getUserName();
         in = getIntent();
         txt1 = (TextView) findViewById(R.id.textView9);
-        if(flatID > -1){
+        if(flatPos > -1){
             txt1.setText(in.getExtras().getString("Name"));
         }
         else{
@@ -93,7 +87,7 @@ public class Archives extends AppCompatActivity {
         mFragmentManager = getSupportFragmentManager();
         mFragmentManager2 = getSupportFragmentManager();
         mFragmentTransaction = mFragmentManager.beginTransaction();
-        mFragmentTransaction.replace(R.id.containerView, new TabFragment_archives()).commit();
+        mFragmentTransaction.replace(R.id.containerView, new TabArchives()).commit();
 
         /**
          * Setup click events on the Navigation View Items.
@@ -155,7 +149,7 @@ public class Archives extends AppCompatActivity {
 
     public void archives(View view) {
         mFragmentTransaction = mFragmentManager.beginTransaction();
-        mFragmentTransaction.replace(R.id.containerView, new TabFragment_archives()).commit();
+        mFragmentTransaction.replace(R.id.containerView, new TabArchives()).commit();
 
         // startActivity(new Intent(getApplicationContext(), Archives.class));
         //  finish();
@@ -278,6 +272,7 @@ public class Archives extends AppCompatActivity {
         Log.d("fasfa","fsafsafsa");
         PopupMenu popup = new PopupMenu(this, view);
         //Inflating the Popup using xml file
+        popup.getMenu().add(getString(R.string.all_users));
         for(int i = 0; i<users.size(); i++){
             popup.getMenu().add(users.get(i));
             Log.d("User", users.get(i));
@@ -291,6 +286,7 @@ public class Archives extends AppCompatActivity {
 
                 //Toast.makeText(Archives.this, "You Clicked : " + item.getTitle(), Toast.LENGTH_SHORT).show();
                 idUser = getIdUser(String.valueOf(item.getTitle()));
+
 
 
                 mFragmentTransaction = mFragmentManager.beginTransaction();

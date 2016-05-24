@@ -51,7 +51,7 @@ public class ArchInformation extends Activity {
         int width = dm.widthPixels;
         int height = dm.heightPixels;
 
-        getWindow().setLayout((int) (width * .7), (int) (height * .35));
+        getWindow().setLayout((int) (width * .75), (int) (height * .35));
     }
 
     public String getNameById(int id){

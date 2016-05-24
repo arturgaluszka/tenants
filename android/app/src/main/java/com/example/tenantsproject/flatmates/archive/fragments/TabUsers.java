@@ -6,6 +6,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,13 +14,13 @@ import android.view.ViewGroup;
 
 import com.example.tenantsproject.flatmates.R;
 import com.example.tenantsproject.flatmates.archive.list.MainArchiveList;
-import com.example.tenantsproject.flatmates.archive.list.MainArchiveList2;
 import com.example.tenantsproject.flatmates.archive.list.UserArchiveList;
 
-public class TabFragment_archives extends Fragment {
+public class TabUsers extends Fragment {
     public static TabLayout tabLayout;
     public static ViewPager viewPager;
-    public static int int_items = 2;
+    public static int int_items = 1;
+
 
     @Nullable
     @Override
@@ -68,8 +69,7 @@ public class TabFragment_archives extends Fragment {
             switch (position) {
                 case 0:
                     return new MainArchiveList();
-                case 1:
-                    return new MainArchiveList2();
+
             }
             return null;
         }
@@ -90,9 +90,8 @@ public class TabFragment_archives extends Fragment {
 
             switch (position) {
                 case 0:
-                    return getString(R.string.main_list);
-                case 1:
-                    return getString(R.string.my_archive);
+                    return "USER ARCHIVE";
+
             }
             return null;
         }

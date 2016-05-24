@@ -36,6 +36,7 @@ public class UserArchiveList extends ListFragment {
     int userID;
     int a = -1;
     TextView txt1;
+    Product prod;
 
 
     @Override
@@ -52,7 +53,7 @@ public class UserArchiveList extends ListFragment {
         setListAdapter(adapterMain);
         txt1 = (TextView) rootView.findViewById(R.id.textView11);
 
-        /*TabFragment_users f1 = new TabFragment_users();
+        /*TabUsers f1 = new TabUsers();
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.containerView, f1); // f1_container is your FrameLayout container
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
@@ -128,7 +129,12 @@ public class UserArchiveList extends ListFragment {
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            int arg2, long arg3) {
                 //Toast.makeText(getActivity(), "On long click listener", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(getActivity(), MyArchiveList.class));
+                prod = RowBean_data.get(arg2);
+                Intent i = new Intent(getActivity(), MyArchiveList.class);
+                Bundle b = new Bundle();
+                b.putSerializable("Object", prod);
+                i.putExtras(b);
+                startActivity(i);
 
                 return true;
             }

@@ -23,18 +23,19 @@ import com.example.tenantsproject.flatmates.security.Authenticator;
 
 import java.util.ArrayList;
 
-public class MainArchiveList2 extends ListFragment {
+public class MyArchive extends ListFragment {
     ListView MainArchiveList;
     int page = 1;
-    ListView mainArchiveList;
     SwipeRefreshLayout swipeContainer;
     ArrayList<Product> products = new ArrayList<>();
-    // PrimaryFragment.RowBean_data;
     StatsService stServ = new StatsService();
     ArrayList<Product> RowBean_data = new ArrayList<>();
     RowAdapterArchive adapterMain;
     TextView txt1;
     int a = -1;
+    Product prod;
+    // PrimaryFragment.RowBean_data;
+    ListView mainArchiveList;
 
 
     @Override
@@ -86,7 +87,12 @@ public class MainArchiveList2 extends ListFragment {
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            int arg2, long arg3) {
                 //Toast.makeText(getActivity(), "On long click listener", Toast.LENGTH_LONG).show();
-                startActivity(new Intent(getActivity(), MyArchiveListMenu.class));
+                prod = RowBean_data.get(arg2);
+                Intent i = new Intent(getActivity(), MyArchiveList.class);
+                Bundle b = new Bundle();
+                b.putSerializable("Object", prod);
+                i.putExtras(b);
+                startActivity(i);
 
                 return true;
             }
