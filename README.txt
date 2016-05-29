@@ -23,7 +23,7 @@ Aby umożliwiść dotarcie do jak największej liczby użytkowników nasz projek
       Zalecane ip koputera z sieci lokalnej
     c) Uruchom swoją aplikacje kliencką Run -> Run “app” 
 3. Serwer aplikacji webowej
-a) Otworz projekt “flatmates-project” w Netbeans (z zainstalowanym serwerem GlassFish)
-b) Kliknij “Run”
-c) Uruchom strone Login.jsp, bądź dopisz po uruchomieniu przegladarki do adresu “Login.jsp”
+    a) Otworz projekt “flatmates-project” w Netbeans (z zainstalowanym serwerem GlassFish)
+    b) Kliknij “Run”
+    c) Uruchom strone Login.jsp, bądź dopisz po uruchomieniu przegladarki do adresu “Login.jsp”
 
